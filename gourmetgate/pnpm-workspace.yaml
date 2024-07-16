@@ -1,0 +1,4 @@
+packages:
+- '.'
+- 'gourmetgate.ui'
+- 'gourmetgate.app'

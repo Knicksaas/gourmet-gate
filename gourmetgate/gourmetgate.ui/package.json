@@ -1,0 +1,48 @@
+{
+  "name": "@gourmetgate/ui",
+  "version": "1.0.0-SNAPSHOT",
+  "engines": {
+    "node": ">=20.10.0",
+    "npm": ">=10.2.3",
+    "pnpm": ">=8.11.0"
+  },
+  "main": "./src/main/js/index.ts",
+  "publishConfig": {
+    "main": "./target/dist/dev/gourmetgate-ui.js"
+  },
+  "files": [
+    "src/main/js",
+    "target/dist"
+  ],
+  "scripts": {
+    "pnpm-install": "pnpm install --ignore-scripts",
+    "testserver:start": "scout-scripts test-server:start",
+    "testserver:stop": "scout-scripts test-server:stop",
+    "test:ci": "scout-scripts test:ci",
+    "build:dev": "scout-scripts build:dev",
+    "build:prod": "scout-scripts build:prod",
+    "build:all": "scout-scripts build:dev && scout-scripts build:prod",
+    "build:dev:watch": "scout-scripts build:dev:watch",
+    "cleanup:snapshots": "releng-scripts cleanup:snapshots",
+    "version:snapshot:dependencies": "releng-scripts version:snapshot:dependencies",
+    "version:snapshot": "releng-scripts version:snapshot",
+    "version:release:dependencies": "releng-scripts version:release:dependencies",
+    "version:release": "releng-scripts version:release"
+  },
+  "devDependencies": {
+    "@eclipse-scout/releng": "^24.1.0",
+    "@eclipse-scout/cli": "24.1.15",
+    "@eclipse-scout/tsconfig": "24.1.15",
+    "jasmine-core": "5.1.1",
+    "jasmine-jquery": "2.1.1",
+    "karma": "6.4.2",
+    "@types/jquery": "3.5.29",
+    "@types/jasmine": "5.1.4",
+    "@types/jasmine-ajax": "3.3.5",
+    "@types/jasmine-jquery": "1.5.37"
+  },
+  "dependencies": {
+    "@eclipse-scout/core": "24.1.15",
+    "jquery": "3.7.1"
+  }
+}

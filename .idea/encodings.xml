@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding" defaultCharsetForPropertiesFiles="UTF-8">
+    <file url="file://$PROJECT_DIR$/gourmetgate/gourmetgate.api/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gourmetgate/gourmetgate.api/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gourmetgate/gourmetgate.app.dev/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gourmetgate/gourmetgate.app.dev/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gourmetgate/gourmetgate.app.image/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gourmetgate/gourmetgate.app.image/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gourmetgate/gourmetgate.app.zip/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gourmetgate/gourmetgate.app.zip/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gourmetgate/gourmetgate.app/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gourmetgate/gourmetgate.app/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gourmetgate/gourmetgate.core/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gourmetgate/gourmetgate.core/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gourmetgate/gourmetgate.data/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gourmetgate/gourmetgate.data/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gourmetgate/gourmetgate.db/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gourmetgate/gourmetgate.db/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gourmetgate/gourmetgate.persistence/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gourmetgate/gourmetgate.persistence/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gourmetgate/gourmetgate.ui/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gourmetgate/gourmetgate.ui/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gourmetgate/gourmetgate/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gourmetgate/gourmetgate/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gourmetgate/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gourmetgate/src/main/resources" charset="UTF-8" />
+    <file url="PROJECT" charset="UTF-8" />
+  </component>
+</project>
