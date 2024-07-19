@@ -1,16 +1,6 @@
 package org.gourmetgate.gourmetgate.persistence.person;
 
-import static org.gourmetgate.gourmetgate.persistence.JooqSqlService.jooq;
-import static org.jooq.impl.DSL.noCondition;
-
-import java.util.Optional;
-import java.util.UUID;
-import java.util.stream.Stream;
-
 import org.eclipse.scout.rt.platform.util.StringUtility;
-import org.eclipse.scout.rt.platform.BEANS;
-import org.jooq.Field;
-
 import org.gourmetgate.gourmetgate.data.person.IPersonRepository;
 import org.gourmetgate.gourmetgate.data.person.PersonDo;
 import org.gourmetgate.gourmetgate.data.person.PersonRestrictionDo;
@@ -18,6 +8,12 @@ import org.gourmetgate.gourmetgate.persistence.common.AbstractRepository;
 import org.gourmetgate.gourmetgate.persistence.common.DoEntityBeanMappings;
 import org.gourmetgate.gourmetgate.persistence.tables.Person;
 import org.gourmetgate.gourmetgate.persistence.tables.records.PersonRecord;
+import org.jooq.Field;
+
+import java.util.stream.Stream;
+
+import static org.gourmetgate.gourmetgate.persistence.JooqSqlService.jooq;
+import static org.jooq.impl.DSL.noCondition;
 
 public class PersonRepository extends AbstractRepository<Person, PersonRecord, PersonDo> implements IPersonRepository {
 
@@ -32,17 +28,7 @@ public class PersonRepository extends AbstractRepository<Person, PersonRecord, P
   }
 
   @Override
-  public void store(String id, PersonDo person) {
-    super.store(id, doToRec(person));
-  }
-
-  @Override
-  public Stream<PersonDo> all() {
-    return getAll().map(this::recToDo);
-  }
-
-  @Override
-  public Stream<PersonDo> list(PersonRestrictionDo restrictions) {
+  public Stream<PersonDo> search(PersonRestrictionDo restrictions) {
     Person personTab = Person.PERSON.as("p");
     return jooq()
         .select()
@@ -52,31 +38,7 @@ public class PersonRepository extends AbstractRepository<Person, PersonRecord, P
         .limit(100)
         .fetchStream()
         .map(r -> r.into(personTab))
-        .map(this::recToDo);
-  }
-
-  @Override
-  public Optional<PersonDo> getById(String personId) {
-    return get(personId).map(this::recToDo);
-  }
-
-  @Override
-  public PersonDo create(PersonDo person) {
-    PersonRecord newPersonRecord = newRecord();
-    String newPersonId = UUID.randomUUID().toString();
-
-    fromDoToRecord(person, newPersonRecord)
-        .setPersonId(newPersonId);
-    newPersonRecord.store();
-    return fromRecordToDo(newPersonRecord, person);
-  }
-
-  protected PersonDo recToDo(PersonRecord personRecord) {
-    return fromRecordToDo(personRecord, BEANS.get(PersonDo.class));
-  }
-
-  protected PersonRecord doToRec(PersonDo person) {
-    return fromDoToRecord(person, new PersonRecord());
+      .map(this::fromRecordToDo);
   }
 
   @Override

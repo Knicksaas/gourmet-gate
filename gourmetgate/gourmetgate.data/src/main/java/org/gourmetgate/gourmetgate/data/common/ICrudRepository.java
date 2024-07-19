@@ -17,5 +17,5 @@ public interface ICrudRepository<ENTITY extends DoEntity> {
 
   void update(String id, ENTITY entity);
 
-  int delte(String id);
+  int delete(String id);
 }

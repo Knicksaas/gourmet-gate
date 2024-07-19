@@ -1,22 +1,10 @@
 package org.gourmetgate.gourmetgate.data.person;
 
-import java.util.Optional;
-import java.util.stream.Stream;
-
 import org.eclipse.scout.rt.platform.ApplicationScoped;
+import org.gourmetgate.gourmetgate.data.common.ICrudRepository;
+import org.gourmetgate.gourmetgate.data.common.ISearchRepository;
 
 @ApplicationScoped
-public interface IPersonRepository {
+public interface IPersonRepository extends ICrudRepository<PersonDo>, ISearchRepository<PersonDo, PersonRestrictionDo> {
 
-  void store(String id, PersonDo person);
-
-  Stream<PersonDo> all();
-
-  Stream<PersonDo> list(PersonRestrictionDo restrictions);
-
-  Optional<PersonDo> getById(String id);
-
-  int remove(String id);
-
-  PersonDo create(PersonDo person);
 }

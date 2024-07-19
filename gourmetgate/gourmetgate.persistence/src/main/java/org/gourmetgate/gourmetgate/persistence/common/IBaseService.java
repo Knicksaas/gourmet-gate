@@ -1,13 +1,13 @@
 package org.gourmetgate.gourmetgate.persistence.common;
 
-import java.util.Optional;
-import java.util.stream.Stream;
-
-import org.eclipse.scout.rt.platform.ApplicationScoped;
 import org.eclipse.scout.rt.dataobject.DoEntity;
+import org.eclipse.scout.rt.platform.ApplicationScoped;
 import org.jooq.Field;
 import org.jooq.Record;
 import org.jooq.Table;
+
+import java.util.Optional;
+import java.util.stream.Stream;
 
 @ApplicationScoped
 public interface IBaseService<TABLE extends Table<RECORD>, RECORD extends Record, DO extends DoEntity> {
@@ -23,15 +23,21 @@ public interface IBaseService<TABLE extends Table<RECORD>, RECORD extends Record
   Field<String> getIdColumn();
 
   /**
-   * Deletes the record with the specified id
-   * 
-   * @return the number of records deleted
+   * @return A new empty record.
    */
-  int remove(String id);
+  RECORD newRecord();
+
+  /**
+   * Creates a new record in the database.
+   *
+   * @param entity new record as DO
+   * @return the persisted record with filled primary key
+   */
+  DO create(DO entity);
 
   /**
    * Gets the record for the specified id.
-   * 
+   *
    * @return the record for the id given or an empty {@link Optional} if the id could not be found.
    */
   Optional<RECORD> get(String id);
@@ -43,13 +49,15 @@ public interface IBaseService<TABLE extends Table<RECORD>, RECORD extends Record
 
   /**
    * Persists the provided record based on the id specified. If no record with this id exists, a new record is created.
-   * Otherwise the existing record is updated.
+   * Otherwise, the existing record is updated.
    */
   void store(String id, RECORD record);
 
   /**
-   * @return A new empty record.
+   * Deletes the record with the specified id
+   *
+   * @return the number of records deleted
    */
-  RECORD newRecord();
+  int delete(String id);
 
 }
