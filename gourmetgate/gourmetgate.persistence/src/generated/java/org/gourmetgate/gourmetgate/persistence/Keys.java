@@ -5,7 +5,9 @@ package org.gourmetgate.gourmetgate.persistence;
 
 
 import org.gourmetgate.gourmetgate.persistence.tables.Person;
+import org.gourmetgate.gourmetgate.persistence.tables.Table;
 import org.gourmetgate.gourmetgate.persistence.tables.records.PersonRecord;
+import org.gourmetgate.gourmetgate.persistence.tables.records.TableRecord;
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
 import org.jooq.impl.DSL;
@@ -24,4 +26,5 @@ public class Keys {
     // -------------------------------------------------------------------------
 
     public static final UniqueKey<PersonRecord> PERSON_PK = Internal.createUniqueKey(Person.PERSON, DSL.name("person_pk"), new TableField[] { Person.PERSON.PERSON_ID }, true);
+    public static final UniqueKey<TableRecord> TABLE_PK = Internal.createUniqueKey(Table.TABLE, DSL.name("TABLE_PK"), new TableField[] { Table.TABLE.TABLE_ID }, true);
 }

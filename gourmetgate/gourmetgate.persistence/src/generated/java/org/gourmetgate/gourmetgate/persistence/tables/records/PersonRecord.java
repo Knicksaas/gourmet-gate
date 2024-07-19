@@ -3,6 +3,7 @@
  */
 package org.gourmetgate.gourmetgate.persistence.tables.records;
 
+
 import org.gourmetgate.gourmetgate.persistence.tables.Person;
 import org.jooq.Field;
 import org.jooq.Record1;

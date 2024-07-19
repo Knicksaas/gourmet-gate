@@ -5,6 +5,7 @@ package org.gourmetgate.gourmetgate.persistence;
 
 
 import org.gourmetgate.gourmetgate.persistence.tables.Person;
+import org.gourmetgate.gourmetgate.persistence.tables.Table;
 
 
 /**
@@ -17,4 +18,9 @@ public class Tables {
      * The table <code>Schema.person</code>.
      */
     public static final Person PERSON = Person.PERSON;
+
+    /**
+     * The table <code>Schema.table</code>.
+     */
+    public static final Table TABLE = Table.TABLE;
 }

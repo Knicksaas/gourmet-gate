@@ -8,8 +8,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.gourmetgate.gourmetgate.persistence.tables.Person;
+import org.gourmetgate.gourmetgate.persistence.tables.Table;
 import org.jooq.Catalog;
-import org.jooq.Table;
 import org.jooq.impl.SchemaImpl;
 
 
@@ -19,35 +19,41 @@ import org.jooq.impl.SchemaImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Schema extends SchemaImpl {
 
-  private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-  /**
-   * The reference instance of <code>Schema</code>
-   */
-  public static final Schema SCHEMA = new Schema();
+    /**
+     * The reference instance of <code>Schema</code>
+     */
+    public static final Schema SCHEMA = new Schema();
 
-  /**
-   * The table <code>Schema.person</code>.
-   */
-  public final Person PERSON = Person.PERSON;
+    /**
+     * The table <code>Schema.person</code>.
+     */
+    public final Person PERSON = Person.PERSON;
 
-  /**
-   * No further instances allowed
-   */
-  private Schema() {
-    super("Schema", null);
-  }
+    /**
+     * The table <code>Schema.table</code>.
+     */
+    public final Table TABLE = Table.TABLE;
+
+    /**
+     * No further instances allowed
+     */
+    private Schema() {
+        super("Schema", null);
+    }
 
 
-  @Override
-  public Catalog getCatalog() {
-    return DefaultCatalog.DEFAULT_CATALOG;
-  }
+    @Override
+    public Catalog getCatalog() {
+        return DefaultCatalog.DEFAULT_CATALOG;
+    }
 
-  @Override
-  public final List<Table<?>> getTables() {
-    return Arrays.asList(
-      Person.PERSON
-    );
-  }
+    @Override
+    public final List<org.jooq.Table<?>> getTables() {
+        return Arrays.asList(
+            Person.PERSON,
+            Table.TABLE
+        );
+    }
 }
