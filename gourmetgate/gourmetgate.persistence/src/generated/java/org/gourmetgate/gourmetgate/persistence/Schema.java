@@ -4,13 +4,12 @@
 package org.gourmetgate.gourmetgate.persistence;
 
 
-import java.util.Arrays;
-import java.util.List;
-
-import org.gourmetgate.gourmetgate.persistence.tables.Person;
-import org.gourmetgate.gourmetgate.persistence.tables.Table;
+import org.gourmetgate.gourmetgate.persistence.tables.*;
 import org.jooq.Catalog;
 import org.jooq.impl.SchemaImpl;
+
+import java.util.Arrays;
+import java.util.List;
 
 
 /**
@@ -26,6 +25,21 @@ public class Schema extends SchemaImpl {
      */
     public static final Schema SCHEMA = new Schema();
 
+  /**
+   * The table <code>Schema.ARTICLE</code>.
+   */
+  public final Article ARTICLE = Article.ARTICLE;
+
+  /**
+   * The table <code>Schema.order</code>.
+   */
+  public final Order ORDER = Order.ORDER;
+
+  /**
+   * The table <code>Schema.ORDER_POSITION</code>.
+   */
+  public final OrderPosition ORDER_POSITION = OrderPosition.ORDER_POSITION;
+
     /**
      * The table <code>Schema.person</code>.
      */
@@ -37,7 +51,12 @@ public class Schema extends SchemaImpl {
     public final Table TABLE = Table.TABLE;
 
     /**
-     * No further instances allowed
+     * The table <code>Schema.VAT</code>.
+     */
+    public final Vat VAT = Vat.VAT;
+
+  /**
+   * No further instances allowed
      */
     private Schema() {
         super("Schema", null);
@@ -52,8 +71,12 @@ public class Schema extends SchemaImpl {
     @Override
     public final List<org.jooq.Table<?>> getTables() {
         return Arrays.asList(
-            Person.PERSON,
-            Table.TABLE
+          Article.ARTICLE,
+          Order.ORDER,
+          OrderPosition.ORDER_POSITION,
+          Person.PERSON,
+          Table.TABLE,
+          Vat.VAT
         );
     }
 }
