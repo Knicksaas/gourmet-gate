@@ -3,6 +3,7 @@ package org.gourmetgate.gourmetgate.data.table;
 import jakarta.annotation.Generated;
 import org.eclipse.scout.rt.dataobject.DoEntity;
 import org.eclipse.scout.rt.dataobject.DoValue;
+import org.gourmetgate.gourmetgate.data.common.EnumUtility;
 
 public class TableDo extends DoEntity {
 
@@ -17,6 +18,14 @@ public class TableDo extends DoEntity {
     public DoValue<String> status() {
         return doValue("status");
     }
+
+  public TableDo withStatusEnum(TableStatus status) {
+    return withStatus(status.name());
+  }
+
+  public TableStatus getStatusEnum() {
+    return EnumUtility.getEnumFromString(TableStatus.class, getStatus());
+  }
 
     /* **************************************************************************
      * GENERATED CONVENIENCE METHODS

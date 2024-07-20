@@ -3,6 +3,7 @@ package org.gourmetgate.gourmetgate.persistence.common;
 import org.eclipse.scout.rt.dataobject.DoEntity;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.util.TypeCastUtility;
+import org.jooq.Field;
 import org.jooq.Table;
 import org.jooq.UpdatableRecord;
 
@@ -95,6 +96,14 @@ public abstract class AbstractRepository<TABLE extends Table<RECORD>, RECORD ext
   public int delete(String id) {
     return jooq()
       .deleteFrom(getTable())
+      .where(getIdColumn().eq(id))
+      .execute();
+  }
+
+  public <T> int updateField(String id, Field<T> field, T value) {
+    return jooq()
+      .update(getTable())
+      .set(field, value)
       .where(getIdColumn().eq(id))
       .execute();
   }

@@ -22,8 +22,8 @@ public class TableRepository extends AbstractRepository<Table, TableRecord, Tabl
   }
 
   @Override
-  public void updateStatus(TableStatus tableStatus) {
-
+  public void updateStatus(String id, TableStatus tableStatus) {
+    updateField(id, Table.TABLE.STATUS, tableStatus.name());
   }
 
   @Override
