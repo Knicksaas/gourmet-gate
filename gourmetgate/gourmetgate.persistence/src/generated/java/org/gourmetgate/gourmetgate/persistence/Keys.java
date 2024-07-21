@@ -25,6 +25,7 @@ public class Keys {
     // -------------------------------------------------------------------------
 
   public static final UniqueKey<ArticleRecord> ARTICLE_PK = Internal.createUniqueKey(Article.ARTICLE, DSL.name("ARTICLE_PK"), new TableField[]{Article.ARTICLE.ARTICLE_ID}, true);
+  public static final UniqueKey<ArticleGroupRecord> ARTICLE_GROUP_PK = Internal.createUniqueKey(ArticleGroup.ARTICLE_GROUP, DSL.name("ARTICLE_GROUP_PK"), new TableField[]{ArticleGroup.ARTICLE_GROUP.ARTICLE_GROUP_ID}, true);
   public static final UniqueKey<OrderRecord> ORDER_PK = Internal.createUniqueKey(Order.ORDER, DSL.name("ORDER_PK"), new TableField[]{Order.ORDER.ORDER_ID}, true);
   public static final UniqueKey<OrderPositionRecord> ORDER_POSITION_PK = Internal.createUniqueKey(OrderPosition.ORDER_POSITION, DSL.name("ORDER_POSITION_PK"), new TableField[]{OrderPosition.ORDER_POSITION.ORDER_POSITION_ID}, true);
     public static final UniqueKey<PersonRecord> PERSON_PK = Internal.createUniqueKey(Person.PERSON, DSL.name("person_pk"), new TableField[] { Person.PERSON.PERSON_ID }, true);
@@ -35,6 +36,7 @@ public class Keys {
   // FOREIGN KEY definitions
   // -------------------------------------------------------------------------
 
+  public static final ForeignKey<ArticleRecord, ArticleGroupRecord> ARTICLE_ARTICLE_GROUP_ARTICLE_GROUP_ID_FK = Internal.createForeignKey(Article.ARTICLE, DSL.name("ARTICLE_ARTICLE_GROUP_ARTICLE_GROUP_ID_FK"), new TableField[]{Article.ARTICLE.ARTICLE_GROUP_ID}, Keys.ARTICLE_GROUP_PK, new TableField[]{ArticleGroup.ARTICLE_GROUP.ARTICLE_GROUP_ID}, true);
   public static final ForeignKey<ArticleRecord, VatRecord> ARTICLE_VAT_VAT_ID_FK = Internal.createForeignKey(Article.ARTICLE, DSL.name("ARTICLE_VAT_VAT_ID_FK"), new TableField[]{Article.ARTICLE.VAT_ID}, Keys.VAT_PK, new TableField[]{Vat.VAT.VAT_ID}, true);
   public static final ForeignKey<OrderRecord, TableRecord> ORDER_TABLE_TABLE_ID_FK = Internal.createForeignKey(Order.ORDER, DSL.name("ORDER_TABLE_TABLE_ID_FK"), new TableField[]{Order.ORDER.TABLE_ID}, Keys.TABLE_PK, new TableField[]{Table.TABLE.TABLE_ID}, true);
   public static final ForeignKey<OrderPositionRecord, ArticleRecord> ORDER_POSITION_ARTICLE_ARTICLE_ID_FK = Internal.createForeignKey(OrderPosition.ORDER_POSITION, DSL.name("ORDER_POSITION_ARTICLE_ARTICLE_ID_FK"), new TableField[]{OrderPosition.ORDER_POSITION.ARTICLE_ID}, Keys.ARTICLE_PK, new TableField[]{Article.ARTICLE.ARTICLE_ID}, true);

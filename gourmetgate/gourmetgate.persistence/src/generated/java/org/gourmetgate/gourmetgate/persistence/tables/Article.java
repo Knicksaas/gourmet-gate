@@ -75,6 +75,11 @@ public class Article extends TableImpl<ArticleRecord> {
    */
   public final TableField<ArticleRecord, BigDecimal> PRICE = createField(DSL.name("PRICE"), SQLDataType.DECIMAL(15, 10).nullable(false).defaultValue(DSL.field("0.0", SQLDataType.DECIMAL)), this, "");
 
+  /**
+   * The column <code>Schema.ARTICLE.ARTICLE_GROUP_ID</code>.
+   */
+  public final TableField<ArticleRecord, String> ARTICLE_GROUP_ID = createField(DSL.name("ARTICLE_GROUP_ID"), SQLDataType.VARCHAR(36).nullable(false).defaultValue(DSL.field("''", SQLDataType.VARCHAR)), this, "");
+
   private Article(Name alias, Table<ArticleRecord> aliased) {
     this(alias, aliased, null);
   }
@@ -120,10 +125,11 @@ public class Article extends TableImpl<ArticleRecord> {
 
   @Override
   public List<ForeignKey<ArticleRecord, ?>> getReferences() {
-    return Arrays.asList(Keys.ARTICLE_VAT_VAT_ID_FK);
+    return Arrays.asList(Keys.ARTICLE_VAT_VAT_ID_FK, Keys.ARTICLE_ARTICLE_GROUP_ARTICLE_GROUP_ID_FK);
   }
 
   private transient Vat _vat;
+  private transient ArticleGroup _articleGroup;
 
   /**
    * Get the implicit join path to the <code>Schema.VAT</code> table.
@@ -133,6 +139,17 @@ public class Article extends TableImpl<ArticleRecord> {
       _vat = new Vat(this, Keys.ARTICLE_VAT_VAT_ID_FK);
 
     return _vat;
+  }
+
+  /**
+   * Get the implicit join path to the <code>Schema.ARTICLE_GROUP</code>
+   * table.
+   */
+  public ArticleGroup articleGroup() {
+    if (_articleGroup == null)
+      _articleGroup = new ArticleGroup(this, Keys.ARTICLE_ARTICLE_GROUP_ARTICLE_GROUP_ID_FK);
+
+    return _articleGroup;
   }
 
   @Override
@@ -162,11 +179,11 @@ public class Article extends TableImpl<ArticleRecord> {
   }
 
   // -------------------------------------------------------------------------
-  // Row7 type methods
+  // Row8 type methods
   // -------------------------------------------------------------------------
 
   @Override
-  public Row7<String, String, String, Boolean, String, String, BigDecimal> fieldsRow() {
-    return (Row7) super.fieldsRow();
+  public Row8<String, String, String, Boolean, String, String, BigDecimal, String> fieldsRow() {
+    return (Row8) super.fieldsRow();
   }
 }

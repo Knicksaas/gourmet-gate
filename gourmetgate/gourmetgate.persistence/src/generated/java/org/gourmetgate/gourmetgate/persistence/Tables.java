@@ -19,6 +19,11 @@ public class Tables {
   public static final Article ARTICLE = Article.ARTICLE;
 
   /**
+   * The table <code>Schema.ARTICLE_GROUP</code>.
+   */
+  public static final ArticleGroup ARTICLE_GROUP = ArticleGroup.ARTICLE_GROUP;
+
+  /**
    * The table <code>Schema.order</code>.
    */
   public static final Order ORDER = Order.ORDER;
@@ -28,8 +33,8 @@ public class Tables {
    */
   public static final OrderPosition ORDER_POSITION = OrderPosition.ORDER_POSITION;
 
-    /**
-     * The table <code>Schema.person</code>.
+  /**
+   * The table <code>Schema.person</code>.
      */
     public static final Person PERSON = Person.PERSON;
 
