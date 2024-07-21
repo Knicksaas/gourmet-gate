@@ -12,6 +12,10 @@ public class ArticleDo extends DoEntity {
     return doValue("articleId");
   }
 
+  public DoValue<String> articleGroupId() {
+    return doValue("articleGroupId");
+  }
+
   public DoValue<String> name() {
     return doValue("name");
   }
@@ -49,6 +53,17 @@ public class ArticleDo extends DoEntity {
   @Generated("DoConvenienceMethodsGenerator")
   public String getArticleId() {
     return articleId().get();
+  }
+
+  @Generated("DoConvenienceMethodsGenerator")
+  public ArticleDo withArticleGroupId(String articleGroupId) {
+    articleGroupId().set(articleGroupId);
+    return this;
+  }
+
+  @Generated("DoConvenienceMethodsGenerator")
+  public String getArticleGroupId() {
+    return articleGroupId().get();
   }
 
   @Generated("DoConvenienceMethodsGenerator")

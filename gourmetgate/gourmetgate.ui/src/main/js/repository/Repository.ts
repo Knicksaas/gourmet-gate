@@ -52,6 +52,10 @@ export abstract class Repository implements ObjectWithType {
     return JSON.parse(data, this.jsonReviver);
   }
 
+  protected _all<TData>(): JQuery.Promise<TData[]> {
+    return this.getJson(this.targetUrl + 'all')
+  }
+
   protected _list<TRestriction, TData>(restriction: TRestriction): JQuery.Promise<TData> {
     return this.postJson(this.targetUrl + 'list', this.jsonStringify(restriction));
   }
