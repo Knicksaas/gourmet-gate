@@ -1,13 +1,5 @@
-import {
-  AccordionField,
-  Button,
-  FormModel,
-  Group,
-  GroupBox,
-  HtmlTile,
-  TileAccordion,
-  TileGrid
-} from '@eclipse-scout/core';
+import {AccordionField, Button, FormModel, Group, GroupBox, HtmlTile, TileAccordion} from '@eclipse-scout/core';
+import {ArticleAccordionGroup} from '../index';
 
 export default (): FormModel => ({
   id: 'gourmetgate.OrderForm',
@@ -28,19 +20,9 @@ export default (): FormModel => ({
             objectType: TileAccordion,
             scrollable: true,
             textFilterEnabled: false,
+            exclusiveExpand: true,
             groups: [{
-              id: 'TestGroup',
-              objectType: Group,
-              title: '${textKey:All}',
-              body: {
-                objectType: TileGrid,
-                gridColumnCount: 3,
-                tiles: [{
-                  id: 'TestTile',
-                  objectType: HtmlTile,
-                  content: '<h1>hoi</h1>'
-                }]
-              }
+              objectType: ArticleAccordionGroup
             }],
           },
           gridDataHints: {

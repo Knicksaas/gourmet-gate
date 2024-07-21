@@ -8,6 +8,8 @@ export * from './desktop/Desktop';
 export * from './desktop/DesktopModel';
 export * from './desktop/DataOutline';
 export * from './desktop/DataOutlineModel';
+export * from './article/ArticleAccordionGroup';
+export * from './article/ArticleTile';
 export * from './order/OrderForm';
 export * from './person/Person';
 export * from './person/PersonForm';
