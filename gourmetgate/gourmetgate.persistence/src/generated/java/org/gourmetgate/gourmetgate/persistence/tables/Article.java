@@ -51,9 +51,9 @@ public class Article extends TableImpl<ArticleRecord> {
   public final TableField<ArticleRecord, String> NAME = createField(DSL.name("NAME"), SQLDataType.VARCHAR(80).nullable(false), this, "");
 
   /**
-   * The column <code>Schema.ARTICLE.DESCRIPTION</code>.
+   * The column <code>Schema.ARTICLE.UNIT</code>.
    */
-  public final TableField<ArticleRecord, String> DESCRIPTION = createField(DSL.name("DESCRIPTION"), SQLDataType.LONGVARCHAR, this, "");
+  public final TableField<ArticleRecord, String> UNIT = createField(DSL.name("UNIT"), SQLDataType.LONGVARCHAR.nullable(false).defaultValue(DSL.field("'5 dl'", SQLDataType.LONGVARCHAR)), this, "");
 
   /**
    * The column <code>Schema.ARTICLE.HAS_OPTIONS</code>.

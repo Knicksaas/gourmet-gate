@@ -4,7 +4,7 @@ export class Article {
   articleId: string;
   articleGroupId: string;
   name: string;
-  description: string;
+  unit: string;
   price: number;
   options: boolean;
   status: string;
@@ -17,7 +17,7 @@ export class Article {
     this.articleId = null;
     this.articleGroupId = null;
     this.name = null;
-    this.description = null;
+    this.unit = null;
     this.price = 0;
     this.options = null;
     this.status = null;
@@ -41,8 +41,8 @@ export class Article {
     this.name = name;
   }
 
-  setDescription(description: string) {
-    this.description = description;
+  setUnit(unit: string) {
+    this.unit = unit;
   }
 
   setPrice(price: number) {

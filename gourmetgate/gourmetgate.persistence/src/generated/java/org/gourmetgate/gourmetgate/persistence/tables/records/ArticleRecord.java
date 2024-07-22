@@ -51,16 +51,16 @@ public class ArticleRecord extends UpdatableRecordImpl<ArticleRecord> implements
   }
 
   /**
-   * Setter for <code>Schema.ARTICLE.DESCRIPTION</code>.
+   * Setter for <code>Schema.ARTICLE.UNIT</code>.
    */
-  public void setDescription(String value) {
+  public void setUnit(String value) {
     set(2, value);
   }
 
   /**
-   * Getter for <code>Schema.ARTICLE.DESCRIPTION</code>.
+   * Getter for <code>Schema.ARTICLE.UNIT</code>.
    */
-  public String getDescription() {
+  public String getUnit() {
     return (String) get(2);
   }
 
@@ -169,7 +169,7 @@ public class ArticleRecord extends UpdatableRecordImpl<ArticleRecord> implements
 
   @Override
   public Field<String> field3() {
-    return Article.ARTICLE.DESCRIPTION;
+    return Article.ARTICLE.UNIT;
   }
 
   @Override
@@ -209,7 +209,7 @@ public class ArticleRecord extends UpdatableRecordImpl<ArticleRecord> implements
 
   @Override
   public String component3() {
-    return getDescription();
+    return getUnit();
   }
 
   @Override
@@ -249,7 +249,7 @@ public class ArticleRecord extends UpdatableRecordImpl<ArticleRecord> implements
 
   @Override
   public String value3() {
-    return getDescription();
+    return getUnit();
   }
 
   @Override
@@ -291,7 +291,7 @@ public class ArticleRecord extends UpdatableRecordImpl<ArticleRecord> implements
 
   @Override
   public ArticleRecord value3(String value) {
-    setDescription(value);
+    setUnit(value);
     return this;
   }
 
@@ -352,12 +352,12 @@ public class ArticleRecord extends UpdatableRecordImpl<ArticleRecord> implements
   /**
    * Create a detached, initialised ArticleRecord
    */
-  public ArticleRecord(String articleId, String name, String description, Boolean hasOptions, String vatId, String status, BigDecimal price, String articleGroupId) {
+  public ArticleRecord(String articleId, String name, String unit, Boolean hasOptions, String vatId, String status, BigDecimal price, String articleGroupId) {
     super(Article.ARTICLE);
 
     setArticleId(articleId);
     setName(name);
-    setDescription(description);
+    setUnit(unit);
     setHasOptions(hasOptions);
     setVatId(vatId);
     setStatus(status);

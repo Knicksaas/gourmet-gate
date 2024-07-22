@@ -1,0 +1,21 @@
+.article-tile {
+  border-radius: @border-radius-large;
+  border-style: solid;
+  border-color: @border-color;
+  padding: @tile-padding-y @tile-padding-x;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  & > .article-title {
+    width: 100%;
+    text-align: center;
+    font-size: @sub-title-font-size;
+  }
+
+  & > .article-footer {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+}

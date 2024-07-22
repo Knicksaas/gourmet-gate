@@ -22,8 +22,8 @@ public class ArticleDo extends DoEntity {
     return doValue("name");
   }
 
-  public DoValue<String> description() {
-    return doValue("description");
+  public DoValue<String> unit() {
+    return doValue("unit");
   }
 
   public DoValue<BigDecimal> price() {
@@ -80,14 +80,14 @@ public class ArticleDo extends DoEntity {
   }
 
   @Generated("DoConvenienceMethodsGenerator")
-  public ArticleDo withDescription(String description) {
-    description().set(description);
+  public ArticleDo withUnit(String unit) {
+    unit().set(unit);
     return this;
   }
 
   @Generated("DoConvenienceMethodsGenerator")
-  public String getDescription() {
-    return description().get();
+  public String getUnit() {
+    return unit().get();
   }
 
   @Generated("DoConvenienceMethodsGenerator")

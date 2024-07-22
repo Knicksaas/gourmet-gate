@@ -25,7 +25,7 @@ public class ArticleRepository extends AbstractRepository<Article, ArticleRecord
     return new DoEntityBeanMappings<ArticleDo, ArticleRecord>()
       .with(ArticleDo::articleId, ArticleRecord::getArticleId, ArticleRecord::setArticleId)
       .with(ArticleDo::name, ArticleRecord::getName, ArticleRecord::setName)
-      .with(ArticleDo::description, ArticleRecord::getDescription, ArticleRecord::setDescription)
+      .with(ArticleDo::unit, ArticleRecord::getUnit, ArticleRecord::setUnit)
       .with(ArticleDo::price, ArticleRecord::getPrice, ArticleRecord::setPrice)
       .with(ArticleDo::options, ArticleRecord::getHasOptions, ArticleRecord::setHasOptions)
       .with(ArticleDo::vatId, ArticleRecord::getVatId, ArticleRecord::setVatId)
