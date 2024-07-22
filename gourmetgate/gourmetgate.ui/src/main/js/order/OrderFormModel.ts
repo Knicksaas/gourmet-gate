@@ -7,6 +7,7 @@ export default (): FormModel => ({
   rootGroupBox: {
     id: 'MainBox',
     objectType: GroupBox,
+    cssClass: 'order-form-main-box',
     fields: [
       {
         id: 'TileAccordionBox',
@@ -41,6 +42,7 @@ export default (): FormModel => ({
           objectType: Button,
           processButton: false,
           label: '${textKey:Order}',
+          cssClass: 'order-form-order-button',
           gridDataHints: {
             fillHorizontal: true
           }

@@ -15,7 +15,8 @@ export class OrderForm extends Form {
     let tiles = this.data.map(article => {
       return scout.create(ArticleTile, {
         parent: tileGrid,
-        bean: article
+        bean: article,
+        cartCount: 10
       });
     })
     tileGrid.insertTiles(tiles)
