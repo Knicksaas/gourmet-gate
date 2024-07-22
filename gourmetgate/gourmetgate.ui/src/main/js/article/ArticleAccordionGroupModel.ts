@@ -1,14 +1,12 @@
 import {Group, GroupModel, TileGrid} from "@eclipse-scout/core";
-import {ArticleTile} from '../index';
 
 export default (): GroupModel => ({
   id: 'ArticleAccordionGroup',
   objectType: Group,
+  cssClass: 'article-accordion-group',
   body: {
     objectType: TileGrid,
-    gridColumnCount: 3,
-    tiles: [{
-      objectType: ArticleTile
-    }]
+    withPlaceholders: true,
+    gridColumnCount: 3
   }
 });

@@ -1,4 +1,4 @@
-import {AccordionField, Button, FormModel, Group, GroupBox, HtmlTile, TileAccordion} from '@eclipse-scout/core';
+import {AccordionField, Button, FormModel, GroupBox, TileAccordion} from '@eclipse-scout/core';
 import {ArticleAccordionGroup} from '../index';
 
 export default (): FormModel => ({
@@ -15,12 +15,14 @@ export default (): FormModel => ({
           id: 'OrderAccordionField',
           objectType: AccordionField,
           labelVisible: false,
+          statusVisible: false,
           accordion: {
             id: 'OrderAcordion',
             objectType: TileAccordion,
             scrollable: true,
             textFilterEnabled: false,
             exclusiveExpand: true,
+            cssClass: 'order-accordion',
             groups: [{
               objectType: ArticleAccordionGroup
             }],
@@ -56,8 +58,6 @@ export type OrderFormWidgetMap = {
   'TileAccordionBox': GroupBox;
   'OrderAccordionField': AccordionField;
   'OrderAcordion': TileAccordion;
-  'TestGroup': Group;
-  'TestTile': HtmlTile;
   'OrderButtonBox': GroupBox;
   'OrderButton': Button;
 };

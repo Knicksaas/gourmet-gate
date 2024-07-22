@@ -1,5 +1,6 @@
-import {Outline, OutlineModel, PageWithNodes} from '@eclipse-scout/core';
+import {Outline, OutlineModel} from '@eclipse-scout/core';
 import {OrderForm, PersonTablePage} from '../index';
+import {PageWithData} from './PageWithData';
 
 export default (): OutlineModel => ({
   id: 'gourmetgate.DataOutline',
@@ -10,13 +11,14 @@ export default (): OutlineModel => ({
       objectType: PersonTablePage
     },
     {
-      objectType: PageWithNodes,
+      objectType: PageWithData,
       leaf: true,
       navigateButtonsVisible: false,
       text: '${textKey:Order}',
       detailForm: {
-        objectType: OrderForm
-      }
+        objectType: OrderForm,
+      },
+      detailTableVisible: false
     }
   ]
 });

@@ -1,6 +1,25 @@
-import {EventHandler, InitModelOf, MessageBox, MessageBoxes, ObjectOrModel, PageWithTable, PageWithTableModel, scout, Table, TableRow} from '@eclipse-scout/core';
-import {DataChangeEvent, Person, PersonForm, PersonRepository, PersonRestriction, PersonSearchFormData} from '../index';
-import PersonTablePageModel, {PersonTablePageTable} from './PersonTablePageModel';
+import {
+  EventHandler,
+  InitModelOf,
+  MessageBox,
+  MessageBoxes,
+  ObjectOrModel,
+  PageWithTable,
+  PageWithTableModel,
+  scout,
+  Table,
+  TableRow
+} from '@eclipse-scout/core';
+import {
+  DataChangeEvent,
+  Person,
+  PersonForm,
+  PersonRepository,
+  PersonRestriction,
+  PersonSearchFormData,
+  PersonTablePageTable
+} from '../index';
+import PersonTablePageModel from './PersonTablePageModel';
 
 export class PersonTablePage extends PageWithTable {
   declare detailTable: PersonTablePageTable;

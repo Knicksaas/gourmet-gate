@@ -8,7 +8,7 @@ export class ArticleRepository extends Repository {
     super();
 
     this.entityType = Article.ENTITY_TYPE;
-    this.targetUrl = `${App.get().apiUrl}articles/`;
+    this.targetUrl = `${App.get().apiUrl}article/`;
   }
 
   all(): JQuery.Promise<Article[]> {

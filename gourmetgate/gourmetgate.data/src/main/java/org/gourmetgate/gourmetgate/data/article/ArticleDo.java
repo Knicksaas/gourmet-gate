@@ -3,9 +3,11 @@ package org.gourmetgate.gourmetgate.data.article;
 import jakarta.annotation.Generated;
 import org.eclipse.scout.rt.dataobject.DoEntity;
 import org.eclipse.scout.rt.dataobject.DoValue;
+import org.eclipse.scout.rt.dataobject.TypeName;
 
 import java.math.BigDecimal;
 
+@TypeName("gourmetgate.Article")
 public class ArticleDo extends DoEntity {
 
   public DoValue<String> articleId() {

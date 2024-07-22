@@ -1,3 +1,5 @@
+import $ from "jquery";
+
 export class Article {
   articleId: string;
   articleGroupId: string;
@@ -6,13 +8,25 @@ export class Article {
   price: number;
   options: boolean;
   status: string;
+  vatId: string;
   cartCount: number;
 
   static ENTITY_TYPE = 'article';
 
   constructor() {
+    this.articleId = null;
+    this.articleGroupId = null;
+    this.name = null;
+    this.description = null;
     this.price = 0;
+    this.options = null;
+    this.status = null;
+    this.vatId = null;
     this.cartCount = 0;
+  }
+
+  init(model: any) {
+    $.extend(this, model);
   }
 
   setArticleId(id: string) {

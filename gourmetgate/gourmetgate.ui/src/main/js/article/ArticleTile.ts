@@ -9,7 +9,6 @@ export class ArticleTile extends BeanTile<Article> {
   }
 
   protected override _renderBean() {
-    super._renderBean();
     this.$container
       .appendDiv("article-tile-title")
       .text(this.bean.name);

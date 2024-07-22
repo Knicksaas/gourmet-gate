@@ -10,6 +10,7 @@ export * from './desktop/DataOutline';
 export * from './desktop/DataOutlineModel';
 export * from './article/Article';
 export * from './article/ArticleAccordionGroup';
+export * from './article/ArticleRepository';
 export * from './article/ArticleTile';
 export * from './order/OrderForm';
 export * from './person/Person';

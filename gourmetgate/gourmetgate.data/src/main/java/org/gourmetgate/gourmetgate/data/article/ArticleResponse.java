@@ -9,7 +9,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Stream;
 
-@TypeName("gourmetgate.PersonResponse")
+@TypeName("gourmetgate.ArticleResponse")
 public class ArticleResponse extends DoEntity {
 
   public DoList<ArticleDo> items() {
