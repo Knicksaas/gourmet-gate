@@ -3,7 +3,9 @@ package org.gourmetgate.gourmetgate.data.articlegroup;
 import jakarta.annotation.Generated;
 import org.eclipse.scout.rt.dataobject.DoEntity;
 import org.eclipse.scout.rt.dataobject.DoValue;
+import org.eclipse.scout.rt.dataobject.TypeName;
 
+@TypeName("gourmetgate.ArticleGroup")
 public class ArticleGroupDo extends DoEntity {
 
   public DoValue<String> articleGroupId() {
