@@ -13,6 +13,7 @@ export * from './article/ArticleAccordionGroup';
 export * from './article/ArticleRepository';
 export * from './article/ArticleTile';
 export * from './articlegroup/ArticleGroup';
+export * from './cart/ArticleCartCount';
 export * from './order/OrderForm';
 export * from './order/OrderFormData';
 export * from './order/OrderFormRepository';

@@ -1,10 +1,21 @@
 import {Form, scout, TileAccordion, TileGrid, WidgetModel} from "@eclipse-scout/core";
 import OrderFormModel, {OrderFormWidgetMap} from './OrderFormModel';
-import {Article, ArticleAccordionGroup, ArticleGroup, ArticleTile, OrderFormData, OrderFormRepository} from "../index";
+import {
+  Article,
+  ArticleAccordionGroup,
+  ArticleCartCount,
+  ArticleGroup,
+  ArticleTile,
+  OrderFormData,
+  OrderFormRepository
+} from "../index";
 
 export class OrderForm extends Form {
   declare widgetMap: OrderFormWidgetMap;
   declare data: OrderFormData;
+
+  protected _allGroups: ArticleAccordionGroup[];
+  protected _allTiles: ArticleTile[];
 
   protected override _jsonModel(): WidgetModel {
     return OrderFormModel();
@@ -15,16 +26,22 @@ export class OrderForm extends Form {
   }
 
   override importData() {
+    this._allGroups = [];
+    this._allTiles = [];
+
     let accordion = this.widget('OrderAcordion');
-    let groups = this.data.articleGroups
+    this._allGroups = this.data.articleGroups
       .map(group => this._createArticleGroup(group, accordion));
 
     this.data.articles.forEach(article => {
-      let tileGrid = this._getTileGridForArticleGroupId(groups, article.articleGroupId);
+      let tileGrid = this._getTileGridForArticleGroupId(this._allGroups, article.articleGroupId);
       let tile = this._createArticleTile(article, tileGrid);
+      this._allTiles.push(tile);
       tileGrid.insertTile(tile);
     });
-    accordion.setGroups(groups);
+    accordion.setGroups(this._allGroups);
+
+    this._mapCartCounts(this.data.articleCartCounts);
   }
 
   protected _createArticleGroup(articleGroup: ArticleGroup, parent: TileAccordion): ArticleAccordionGroup {
@@ -48,8 +65,16 @@ export class OrderForm extends Form {
   protected _createArticleTile(article: Article, parent: TileGrid): ArticleTile {
     return scout.create(ArticleTile, {
       parent: parent,
-      bean: article,
-      cartCount: 10
+      bean: article
+    });
+  }
+
+  protected _mapCartCounts(cartCounts: ArticleCartCount[]) {
+    cartCounts.forEach(cartCount => {
+      let tile = this._allTiles.find(tile => tile.bean.articleId === cartCount.articleId);
+      if (tile) {
+        tile.setCartCount(cartCount.cartCount);
+      }
     });
   }
 }
