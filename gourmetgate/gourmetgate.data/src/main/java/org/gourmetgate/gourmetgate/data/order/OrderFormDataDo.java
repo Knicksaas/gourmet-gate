@@ -23,7 +23,7 @@ public class OrderFormDataDo extends DoEntity {
   }
 
   public DoList<ArticleCartCountDo> cartCounts() {
-    return doList("articlecartCounts");
+    return doList("articleCartCounts");
   }
 
   /* **************************************************************************

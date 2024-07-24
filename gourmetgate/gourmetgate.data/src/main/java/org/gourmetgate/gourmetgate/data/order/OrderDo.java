@@ -5,12 +5,16 @@ import org.eclipse.scout.rt.dataobject.DoEntity;
 import org.eclipse.scout.rt.dataobject.DoValue;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.util.Date;
 
 public class OrderDo extends DoEntity {
 
   public DoValue<String> orderId() {
     return doValue("orderId");
+  }
+
+  public DoValue<String> sessionId() {
+    return doValue("sessionId");
   }
 
   public DoValue<String> tableId() {
@@ -25,11 +29,11 @@ public class OrderDo extends DoEntity {
     return doValue("tip");
   }
 
-  public DoValue<LocalDate> evtCreate() {
+  public DoValue<Date> evtCreate() {
     return doValue("evtCreate");
   }
 
-  public DoValue<LocalDate> evtPay() {
+  public DoValue<Date> evtPay() {
     return doValue("evtPay");
   }
 
@@ -46,6 +50,17 @@ public class OrderDo extends DoEntity {
   @Generated("DoConvenienceMethodsGenerator")
   public String getOrderId() {
     return orderId().get();
+  }
+
+  @Generated("DoConvenienceMethodsGenerator")
+  public OrderDo withSessionId(String sessionId) {
+    sessionId().set(sessionId);
+    return this;
+  }
+
+  @Generated("DoConvenienceMethodsGenerator")
+  public String getSessionId() {
+    return sessionId().get();
   }
 
   @Generated("DoConvenienceMethodsGenerator")
@@ -82,24 +97,24 @@ public class OrderDo extends DoEntity {
   }
 
   @Generated("DoConvenienceMethodsGenerator")
-  public OrderDo withEvtCreate(LocalDate evtCreate) {
+  public OrderDo withEvtCreate(Date evtCreate) {
     evtCreate().set(evtCreate);
     return this;
   }
 
   @Generated("DoConvenienceMethodsGenerator")
-  public LocalDate getEvtCreate() {
+  public Date getEvtCreate() {
     return evtCreate().get();
   }
 
   @Generated("DoConvenienceMethodsGenerator")
-  public OrderDo withEvtPay(LocalDate evtPay) {
+  public OrderDo withEvtPay(Date evtPay) {
     evtPay().set(evtPay);
     return this;
   }
 
   @Generated("DoConvenienceMethodsGenerator")
-  public LocalDate getEvtPay() {
+  public Date getEvtPay() {
     return evtPay().get();
   }
 }

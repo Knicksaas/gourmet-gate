@@ -48,7 +48,7 @@ public class Schema extends SchemaImpl {
   /**
    * The table <code>Schema.person</code>.
    */
-    public final Person PERSON = Person.PERSON;
+  public final Person PERSON = Person.PERSON;
 
     /**
      * The table <code>Schema.table</code>.

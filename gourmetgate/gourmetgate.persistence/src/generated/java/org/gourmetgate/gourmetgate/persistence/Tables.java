@@ -36,7 +36,7 @@ public class Tables {
   /**
    * The table <code>Schema.person</code>.
    */
-    public static final Person PERSON = Person.PERSON;
+  public static final Person PERSON = Person.PERSON;
 
     /**
      * The table <code>Schema.table</code>.

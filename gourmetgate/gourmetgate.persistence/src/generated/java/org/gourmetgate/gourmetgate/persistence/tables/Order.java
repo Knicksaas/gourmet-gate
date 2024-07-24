@@ -6,6 +6,7 @@ package org.gourmetgate.gourmetgate.persistence.tables;
 
 import org.gourmetgate.gourmetgate.persistence.Keys;
 import org.gourmetgate.gourmetgate.persistence.Schema;
+import org.gourmetgate.gourmetgate.persistence.common.DateConverter;
 import org.gourmetgate.gourmetgate.persistence.tables.records.OrderRecord;
 import org.jooq.Record;
 import org.jooq.Table;
@@ -15,8 +16,8 @@ import org.jooq.impl.SQLDataType;
 import org.jooq.impl.TableImpl;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 
@@ -57,19 +58,24 @@ public class Order extends TableImpl<OrderRecord> {
   public final TableField<OrderRecord, String> STATUS = createField(DSL.name("STATUS"), SQLDataType.VARCHAR(80).nullable(false), this, "");
 
   /**
-   * The column <code>Schema.order.EVT_CREATE</code>.
-   */
-  public final TableField<OrderRecord, LocalDate> EVT_CREATE = createField(DSL.name("EVT_CREATE"), SQLDataType.LOCALDATE.nullable(false), this, "");
-
-  /**
-   * The column <code>Schema.order.EVT_PAY</code>.
-   */
-  public final TableField<OrderRecord, LocalDate> EVT_PAY = createField(DSL.name("EVT_PAY"), SQLDataType.LOCALDATE, this, "");
-
-  /**
    * The column <code>Schema.order.TIP</code>.
    */
   public final TableField<OrderRecord, BigDecimal> TIP = createField(DSL.name("TIP"), SQLDataType.DECIMAL(15, 10).nullable(false).defaultValue(DSL.field("0.0", SQLDataType.DECIMAL)), this, "");
+
+  /**
+   * The column <code>Schema.order.SESSION_ID</code>.
+   */
+  public final TableField<OrderRecord, String> SESSION_ID = createField(DSL.name("SESSION_ID"), SQLDataType.VARCHAR(36).nullable(false).defaultValue(DSL.field("''", SQLDataType.VARCHAR)), this, "");
+
+  /**
+   * The column <code>Schema.order.EVT_CREATE</code>.
+   */
+  public final TableField<OrderRecord, Date> EVT_CREATE = createField(DSL.name("EVT_CREATE"), SQLDataType.LOCALDATETIME(9).nullable(false).defaultValue(DSL.field("'1960-01-01 23:03:20'", SQLDataType.LOCALDATETIME)), this, "", new DateConverter());
+
+  /**
+     * The column <code>Schema.order.EVT_PAY</code>.
+   */
+  public final TableField<OrderRecord, Date> EVT_PAY = createField(DSL.name("EVT_PAY"), SQLDataType.LOCALDATETIME(9), this, "", new DateConverter());
 
   private Order(Name alias, Table<OrderRecord> aliased) {
     this(alias, aliased, null);
@@ -158,11 +164,11 @@ public class Order extends TableImpl<OrderRecord> {
   }
 
   // -------------------------------------------------------------------------
-  // Row6 type methods
+  // Row7 type methods
   // -------------------------------------------------------------------------
 
   @Override
-  public Row6<String, String, String, LocalDate, LocalDate, BigDecimal> fieldsRow() {
-    return (Row6) super.fieldsRow();
+  public Row7<String, String, String, BigDecimal, String, Date, Date> fieldsRow() {
+    return (Row7) super.fieldsRow();
   }
 }
