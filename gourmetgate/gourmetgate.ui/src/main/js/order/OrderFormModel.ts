@@ -1,5 +1,5 @@
 import {AccordionField, Button, FormModel, GroupBox, TileAccordion} from '@eclipse-scout/core';
-import {ArticleAccordionGroup} from '../index';
+import {ArticleAccordionGroup, ArticleTile} from '../index';
 
 export default (): FormModel => ({
   id: 'gourmetgate.OrderForm',
@@ -19,10 +19,9 @@ export default (): FormModel => ({
           statusVisible: false,
           accordion: {
             id: 'OrderAcordion',
-            objectType: TileAccordion,
+            objectType: TileAccordion<ArticleTile>,
             scrollable: true,
             textFilterEnabled: false,
-            exclusiveExpand: true,
             cssClass: 'order-accordion',
             groups: [{
               objectType: ArticleAccordionGroup

@@ -24,6 +24,7 @@ public class ArticleRepository extends AbstractRepository<Article, ArticleRecord
   protected DoEntityBeanMappings<ArticleDo, ArticleRecord> mappings() {
     return new DoEntityBeanMappings<ArticleDo, ArticleRecord>()
       .with(ArticleDo::articleId, ArticleRecord::getArticleId, ArticleRecord::setArticleId)
+      .with(ArticleDo::articleGroupId, ArticleRecord::getArticleGroupId, ArticleRecord::setArticleGroupId)
       .with(ArticleDo::name, ArticleRecord::getName, ArticleRecord::setName)
       .with(ArticleDo::unit, ArticleRecord::getUnit, ArticleRecord::setUnit)
       .with(ArticleDo::price, ArticleRecord::getPrice, ArticleRecord::setPrice)
