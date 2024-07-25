@@ -5,7 +5,7 @@ import org.eclipse.scout.rt.dataobject.DoEntity;
 import org.eclipse.scout.rt.dataobject.DoValue;
 import org.eclipse.scout.rt.dataobject.TypeName;
 
-@TypeName("groumetgate.ArticleCartCount")
+@TypeName("gourmetgate.ArticleCartCount")
 public class ArticleCartCountDo extends DoEntity {
 
   public DoValue<String> articleId() {

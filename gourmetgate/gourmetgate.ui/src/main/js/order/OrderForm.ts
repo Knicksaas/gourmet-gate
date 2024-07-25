@@ -1,4 +1,13 @@
-import {Form, scout, TileAccordion, TileGrid, WidgetModel} from "@eclipse-scout/core";
+import {
+  arrays,
+  EventHandler,
+  Form,
+  InitModelOf,
+  scout,
+  TileAccordion,
+  TileGrid,
+  WidgetModel
+} from "@eclipse-scout/core";
 import OrderFormModel, {OrderFormWidgetMap} from './OrderFormModel';
 import {
   Article,
@@ -6,6 +15,7 @@ import {
   ArticleCartCount,
   ArticleGroup,
   ArticleTile,
+  DataChangeEvent,
   OrderFormData,
   OrderFormRepository
 } from "../index";
@@ -16,13 +26,33 @@ export class OrderForm extends Form {
 
   protected _allGroups: ArticleAccordionGroup[];
   protected _allTiles: ArticleTile[];
+  protected _dataChangeListener: EventHandler<DataChangeEvent>;
 
   protected override _jsonModel(): WidgetModel {
     return OrderFormModel();
   }
 
+  override init(model: InitModelOf<this>) {
+    super.init(model);
+
+    this._dataChangeListener = this._onDataChange.bind(this);
+    this.session.desktop.on('dataChange', this._dataChangeListener);
+  }
+
+  protected _onDataChange(event: DataChangeEvent) {
+    if (event.dataType === ArticleCartCount.ENTITY_TYPE) {
+      this._mapCartCounts(arrays.ensure(event.data));
+    }
+  }
+
   protected override _load(): JQuery.Promise<OrderFormData> {
     return OrderFormRepository.get().formData();
+  }
+
+
+  protected override _destroy() {
+    this.session.desktop.off('dataChange', this._dataChangeListener);
+    super._destroy();
   }
 
   override importData() {

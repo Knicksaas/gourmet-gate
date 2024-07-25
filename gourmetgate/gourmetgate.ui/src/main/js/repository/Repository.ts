@@ -16,7 +16,7 @@ export abstract class Repository implements ObjectWithType {
     return Repository.map(ajax.getJson(url, this._ensureConverter(opts)));
   }
 
-  postJson(url: string, data: any, opts?: JQuery.AjaxSettings): JQuery.Promise<any> {
+  postJson(url: string, data?: any, opts?: JQuery.AjaxSettings): JQuery.Promise<any> {
     return Repository.map(ajax.postJson(url, data, this._ensureConverter(opts)));
   }
 
@@ -88,9 +88,9 @@ export abstract class Repository implements ObjectWithType {
     return items[0];
   }
 
-  protected _triggerDataChange<TData>(data?: TData): TData {
+  protected _triggerDataChange<TData>(data?: TData, entityType?: string): TData {
     scout.getSession().desktop.dataChange({
-      dataType: this.entityType,
+      dataType: entityType || this.entityType,
       data: data
     });
     return data;
