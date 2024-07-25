@@ -63,19 +63,19 @@ public class Order extends TableImpl<OrderRecord> {
   public final TableField<OrderRecord, BigDecimal> TIP = createField(DSL.name("TIP"), SQLDataType.DECIMAL(15, 10).nullable(false).defaultValue(DSL.field("0.0", SQLDataType.DECIMAL)), this, "");
 
   /**
-   * The column <code>Schema.order.SESSION_ID</code>.
-   */
-  public final TableField<OrderRecord, String> SESSION_ID = createField(DSL.name("SESSION_ID"), SQLDataType.VARCHAR(36).nullable(false).defaultValue(DSL.field("''", SQLDataType.VARCHAR)), this, "");
-
-  /**
    * The column <code>Schema.order.EVT_CREATE</code>.
    */
   public final TableField<OrderRecord, Date> EVT_CREATE = createField(DSL.name("EVT_CREATE"), SQLDataType.LOCALDATETIME(9).nullable(false).defaultValue(DSL.field("'1960-01-01 23:03:20'", SQLDataType.LOCALDATETIME)), this, "", new DateConverter());
 
   /**
-     * The column <code>Schema.order.EVT_PAY</code>.
-   */
+   * The column <code>Schema.order.EVT_PAY</code>.
+     */
   public final TableField<OrderRecord, Date> EVT_PAY = createField(DSL.name("EVT_PAY"), SQLDataType.LOCALDATETIME(9), this, "", new DateConverter());
+
+  /**
+   * The column <code>Schema.order.SESSION_ID</code>.
+   */
+  public final TableField<OrderRecord, String> SESSION_ID = createField(DSL.name("SESSION_ID"), SQLDataType.VARCHAR(80).nullable(false).defaultValue(DSL.field("'default'", SQLDataType.VARCHAR)), this, "");
 
   private Order(Name alias, Table<OrderRecord> aliased) {
     this(alias, aliased, null);
@@ -168,7 +168,7 @@ public class Order extends TableImpl<OrderRecord> {
   // -------------------------------------------------------------------------
 
   @Override
-  public Row7<String, String, String, BigDecimal, String, Date, Date> fieldsRow() {
+  public Row7<String, String, String, BigDecimal, Date, Date, String> fieldsRow() {
     return (Row7) super.fieldsRow();
   }
 }

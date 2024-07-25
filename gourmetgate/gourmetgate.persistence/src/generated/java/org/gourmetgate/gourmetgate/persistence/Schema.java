@@ -36,6 +36,11 @@ public class Schema extends SchemaImpl {
   public final ArticleGroup ARTICLE_GROUP = ArticleGroup.ARTICLE_GROUP;
 
   /**
+   * The table <code>Schema.ARTICLE_OPTION</code>.
+   */
+  public final ArticleOption ARTICLE_OPTION = ArticleOption.ARTICLE_OPTION;
+
+  /**
    * The table <code>Schema.order</code>.
    */
   public final Order ORDER = Order.ORDER;
@@ -46,12 +51,17 @@ public class Schema extends SchemaImpl {
   public final OrderPosition ORDER_POSITION = OrderPosition.ORDER_POSITION;
 
   /**
+   * The table <code>Schema.ORDER_POSITION_OPTION</code>.
+   */
+  public final OrderPositionOption ORDER_POSITION_OPTION = OrderPositionOption.ORDER_POSITION_OPTION;
+
+  /**
    * The table <code>Schema.person</code>.
    */
   public final Person PERSON = Person.PERSON;
 
-    /**
-     * The table <code>Schema.table</code>.
+  /**
+   * The table <code>Schema.table</code>.
      */
     public final Table TABLE = Table.TABLE;
 
@@ -76,10 +86,12 @@ public class Schema extends SchemaImpl {
     @Override
     public final List<org.jooq.Table<?>> getTables() {
         return Arrays.asList(
-          Article.ARTICLE,
+            Article.ARTICLE,
           ArticleGroup.ARTICLE_GROUP,
+          ArticleOption.ARTICLE_OPTION,
           Order.ORDER,
           OrderPosition.ORDER_POSITION,
+          OrderPositionOption.ORDER_POSITION_OPTION,
           Person.PERSON,
           Table.TABLE,
           Vat.VAT

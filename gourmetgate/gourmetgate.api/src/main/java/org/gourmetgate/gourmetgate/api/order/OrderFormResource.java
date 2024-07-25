@@ -19,7 +19,7 @@ public class OrderFormResource implements IRestResource {
   @Produces(MediaType.APPLICATION_JSON)
   public OrderFormDataResponse getFormData(@CookieParam("JSESSIONID") Cookie cookie) {
     OrderFormService service = BEANS.get(OrderFormService.class);
-    String orderId = service.getOrderIdForSession(cookie.getValue(), "eaec9de9-3bc5-4981-bb0a-e02aa4c88b31");
+    String orderId = service.getOrCreateOrderForSession(cookie.getValue(), "eaec9de9-3bc5-4981-bb0a-e02aa4c88b31");
     return BEANS.get(OrderFormDataResponse.class)
       .withItem(service.getOrderFormData(orderId));
   }

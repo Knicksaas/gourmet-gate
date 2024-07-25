@@ -8,6 +8,7 @@ import org.gourmetgate.gourmetgate.persistence.common.AbstractRepository;
 import org.gourmetgate.gourmetgate.persistence.common.DoEntityBeanMappings;
 import org.gourmetgate.gourmetgate.persistence.tables.OrderPosition;
 import org.gourmetgate.gourmetgate.persistence.tables.records.OrderPositionRecord;
+import org.jooq.Condition;
 import org.jooq.Field;
 import org.jooq.impl.DSL;
 
@@ -29,12 +30,25 @@ public class OrderPositionRepository extends AbstractRepository<OrderPosition, O
 
   @Override
   public Stream<Pair<String, Integer>> getCartCountPerArticle(String orderId) {
+    return getCartCountPerArticle(orderId, null);
+  }
+
+  @Override
+  public Stream<Pair<String, Integer>> getCartCountPerArticle(String orderId, String articleId) {
     return jooq().select(OrderPosition.ORDER_POSITION.ARTICLE_ID, DSL.count(OrderPosition.ORDER_POSITION.ARTICLE_ID))
       .from(OrderPosition.ORDER_POSITION)
-      .where(OrderPosition.ORDER_POSITION.ORDER_ID.eq(orderId))
+      .where(getCartCountWhere(orderId, articleId))
       .groupBy(OrderPosition.ORDER_POSITION.ARTICLE_ID)
       .stream()
       .map(result -> new ImmutablePair<>(result.component1(), result.component2()));
+  }
+
+  private Condition getCartCountWhere(String orderId, String articleId) {
+    Condition condition = OrderPosition.ORDER_POSITION.ORDER_ID.eq(orderId);
+    if (articleId != null) {
+      condition = DSL.and(condition, OrderPosition.ORDER_POSITION.ARTICLE_ID.eq(articleId));
+    }
+    return condition;
   }
 
   @Override

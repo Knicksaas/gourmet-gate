@@ -18,7 +18,11 @@ public class OrderFormService implements IService {
     return formData;
   }
 
-  public String getOrderIdForSession(String sessionId, String tableId) {
-    return BEANS.get(IOrderRepository.class).getOrderForSession(sessionId, tableId);
+  public String getOrderIdForSession(String sessionId) {
+    return BEANS.get(IOrderRepository.class).getCurrentOrderIdForSession(sessionId);
+  }
+
+  public String getOrCreateOrderForSession(String sessionId, String tableId) {
+    return BEANS.get(IOrderRepository.class).getOrCreateOrderForSession(sessionId, tableId);
   }
 }

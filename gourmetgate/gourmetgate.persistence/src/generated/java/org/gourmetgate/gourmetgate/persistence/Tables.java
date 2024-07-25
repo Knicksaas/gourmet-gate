@@ -24,6 +24,11 @@ public class Tables {
   public static final ArticleGroup ARTICLE_GROUP = ArticleGroup.ARTICLE_GROUP;
 
   /**
+   * The table <code>Schema.ARTICLE_OPTION</code>.
+   */
+  public static final ArticleOption ARTICLE_OPTION = ArticleOption.ARTICLE_OPTION;
+
+  /**
    * The table <code>Schema.order</code>.
    */
   public static final Order ORDER = Order.ORDER;
@@ -34,12 +39,17 @@ public class Tables {
   public static final OrderPosition ORDER_POSITION = OrderPosition.ORDER_POSITION;
 
   /**
+   * The table <code>Schema.ORDER_POSITION_OPTION</code>.
+   */
+  public static final OrderPositionOption ORDER_POSITION_OPTION = OrderPositionOption.ORDER_POSITION_OPTION;
+
+  /**
    * The table <code>Schema.person</code>.
    */
   public static final Person PERSON = Person.PERSON;
 
-    /**
-     * The table <code>Schema.table</code>.
+  /**
+   * The table <code>Schema.table</code>.
      */
     public static final Table TABLE = Table.TABLE;
 

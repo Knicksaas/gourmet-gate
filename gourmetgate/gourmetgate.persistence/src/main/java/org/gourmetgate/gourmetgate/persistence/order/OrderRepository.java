@@ -39,7 +39,7 @@ public class OrderRepository extends AbstractRepository<Order, OrderRecord, Orde
   }
 
   @Override
-  public String getOrderForSession(String sessionId, String tableId) {
+  public String getOrCreateOrderForSession(String sessionId, String tableId) {
     String currentOrder = getCurrentOrderIdForSession(sessionId);
     if (currentOrder != null) {
       return currentOrder;
