@@ -1,6 +1,16 @@
-import {EventHandler, Group, GroupModel, InitModelOf, TileClickEvent, TileGrid, WidgetModel} from "@eclipse-scout/core";
+import {
+  EventHandler,
+  Group,
+  GroupModel,
+  InitModelOf,
+  scout,
+  TileClickEvent,
+  TileGrid,
+  WidgetModel
+} from "@eclipse-scout/core";
 import ArticleAccordionGroupJsonModel from "./ArticleAccordionGroupJsonModel";
 import {ArticleTile, OrderRepository} from "../index";
+import {OrderPositionOptionForm} from "../order/options/OrderPositionOptionForm";
 
 export interface ArticleAccordionGroupModel extends GroupModel<TileGrid<ArticleTile>> {
   articleGroupId?: string;
@@ -24,7 +34,19 @@ export class ArticleAccordionGroup extends Group<TileGrid<ArticleTile>> implemen
   }
 
   protected _onTileClick(event: TileClickEvent) {
-    OrderRepository.get().addArticle((<ArticleTile>event.tile).bean.articleId);
+    let tile = event.tile as ArticleTile;
+    OrderRepository.get().addArticle(tile.bean.articleId);
+    if (tile.bean.options) {
+      let optionsForm = this._createOptionsForm(tile.bean.articleId);
+      optionsForm.setTitle('Optionen: ' + tile.bean.name);
+      optionsForm.open();
+    }
+  }
+
+  protected _createOptionsForm(articleId: string): OrderPositionOptionForm {
+    return scout.create(OrderPositionOptionForm, {
+      parent: this
+    });
   }
 
   override destroy() {
@@ -32,3 +54,4 @@ export class ArticleAccordionGroup extends Group<TileGrid<ArticleTile>> implemen
     super.destroy();
   }
 }
+
