@@ -26,15 +26,11 @@ public class OrderPositionService implements IService {
     BEANS.get(IOrderPositionRepository.class).create(orderPosition);
 
     // Reload cart count
-    return getCartCounts(orderId, articleId);
+    return getCartCounts(orderId);
   }
 
   public Stream<ArticleCartCountDo> getCartCounts(String orderId) {
-    return getCartCounts(orderId, null);
-  }
-
-  public Stream<ArticleCartCountDo> getCartCounts(String orderId, String articleId) {
-    return BEANS.get(IOrderPositionRepository.class).getCartCountPerArticle(orderId, articleId)
+    return BEANS.get(IOrderPositionRepository.class).getCartCountPerArticle(orderId)
       .map(pair -> BEANS.get(ArticleCartCountDo.class)
         .withArticleId(pair.getLeft())
         .withCartCount(pair.getRight()));

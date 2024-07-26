@@ -8,6 +8,4 @@ import java.util.stream.Stream;
 public interface IOrderPositionRepository extends ICrudRepository<OrderPositionDo> {
 
   Stream<Pair<String, Integer>> getCartCountPerArticle(String orderId);
-
-  Stream<Pair<String, Integer>> getCartCountPerArticle(String orderId, String articleId);
 }

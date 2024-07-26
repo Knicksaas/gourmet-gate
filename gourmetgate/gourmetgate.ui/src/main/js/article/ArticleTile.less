@@ -35,5 +35,15 @@
     color: @text-inverted-color;
     text-align: center;
     line-height: 1.5;
+
+    &.animate {
+      animation: push 0.2s linear 1;
+    }
+
+    @keyframes push {
+      50% {
+        transform: scale(0.5);
+      }
+    }
   }
 }

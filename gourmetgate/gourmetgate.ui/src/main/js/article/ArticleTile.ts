@@ -43,8 +43,16 @@ export class ArticleTile extends BeanTile<Article> implements ArticleTileModel {
   }
 
   protected _renderCartCount() {
+    this._removeCartCount();
     this.$cartCountIndicator = this.$container.appendDiv('article-cart-count-indicator');
     this.$cartCountIndicator.text(this.cartCount)
     this.$cartCountIndicator.toggleClass('hidden', !this.cartCount)
+    this.$cartCountIndicator.addClass('animate');
+  }
+
+  protected _removeCartCount() {
+    if (this.$cartCountIndicator) {
+      this.$cartCountIndicator.remove();
+    }
   }
 }
