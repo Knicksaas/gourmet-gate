@@ -13,7 +13,6 @@ export class OrderRepository extends Repository {
 
   addArticle(articleId: string) {
     this.postJson(this.targetUrl + 'position/' + articleId)
-      .then(data => this._first(data) as ArticleCartCount)
       .then(data => this._triggerDataChange(data, ArticleCartCount.ENTITY_TYPE));
   }
 
