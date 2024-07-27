@@ -18,6 +18,7 @@ export * from './order/OrderForm';
 export * from './order/OrderFormData';
 export * from './order/OrderFormRepository';
 export * from './order/OrderRepository';
+export * from './order/options/OrderPositionOption';
 export * from './order/options/OrderPositionOptionForm';
 export * from './order/options/OrderPositionOptionsListBox';
 export * from './person/Person';
