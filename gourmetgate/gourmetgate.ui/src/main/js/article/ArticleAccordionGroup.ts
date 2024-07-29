@@ -53,7 +53,8 @@ export class ArticleAccordionGroup extends Group<TileGrid<ArticleTile>> implemen
 
   protected _createOptionsForm(orderPositionId: string): OrderPositionOptionForm {
     return scout.create(OrderPositionOptionForm, {
-      parent: this
+      parent: this,
+      orderPositionId: orderPositionId
     });
   }
 

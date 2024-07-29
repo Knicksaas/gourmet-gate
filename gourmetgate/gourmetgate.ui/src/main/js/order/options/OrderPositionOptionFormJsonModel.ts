@@ -1,5 +1,5 @@
 import {FormModel, GroupBox} from '@eclipse-scout/core';
-import {OrderPositionOptionsListBox} from '../../index';
+import {OrderPositionOptionsListBox, OrderPositionOptionsLookupCall} from '../../index';
 
 export default (): FormModel => ({
   id: 'gourmetgate.OrderPositionOptionForm',
@@ -16,6 +16,7 @@ export default (): FormModel => ({
       fields: [{
         id: 'OptionsListField',
         objectType: OrderPositionOptionsListBox,
+        lookupCall: OrderPositionOptionsLookupCall,
         labelVisible: false,
         statusVisible: false,
         gridDataHints: {
@@ -25,3 +26,12 @@ export default (): FormModel => ({
     }]
   }
 });
+
+/* **************************************************************************
+* GENERATED WIDGET MAPS
+* **************************************************************************/
+
+export type OrderPositionOptionFormJsonWidgetMap = {
+  'OptionsBox': GroupBox;
+  'OptionsListField': OrderPositionOptionsListBox;
+};

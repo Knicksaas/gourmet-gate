@@ -3,7 +3,9 @@ package org.gourmetgate.gourmetgate.data.orderposition;
 import jakarta.annotation.Generated;
 import org.eclipse.scout.rt.dataobject.DoEntity;
 import org.eclipse.scout.rt.dataobject.DoValue;
+import org.eclipse.scout.rt.dataobject.TypeName;
 
+@TypeName("gourmetgate.OrderPositionOption")
 public class OrderPositionOptionDo extends DoEntity {
 
   public DoValue<String> orderPositionOptionId() {

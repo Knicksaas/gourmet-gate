@@ -6,6 +6,7 @@ package org.gourmetgate.gourmetgate.persistence.tables.records;
 
 import org.gourmetgate.gourmetgate.persistence.tables.OrderPositionOption;
 import org.jooq.Field;
+import org.jooq.Record1;
 import org.jooq.Record4;
 import org.jooq.Row4;
 import org.jooq.impl.UpdatableRecordImpl;
@@ -27,13 +28,13 @@ public class OrderPositionOptionRecord extends UpdatableRecordImpl<OrderPosition
     set(0, value);
   }
 
-  /**
-   * Getter for
-   * <code>Schema.ORDER_POSITION_OPTION.ORDER_POSITION_OPTION_ID</code>.
-   */
-  public String getOrderPositionOptionId() {
-    return (String) get(0);
-  }
+    /**
+     * Getter for
+     * <code>Schema.ORDER_POSITION_OPTION.ORDER_POSITION_OPTION_ID</code>.
+     */
+    public String getOrderPositionOptionId() {
+      return (String) get(0);
+    }
 
   /**
    * Setter for <code>Schema.ORDER_POSITION_OPTION.ORDER_POSITION_ID</code>.
@@ -75,6 +76,15 @@ public class OrderPositionOptionRecord extends UpdatableRecordImpl<OrderPosition
    */
   public Boolean getSelected() {
     return (Boolean) get(3);
+  }
+
+  // -------------------------------------------------------------------------
+  // Primary key information
+  // -------------------------------------------------------------------------
+
+  @Override
+  public Record1<String> key() {
+    return (Record1) super.key();
   }
 
   // -------------------------------------------------------------------------

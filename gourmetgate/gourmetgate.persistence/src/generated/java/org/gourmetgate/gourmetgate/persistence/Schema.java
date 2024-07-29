@@ -62,7 +62,7 @@ public class Schema extends SchemaImpl {
 
   /**
    * The table <code>Schema.table</code>.
-     */
+   */
     public final Table TABLE = Table.TABLE;
 
     /**

@@ -50,7 +50,7 @@ public class Tables {
 
   /**
    * The table <code>Schema.table</code>.
-     */
+   */
     public static final Table TABLE = Table.TABLE;
 
   /**

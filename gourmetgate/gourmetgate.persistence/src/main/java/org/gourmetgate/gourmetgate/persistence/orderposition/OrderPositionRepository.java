@@ -43,6 +43,7 @@ public class OrderPositionRepository extends AbstractRepository<OrderPosition, O
     return jooq().select(Order.ORDER.SESSION_ID)
       .from(OrderPosition.ORDER_POSITION)
       .join(Order.ORDER).on(Order.ORDER.ORDER_ID.eq(OrderPosition.ORDER_POSITION.ORDER_ID))
+      .where(OrderPosition.ORDER_POSITION.ORDER_POSITION_ID.eq(orderPositionId))
       .fetchOne()
       .value1();
   }

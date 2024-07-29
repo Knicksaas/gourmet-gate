@@ -4,6 +4,7 @@
 package org.gourmetgate.gourmetgate.persistence.tables;
 
 
+import org.gourmetgate.gourmetgate.persistence.Keys;
 import org.gourmetgate.gourmetgate.persistence.Schema;
 import org.gourmetgate.gourmetgate.persistence.tables.records.OrderPositionOptionRecord;
 import org.jooq.Record;
@@ -12,6 +13,9 @@ import org.jooq.*;
 import org.jooq.impl.DSL;
 import org.jooq.impl.SQLDataType;
 import org.jooq.impl.TableImpl;
+
+import java.util.Arrays;
+import java.util.List;
 
 
 /**
@@ -97,12 +101,47 @@ public class OrderPositionOption extends TableImpl<OrderPositionOptionRecord> {
   }
 
   @Override
+  public UniqueKey<OrderPositionOptionRecord> getPrimaryKey() {
+    return Keys.ORDER_POSITION_OPTION_PK;
+  }
+
+  @Override
+  public List<ForeignKey<OrderPositionOptionRecord, ?>> getReferences() {
+    return Arrays.asList(Keys.ORDER_POSITION_OPTION_ORDER_POSITION_ORDER_POSITION_ID_FK, Keys.ORDER_POSITION_OPTION_ARTICLE_OPTION_ARTICLE_OPTION_ID_FK);
+  }
+
+  private transient OrderPosition _orderPosition;
+  private transient ArticleOption _articleOption;
+
+  /**
+   * Get the implicit join path to the <code>Schema.ORDER_POSITION</code>
+   * table.
+   */
+  public OrderPosition orderPosition() {
+    if (_orderPosition == null)
+      _orderPosition = new OrderPosition(this, Keys.ORDER_POSITION_OPTION_ORDER_POSITION_ORDER_POSITION_ID_FK);
+
+    return _orderPosition;
+  }
+
+  /**
+   * Get the implicit join path to the <code>Schema.ARTICLE_OPTION</code>
+   * table.
+   */
+  public ArticleOption articleOption() {
+    if (_articleOption == null)
+      _articleOption = new ArticleOption(this, Keys.ORDER_POSITION_OPTION_ARTICLE_OPTION_ARTICLE_OPTION_ID_FK);
+
+    return _articleOption;
+  }
+
+  @Override
   public OrderPositionOption as(String alias) {
     return new OrderPositionOption(DSL.name(alias), this);
   }
 
   @Override
-  public OrderPositionOption as(Name alias) {
+    public OrderPositionOption as(Name alias) {
     return new OrderPositionOption(alias, this);
   }
 

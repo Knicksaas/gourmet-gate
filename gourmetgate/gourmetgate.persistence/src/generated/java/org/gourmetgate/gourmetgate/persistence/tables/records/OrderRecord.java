@@ -88,10 +88,10 @@ public class OrderRecord extends UpdatableRecordImpl<OrderRecord> implements Rec
 
   /**
    * Getter for <code>Schema.order.EVT_CREATE</code>.
-     */
-  public Date getEvtCreate() {
-    return (Date) get(4);
-  }
+   */
+    public Date getEvtCreate() {
+      return (Date) get(4);
+    }
 
   /**
    * Setter for <code>Schema.order.EVT_PAY</code>.

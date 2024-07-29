@@ -69,8 +69,8 @@ public class Order extends TableImpl<OrderRecord> {
 
   /**
    * The column <code>Schema.order.EVT_PAY</code>.
-     */
-  public final TableField<OrderRecord, Date> EVT_PAY = createField(DSL.name("EVT_PAY"), SQLDataType.LOCALDATETIME(9), this, "", new DateConverter());
+   */
+    public final TableField<OrderRecord, Date> EVT_PAY = createField(DSL.name("EVT_PAY"), SQLDataType.LOCALDATETIME(9), this, "", new DateConverter());
 
   /**
    * The column <code>Schema.order.SESSION_ID</code>.

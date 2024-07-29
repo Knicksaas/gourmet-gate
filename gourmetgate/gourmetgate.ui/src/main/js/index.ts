@@ -22,6 +22,7 @@ export * from './order/OrderRepository';
 export * from './order/options/OrderPositionOption';
 export * from './order/options/OrderPositionOptionForm';
 export * from './order/options/OrderPositionOptionsListBox';
+export * from './order/options/OrderPositionOptionsLookupCall';
 export * from './person/Person';
 export * from './person/PersonForm';
 export * from './person/PersonFormModel';
