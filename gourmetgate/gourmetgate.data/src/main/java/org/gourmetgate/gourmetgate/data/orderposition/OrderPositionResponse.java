@@ -12,13 +12,12 @@ import java.util.List;
 @TypeName("gourmetgate.OrderPositionResponse")
 public class OrderPositionResponse extends DoEntity {
 
-  public DoList<ArticleCartCountDo> items() {
-    return doList("items");
+  public DoList<ArticleCartCountDo> cartCounts() {
+    return doList("cartCounts");
   }
 
-  public OrderPositionResponse withItem(ArticleCartCountDo cartCountDos) {
-    items().get().add(cartCountDos);
-    return this;
+  public DoList<OrderPositionOptionDo> orderPositionOptions() {
+    return doList("orderPositionOptions");
   }
 
   /* **************************************************************************
@@ -26,19 +25,36 @@ public class OrderPositionResponse extends DoEntity {
    * *************************************************************************/
 
   @Generated("DoConvenienceMethodsGenerator")
-  public OrderPositionResponse withItems(Collection<? extends ArticleCartCountDo> items) {
-    items().updateAll(items);
+  public OrderPositionResponse withCartCounts(Collection<? extends ArticleCartCountDo> cartCounts) {
+    cartCounts().updateAll(cartCounts);
     return this;
   }
 
   @Generated("DoConvenienceMethodsGenerator")
-  public OrderPositionResponse withItems(ArticleCartCountDo... items) {
-    items().updateAll(items);
+  public OrderPositionResponse withCartCounts(ArticleCartCountDo... cartCounts) {
+    cartCounts().updateAll(cartCounts);
     return this;
   }
 
   @Generated("DoConvenienceMethodsGenerator")
-  public List<ArticleCartCountDo> getItems() {
-    return items().get();
+  public List<ArticleCartCountDo> getCartCounts() {
+    return cartCounts().get();
+  }
+
+  @Generated("DoConvenienceMethodsGenerator")
+  public OrderPositionResponse withOrderPositionOptions(Collection<? extends OrderPositionOptionDo> orderPositionOptions) {
+    orderPositionOptions().updateAll(orderPositionOptions);
+    return this;
+  }
+
+  @Generated("DoConvenienceMethodsGenerator")
+  public OrderPositionResponse withOrderPositionOptions(OrderPositionOptionDo... orderPositionOptions) {
+    orderPositionOptions().updateAll(orderPositionOptions);
+    return this;
+  }
+
+  @Generated("DoConvenienceMethodsGenerator")
+  public List<OrderPositionOptionDo> getOrderPositionOptions() {
+    return orderPositionOptions().get();
   }
 }

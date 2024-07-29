@@ -1,4 +1,4 @@
-import {App, ArticleCartCount, Repository} from "../index";
+import {App, OrderPosition, Repository} from "../index";
 import {scout} from "@eclipse-scout/core";
 
 let repository: OrderRepository;
@@ -11,9 +11,8 @@ export class OrderRepository extends Repository {
     this.targetUrl = `${App.get().apiUrl}order/`;
   }
 
-  addArticle(articleId: string) {
-    this.postJson(this.targetUrl + 'position/' + articleId)
-      .then(data => this._triggerDataChange(data, ArticleCartCount.ENTITY_TYPE));
+  createOrderPosition(articleId: string): JQuery.Promise<OrderPosition> {
+    return this.postJson(this.targetUrl + 'position/' + articleId);
   }
 
   static get(): OrderRepository {

@@ -8,6 +8,10 @@ import org.gourmetgate.gourmetgate.persistence.tables.ArticleOption;
 import org.gourmetgate.gourmetgate.persistence.tables.records.ArticleOptionRecord;
 import org.jooq.Field;
 
+import java.util.stream.Stream;
+
+import static org.gourmetgate.gourmetgate.persistence.JooqSqlService.jooq;
+
 public class ArticleOptionRepository extends AbstractRepository<ArticleOption, ArticleOptionRecord, ArticleOptionDo> implements IArticleOptionRepository {
 
   @Override
@@ -18,6 +22,15 @@ public class ArticleOptionRepository extends AbstractRepository<ArticleOption, A
   @Override
   public Field<String> getIdColumn() {
     return ArticleOption.ARTICLE_OPTION.ARTICLE_OPTION_ID;
+  }
+
+  @Override
+  public Stream<ArticleOptionDo> getArticleOptionsForArticle(String articleId) {
+    return jooq()
+      .selectFrom(getTable())
+      .where(ArticleOption.ARTICLE_OPTION.ARTICLE_ID.eq(articleId))
+      .stream()
+      .map(this::fromRecordToDo);
   }
 
   @Override

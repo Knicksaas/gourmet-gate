@@ -18,6 +18,13 @@ public class OrderPositionOptionDo extends DoEntity {
     return doValue("articleOptionId");
   }
 
+  /**
+   * No actual column in the database but nescessary for transfering it to the UI
+   */
+  public DoValue<String> description() {
+    return doValue("description");
+  }
+
   public DoValue<Boolean> selected() {
     return doValue("selected");
   }
@@ -57,6 +64,23 @@ public class OrderPositionOptionDo extends DoEntity {
   @Generated("DoConvenienceMethodsGenerator")
   public String getArticleOptionId() {
     return articleOptionId().get();
+  }
+
+  /**
+   * See {@link #description()}.
+   */
+  @Generated("DoConvenienceMethodsGenerator")
+  public OrderPositionOptionDo withDescription(String description) {
+    description().set(description);
+    return this;
+  }
+
+  /**
+   * See {@link #description()}.
+   */
+  @Generated("DoConvenienceMethodsGenerator")
+  public String getDescription() {
+    return description().get();
   }
 
   @Generated("DoConvenienceMethodsGenerator")

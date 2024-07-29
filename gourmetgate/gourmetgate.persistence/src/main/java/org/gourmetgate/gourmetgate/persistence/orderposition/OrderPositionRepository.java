@@ -6,6 +6,7 @@ import org.gourmetgate.gourmetgate.data.orderposition.IOrderPositionRepository;
 import org.gourmetgate.gourmetgate.data.orderposition.OrderPositionDo;
 import org.gourmetgate.gourmetgate.persistence.common.AbstractRepository;
 import org.gourmetgate.gourmetgate.persistence.common.DoEntityBeanMappings;
+import org.gourmetgate.gourmetgate.persistence.tables.Order;
 import org.gourmetgate.gourmetgate.persistence.tables.OrderPosition;
 import org.gourmetgate.gourmetgate.persistence.tables.records.OrderPositionRecord;
 import org.jooq.Field;
@@ -35,6 +36,15 @@ public class OrderPositionRepository extends AbstractRepository<OrderPosition, O
       .groupBy(OrderPosition.ORDER_POSITION.ARTICLE_ID)
       .stream()
       .map(result -> new ImmutablePair<>(result.component1(), result.component2()));
+  }
+
+  @Override
+  public String getSessionIdForOrderPosition(String orderPositionId) {
+    return jooq().select(Order.ORDER.SESSION_ID)
+      .from(OrderPosition.ORDER_POSITION)
+      .join(Order.ORDER).on(Order.ORDER.ORDER_ID.eq(OrderPosition.ORDER_POSITION.ORDER_ID))
+      .fetchOne()
+      .value1();
   }
 
   @Override

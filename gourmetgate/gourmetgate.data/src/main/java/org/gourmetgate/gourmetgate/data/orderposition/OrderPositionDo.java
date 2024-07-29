@@ -3,9 +3,11 @@ package org.gourmetgate.gourmetgate.data.orderposition;
 import jakarta.annotation.Generated;
 import org.eclipse.scout.rt.dataobject.DoEntity;
 import org.eclipse.scout.rt.dataobject.DoValue;
+import org.eclipse.scout.rt.dataobject.TypeName;
 
 import java.math.BigDecimal;
 
+@TypeName("gourmetgate.OrderPosition")
 public class OrderPositionDo extends DoEntity {
 
   public DoValue<String> orderPositionId() {

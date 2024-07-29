@@ -10,7 +10,6 @@ export class OrderPositionOptionForm extends Form {
     return OrderPositionOptionFormModel();
   }
 
-
   protected override _render() {
     super._render();
 

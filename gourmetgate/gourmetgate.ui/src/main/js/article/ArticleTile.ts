@@ -24,6 +24,10 @@ export class ArticleTile extends BeanTile<Article> implements ArticleTileModel {
     this.setProperty('cartCount', cartCount)
   }
 
+  incrementCartCount() {
+    this.setCartCount((this.cartCount || 0) + 1);
+  }
+
   protected override _renderProperties() {
     super._renderProperties();
     this._renderCartCount();

@@ -17,6 +17,7 @@ export * from './cart/ArticleCartCount';
 export * from './order/OrderForm';
 export * from './order/OrderFormData';
 export * from './order/OrderFormRepository';
+export * from './order/OrderPosition';
 export * from './order/OrderRepository';
 export * from './order/options/OrderPositionOption';
 export * from './order/options/OrderPositionOptionForm';

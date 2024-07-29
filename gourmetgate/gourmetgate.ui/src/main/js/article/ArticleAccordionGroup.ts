@@ -35,15 +35,23 @@ export class ArticleAccordionGroup extends Group<TileGrid<ArticleTile>> implemen
 
   protected _onTileClick(event: TileClickEvent) {
     let tile = event.tile as ArticleTile;
-    OrderRepository.get().addArticle(tile.bean.articleId);
-    if (tile.bean.options) {
-      let optionsForm = this._createOptionsForm(tile.bean.articleId);
-      optionsForm.setTitle('Optionen: ' + tile.bean.name);
-      optionsForm.open();
-    }
+    OrderRepository.get().createOrderPosition(tile.bean.articleId)
+      .then(data => {
+        tile.incrementCartCount();
+        this._showOptionsForm(tile, data.orderPositionId);
+      });
   }
 
-  protected _createOptionsForm(articleId: string): OrderPositionOptionForm {
+  protected _showOptionsForm(tile: ArticleTile, orderPositionId: string) {
+    if (!tile.bean.options) {
+      return;
+    }
+    let optionsForm = this._createOptionsForm(orderPositionId);
+    optionsForm.setTitle('Optionen: ' + tile.bean.name);
+    optionsForm.open();
+  }
+
+  protected _createOptionsForm(orderPositionId: string): OrderPositionOptionForm {
     return scout.create(OrderPositionOptionForm, {
       parent: this
     });
