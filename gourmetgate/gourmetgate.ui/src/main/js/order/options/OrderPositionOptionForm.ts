@@ -3,8 +3,7 @@ import OrderPositionOptionFormJsonModel, {
   OrderPositionOptionFormJsonWidgetMap
 } from "./OrderPositionOptionFormJsonModel";
 import $ from "jquery";
-import {OrderPositionOption} from "./OrderPositionOption";
-import {OrderRepository} from "../OrderRepository";
+import {OrderPositionOption, OrderRepository} from "../../index";
 
 export interface OrderPositionOptionFormModel extends FormModel {
   orderPositionId?: string;
@@ -31,6 +30,14 @@ export class OrderPositionOptionForm extends Form implements OrderPositionOption
     this.widget('OptionsListField').lookupCall.setData(this.data);
   }
 
+  override exportData(): any {
+    return this.data.map(option => {
+      let selected = this.widget('OptionsListField').value.includes(option.orderPositionOptionId);
+      option.setSelected(selected);
+      return option;
+    });
+  }
+
   protected override _render() {
     super._render();
 
@@ -44,7 +51,7 @@ export class OrderPositionOptionForm extends Form implements OrderPositionOption
     }
     let targetWidget = scout.widget($(event.target as HTMLElement));
     if (!this.isOrHas(targetWidget)) {
-      this.close();
+      this.save();
     }
   }
 

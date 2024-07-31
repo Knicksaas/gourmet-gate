@@ -13,4 +13,8 @@ export class OrderPositionOption {
   init(model: any) {
     $.extend(this, model);
   }
+
+  setSelected(selected: boolean) {
+    this.selected = selected;
+  }
 }
