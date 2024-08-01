@@ -1,4 +1,4 @@
-import {App, OrderPosition, OrderPositionOption, Repository} from "../index";
+import {App, GenericRequestBody, OrderPosition, OrderPositionOption, Repository} from "../index";
 import {scout} from "@eclipse-scout/core";
 
 let repository: OrderRepository;
@@ -18,6 +18,12 @@ export class OrderRepository extends Repository {
 
   getOrderPositionOptions(orderPositionId: string): JQuery.Promise<OrderPositionOption[]> {
     return this.getJson(this.targetUrl + 'position/' + orderPositionId + '/options');
+  }
+
+  updateOrderPosition(orderPositionId: string, orderPositionOptions: OrderPositionOption[]): JQuery.Promise<void> {
+    let body = new GenericRequestBody();
+    body.withItems(orderPositionOptions);
+    return this.postJson(this.targetUrl + 'position/' + orderPositionId + '/options', this.jsonStringify(body));
   }
 
   static get(): OrderRepository {

@@ -4,6 +4,7 @@ import * as self from './index';
 export * from './App';
 export * from './objectFactories';
 export * from './repository/Repository';
+export * from './repository/GenericRequestBody';
 export * from './desktop/Desktop';
 export * from './desktop/DesktopModel';
 export * from './desktop/DataOutline';
