@@ -1,5 +1,5 @@
-import {AccordionField, Button, FormModel, GroupBox, TileAccordion} from '@eclipse-scout/core';
-import {ArticleAccordionGroup, ArticleTile} from '../index';
+import {AccordionField, Button, FormModel, GroupBox, icons, TileAccordion} from '@eclipse-scout/core';
+import {ArticleAccordionGroup, ArticleTile, HeaderBar, HeaderBarField} from '../index';
 
 export default (): FormModel => ({
   id: 'gourmetgate.OrderForm',
@@ -10,28 +10,43 @@ export default (): FormModel => ({
     cssClass: 'order-form-main-box',
     fields: [
       {
+        id: 'OrderFormHeaderBar',
+        objectType: HeaderBarField,
+        headerBar: {
+          objectType: HeaderBar,
+          title: '${textKey:Order}',
+          iconId: icons.CALENDAR,
+          cartCount: 10
+        },
+        gridDataHints: {
+          fillHorizontal: true,
+          w: 2
+        }
+      },
+      {
         id: 'TileAccordionBox',
         objectType: GroupBox,
-        fields: [{
-          id: 'OrderAccordionField',
-          objectType: AccordionField,
-          labelVisible: false,
-          statusVisible: false,
-          accordion: {
-            id: 'OrderAcordion',
-            objectType: TileAccordion<ArticleTile>,
-            scrollable: true,
-            textFilterEnabled: false,
-            cssClass: 'order-accordion',
-            groups: [{
-              objectType: ArticleAccordionGroup
-            }],
-          },
-          gridDataHints: {
-            fillVertical: true,
-            h: 8
-          }
-        }]
+        fields: [
+          {
+            id: 'OrderAccordionField',
+            objectType: AccordionField,
+            labelVisible: false,
+            statusVisible: false,
+            accordion: {
+              id: 'OrderAcordion',
+              objectType: TileAccordion<ArticleTile>,
+              scrollable: true,
+              textFilterEnabled: false,
+              cssClass: 'order-accordion',
+              groups: [{
+                objectType: ArticleAccordionGroup
+              }],
+            },
+            gridDataHints: {
+              fillVertical: true,
+              h: 8
+            }
+          }]
       },
       {
         id: 'OrderButtonBox',

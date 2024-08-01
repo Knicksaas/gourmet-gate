@@ -1,0 +1,45 @@
+.header-bar {
+  background-color: @accent-color-3;
+  height: @desktop-header-height;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: @text-inverted-color;
+  padding: 0 20px;
+
+  & > .header-bar-title {
+    font-size: 19px;
+  }
+
+  & > .icon {
+    font-size: 30px;
+  }
+
+  & > .cart-count-indicator {
+    &.hidden {
+      display: none;
+    }
+
+    position: absolute;
+    right: 10px;
+    top: 5px;
+    width: 20px;
+    height: 20px;
+    z-index: 1;
+    border-radius: 10px;
+    background-color: @text-inverted-color;
+    color: @accent-color-3;
+    text-align: center;
+    line-height: 1.5;
+
+    &.animate {
+      animation: push 0.2s linear 1;
+    }
+
+    @keyframes push {
+      50% {
+        transform: scale(0.5);
+      }
+    }
+  }
+}
