@@ -51,7 +51,7 @@ export class OrderPositionOptionForm extends Form implements OrderPositionOption
     }
     let targetWidget = scout.widget($(event.target as HTMLElement));
     if (!this.isOrHas(targetWidget)) {
-      this.save();
+      this.ok();
     }
   }
 
