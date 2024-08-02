@@ -3,6 +3,7 @@ import * as self from './index';
 
 export * from './App';
 export * from './objectFactories';
+export * from './ggicons';
 export * from './repository/Repository';
 export * from './repository/GenericRequestBody';
 export * from './widget/HeaderBar';

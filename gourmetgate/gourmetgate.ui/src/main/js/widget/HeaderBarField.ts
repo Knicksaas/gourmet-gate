@@ -9,7 +9,11 @@ export class HeaderBarField extends FormField implements HeaderBarFieldModel {
 
   constructor() {
     super();
-    this.gridDataHints.weightY = 1;
+    this.gridDataHints.weightY = 0;
+    this.gridDataHints.fillHorizontal = true;
+    this.gridDataHints.fillVertical = true;
+    this.gridDataHints.w = 2;
+    this.gridDataHints.heightInPixel = 50;
     this._addWidgetProperties(['headerBar']);
   }
 
