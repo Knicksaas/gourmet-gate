@@ -1,5 +1,5 @@
 import {AccordionField, Button, FormModel, GroupBox, TileAccordion} from '@eclipse-scout/core';
-import {ArticleAccordionGroup, ArticleTile, ggicons, HeaderBar, HeaderBarField} from '../index';
+import {ArticleAccordionGroup, ArticleTile, HeaderBarField, OrderHeaderBar} from '../index';
 
 export default (): FormModel => ({
   id: 'gourmetgate.OrderForm',
@@ -13,10 +13,7 @@ export default (): FormModel => ({
         id: 'OrderFormHeaderBar',
         objectType: HeaderBarField,
         headerBar: {
-          objectType: HeaderBar,
-          title: '${textKey:Order}',
-          iconId: ggicons.SHOPPING_CART,
-          cartCount: 10
+          objectType: OrderHeaderBar
         }
       },
       {

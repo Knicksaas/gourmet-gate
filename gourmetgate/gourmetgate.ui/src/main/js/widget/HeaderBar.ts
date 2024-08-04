@@ -1,8 +1,10 @@
 import {Icon, InitModelOf, scout, Widget} from "@eclipse-scout/core";
-import {HeaderBarModel} from "../index";
+import {HeaderBarModel, IHeaderBarEventMap} from "../index";
 
 export class HeaderBar extends Widget implements HeaderBarModel {
   declare model: HeaderBarModel;
+  declare eventMap: IHeaderBarEventMap;
+  declare self: HeaderBar;
 
   title: string;
   iconId: string;
@@ -35,11 +37,19 @@ export class HeaderBar extends Widget implements HeaderBarModel {
   }
 
   protected _renderIconId() {
+    this._removeIconId();
     this.icon = scout.create(Icon, {
       parent: this,
       iconDesc: this.iconId
     });
     this.icon.render();
+    this.$container.on('click', this._onIconClick.bind(this));
+  }
+
+  protected _removeIconId() {
+    if (this.icon) {
+      this.icon.destroy();
+    }
   }
 
   protected _renderCartCount() {
@@ -48,11 +58,16 @@ export class HeaderBar extends Widget implements HeaderBarModel {
     this.$cartCountIndicator.text(this.cartCount)
     this.$cartCountIndicator.toggleClass('hidden', !this.cartCount)
     this.$cartCountIndicator.addClass('animate');
+    this.$container.on('click', this._onIconClick.bind(this));
   }
 
   protected _removeCartCount() {
     if (this.$cartCountIndicator) {
       this.$cartCountIndicator.remove();
     }
+  }
+
+  protected _onIconClick() {
+    this.trigger('iconClick');
   }
 }

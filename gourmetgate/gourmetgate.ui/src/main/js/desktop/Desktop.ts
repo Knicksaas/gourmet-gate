@@ -11,6 +11,9 @@ import {
   scout
 } from '@eclipse-scout/core';
 import DesktopModel, {DesktopWidgetMap} from './DesktopModel';
+import {OrderForm} from "../order/OrderForm";
+import {PersonTablePage} from "../person/PersonTablePage";
+import {DataOutline} from "./DataOutline";
 
 export class Desktop extends ScoutDesktop {
   declare widgetMap: DesktopWidgetMap;
@@ -36,6 +39,18 @@ export class Desktop extends ScoutDesktop {
     } else {
       defaultThemeMenu.setIconId(icons.CHECKED_BOLD);
     }
+  }
+
+  activateOrderPage() {
+    let outline = this.getOutlines().find(o => o instanceof DataOutline);
+    let cartPage = outline.nodes.find(page => page.detailForm instanceof OrderForm);
+    outline.selectNode(cartPage);
+  }
+
+  activateCartPage() {
+    let outline = this.getOutlines().find(o => o instanceof DataOutline);
+    let cartPage = outline.nodes.find(page => page instanceof PersonTablePage);
+    outline.selectNode(cartPage);
   }
 
   protected _onDefaultThemeMenuAction() {
