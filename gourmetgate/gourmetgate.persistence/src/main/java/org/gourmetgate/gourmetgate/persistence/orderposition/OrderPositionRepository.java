@@ -1,11 +1,14 @@
 package org.gourmetgate.gourmetgate.persistence.orderposition;
 
+import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.util.ImmutablePair;
 import org.eclipse.scout.rt.platform.util.Pair;
+import org.gourmetgate.gourmetgate.data.cart.CartItemDo;
 import org.gourmetgate.gourmetgate.data.orderposition.IOrderPositionRepository;
 import org.gourmetgate.gourmetgate.data.orderposition.OrderPositionDo;
 import org.gourmetgate.gourmetgate.persistence.common.AbstractRepository;
 import org.gourmetgate.gourmetgate.persistence.common.DoEntityBeanMappings;
+import org.gourmetgate.gourmetgate.persistence.tables.Article;
 import org.gourmetgate.gourmetgate.persistence.tables.Order;
 import org.gourmetgate.gourmetgate.persistence.tables.OrderPosition;
 import org.gourmetgate.gourmetgate.persistence.tables.records.OrderPositionRecord;
@@ -46,6 +49,27 @@ public class OrderPositionRepository extends AbstractRepository<OrderPosition, O
       .where(OrderPosition.ORDER_POSITION.ORDER_POSITION_ID.eq(orderPositionId))
       .fetchOne()
       .value1();
+  }
+
+  @Override
+  public Stream<CartItemDo> getCartItemsByOrderId(String orderId) {
+    return jooq().select(
+        OrderPosition.ORDER_POSITION.ORDER_POSITION_ID,
+        Article.ARTICLE.NAME,
+        Article.ARTICLE.UNIT,
+        Article.ARTICLE.PRICE,
+        Article.ARTICLE.HAS_OPTIONS)
+      .from(Order.ORDER)
+      .join(OrderPosition.ORDER_POSITION).on(Order.ORDER.ORDER_ID.eq(OrderPosition.ORDER_POSITION.ORDER_ID))
+      .join(Article.ARTICLE).on(OrderPosition.ORDER_POSITION.ARTICLE_ID.eq(Article.ARTICLE.ARTICLE_ID))
+      .where(Order.ORDER.ORDER_ID.eq(orderId))
+      .stream()
+      .map(rec -> BEANS.get(CartItemDo.class)
+        .withOrderPositionId(rec.component1())
+        .withArticleName(rec.component2())
+        .withUnit(rec.component3())
+        .withPrice(rec.component4())
+        .withHasOptions(rec.component5()));
   }
 
   @Override
