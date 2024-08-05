@@ -12,8 +12,8 @@ import {
 } from '@eclipse-scout/core';
 import DesktopModel, {DesktopWidgetMap} from './DesktopModel';
 import {OrderForm} from "../order/OrderForm";
-import {PersonTablePage} from "../person/PersonTablePage";
 import {DataOutline} from "./DataOutline";
+import {CartForm} from "../cart/CartForm";
 
 export class Desktop extends ScoutDesktop {
   declare widgetMap: DesktopWidgetMap;
@@ -49,7 +49,7 @@ export class Desktop extends ScoutDesktop {
 
   activateCartPage() {
     let outline = this.getOutlines().find(o => o instanceof DataOutline);
-    let cartPage = outline.nodes.find(page => page instanceof PersonTablePage);
+    let cartPage = outline.nodes.find(page => page.detailForm instanceof CartForm);
     outline.selectNode(cartPage);
   }
 

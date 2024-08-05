@@ -12,6 +12,9 @@ export default (): DesktopModel => ({
   outline: {
     objectType: DataOutline
   },
+  navigationHandleVisible: false,
+  navigationVisible: false,
+  headerVisible: false,
   menus: [
     {
       id: 'ThemeMenu',
