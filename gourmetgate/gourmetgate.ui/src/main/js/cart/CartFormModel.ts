@@ -1,5 +1,5 @@
 import {Button, FormModel, GroupBox, TileField, TileGrid} from '@eclipse-scout/core';
-import {ArticleTile, CartHeaderBar, HeaderBarField} from '../index';
+import {CartHeaderBar, HeaderBarField} from '../index';
 
 export default (): FormModel => ({
   id: 'gourmetgate.CartForm',
@@ -32,18 +32,7 @@ export default (): FormModel => ({
             columnWidth: 200,
             hgap: 10,
             vgap: 10
-          },
-          tiles: [
-            {
-              id: 'TestTile',
-              objectType: ArticleTile,
-              content: '<h1>hoi</h1>'
-            },
-            {
-              id: 'TestTile2',
-              objectType: ArticleTile,
-              content: '<h1>hoi</h1>'
-            }]
+          }
         },
         gridDataHints: {
           fillVertical: true,

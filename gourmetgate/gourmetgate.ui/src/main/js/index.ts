@@ -24,6 +24,8 @@ export * from './cart/ArticleCartCount';
 export * from './cart/CartForm';
 export * from './cart/CartFormData';
 export * from './cart/CartHeaderBar';
+export * from './cart/OrderPositionTile';
+export * from './cart/CartItem';
 export * from './order/OrderForm';
 export * from './order/OrderFormData';
 export * from './order/OrderFormRepository';
