@@ -1,5 +1,5 @@
 import {Outline, OutlineModel} from '@eclipse-scout/core';
-import {OrderForm, PersonTablePage} from '../index';
+import {CartForm, OrderForm, PersonTablePage} from '../index';
 import {PageWithData} from './PageWithData';
 
 export default (): OutlineModel => ({
@@ -17,6 +17,16 @@ export default (): OutlineModel => ({
       text: '${textKey:Order}',
       detailForm: {
         objectType: OrderForm,
+      },
+      detailTableVisible: false
+    },
+    {
+      objectType: PageWithData,
+      leaf: true,
+      navigateButtonsVisible: false,
+      text: '${textKey:Pay}',
+      detailForm: {
+        objectType: CartForm,
       },
       detailTableVisible: false
     }

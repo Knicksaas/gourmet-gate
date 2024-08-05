@@ -41,9 +41,11 @@ export class ArticleTile extends BeanTile<Article> implements ArticleTileModel {
     this.$unit = this.$footer.appendDiv('article-unit');
     this.$price = this.$footer.appendDiv('article-price');
 
-    this.$title.text(this.bean.name);
-    this.$unit.text(this.bean.unit);
-    this.$price.text(this.bean.price + ' CHF');
+    if (this.bean) {
+      this.$title.text(this.bean.name);
+      this.$unit.text(this.bean.unit);
+      this.$price.text(this.bean.price + ' CHF');
+    }
   }
 
   protected _renderCartCount() {
