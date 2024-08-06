@@ -1,5 +1,5 @@
 import {BeanTile, BeanTileModel} from "@eclipse-scout/core";
-import {Article} from "../index";
+import {Article, Desktop} from "../index";
 
 export interface ArticleTileModel extends BeanTileModel {
   cartCount?: number;
@@ -14,6 +14,8 @@ export class ArticleTile extends BeanTile<Article> implements ArticleTileModel {
   $unit: JQuery;
   $price: JQuery;
   $cartCountIndicator: JQuery;
+
+  protected _cartCountClickListener: (event: JQuery.ClickEvent) => void;
 
   setCartCount(cartCount: number) {
     this.setProperty('cartCount', cartCount)
@@ -49,12 +51,19 @@ export class ArticleTile extends BeanTile<Article> implements ArticleTileModel {
     this.$cartCountIndicator.text(this.cartCount)
     this.$cartCountIndicator.toggleClass('hidden', !this.cartCount)
     this.$cartCountIndicator.addClass('animate');
+    this._cartCountClickListener = this._onCartCountClick.bind(this);
+    this.$cartCountIndicator.on('click', this._cartCountClickListener);
   }
 
   protected _removeCartCount() {
     if (this.$cartCountIndicator) {
       this.$cartCountIndicator.remove();
     }
+  }
+
+  protected _onCartCountClick(mouseEvent: JQuery.ClickEvent) {
+    mouseEvent.preventDefault();
+    (<Desktop>this.findDesktop()).activateCartPage();
   }
 
   protected override _renderDisplayStyle() {

@@ -6,6 +6,8 @@ export default (): FormModel => ({
   displayHint: 'dialog',
   resizable: false,
   movable: false,
+  saveNeededVisible: false,
+  closable: false,
   cssClass: 'order-position-option-form',
   rootGroupBox: {
     id: 'MainBox',

@@ -43,14 +43,16 @@ export class Desktop extends ScoutDesktop {
 
   activateOrderPage() {
     let outline = this.getOutlines().find(o => o instanceof DataOutline);
-    let cartPage = outline.nodes.find(page => page.id === OrderForm.PageId);
-    outline.selectNode(cartPage);
+    let orderPage = outline.nodes.find(page => page.id === OrderForm.PageId);
+    outline.selectNode(orderPage);
+    orderPage.reloadPage();
   }
 
   activateCartPage() {
     let outline = this.getOutlines().find(o => o instanceof DataOutline);
     let cartPage = outline.nodes.find(page => page.id === CartForm.PageId);
     outline.selectNode(cartPage);
+    cartPage.reloadPage();
   }
 
   protected _onDefaultThemeMenuAction() {
