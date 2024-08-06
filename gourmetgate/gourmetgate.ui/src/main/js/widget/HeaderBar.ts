@@ -52,6 +52,14 @@ export class HeaderBar extends Widget implements HeaderBarModel {
     }
   }
 
+  incrementCartCount() {
+    this.setCartCount((this.cartCount || 0) + 1);
+  }
+
+  setCartCount(cartCount: number) {
+    this.setProperty('cartCount', cartCount);
+  }
+
   protected _renderCartCount() {
     this._removeCartCount();
     this.$cartCountIndicator = this.$container.appendDiv('cart-count-indicator');

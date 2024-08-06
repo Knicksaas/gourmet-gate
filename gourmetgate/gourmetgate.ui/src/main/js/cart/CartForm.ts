@@ -12,7 +12,6 @@ export class CartForm extends Form {
     return CartFormModel();
   }
 
-
   protected override _init(model: InitModelOf<this>) {
     super._init(model);
 

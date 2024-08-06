@@ -52,7 +52,9 @@ export default (): FormModel => ({
           cssClass: 'order-form-order-button',
           gridDataHints: {
             fillHorizontal: true
-          }
+          },
+          defaultButton: true,
+          preventInitialFocus: true
         }]
       }]
   }
@@ -64,9 +66,10 @@ export default (): FormModel => ({
 
 export type OrderFormWidgetMap = {
   'MainBox': GroupBox;
+  'OrderFormHeaderBar': HeaderBarField;
   'TileAccordionBox': GroupBox;
   'OrderAccordionField': AccordionField;
-  'OrderAcordion': TileAccordion;
+  'OrderAcordion': TileAccordion<ArticleTile>;
   'OrderButtonBox': GroupBox;
   'OrderButton': Button;
 };

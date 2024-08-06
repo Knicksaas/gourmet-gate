@@ -52,7 +52,8 @@ export default (): FormModel => ({
             cssClass: 'cart-form-order-button',
             gridDataHints: {
               fillHorizontal: true
-            }
+            },
+            preventInitialFocus: true
           },
           {
             id: 'PayButton',
@@ -62,7 +63,9 @@ export default (): FormModel => ({
             cssClass: 'cart-form-order-button',
             gridDataHints: {
               fillHorizontal: true
-            }
+            },
+            defaultButton: true,
+            preventInitialFocus: true
           }]
       }
     ],

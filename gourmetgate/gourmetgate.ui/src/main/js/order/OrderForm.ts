@@ -45,7 +45,7 @@ export class OrderForm extends Form {
 
   protected _onDataChange(event: DataChangeEvent) {
     if (event.dataType === ArticleCartCount.ENTITY_TYPE) {
-      this._mapCartCounts(arrays.ensure(event.data));
+      this._updateCartCounts(arrays.ensure(event.data));
     }
   }
 
@@ -75,15 +75,17 @@ export class OrderForm extends Form {
     });
     accordion.setGroups(this._allGroups);
 
-    this._mapCartCounts(this.data.articleCartCounts);
+    this._updateCartCounts(this.data.articleCartCounts);
   }
 
   protected _createArticleGroup(articleGroup: ArticleGroup, parent: TileAccordion): ArticleAccordionGroup {
-    return scout.create(ArticleAccordionGroup, {
+    let group = scout.create(ArticleAccordionGroup, {
       parent: parent,
       articleGroupId: articleGroup.articleGroupId,
       title: articleGroup.name
     });
+    group.on('incrementCartCount', this._onIncrementCartCount.bind(this));
+    return group;
   }
 
   protected _getTileGridForArticleGroupId(groups: ArticleAccordionGroup[], articleGroupId: string): TileGrid {
@@ -103,16 +105,23 @@ export class OrderForm extends Form {
     });
   }
 
-  protected _mapCartCounts(cartCounts: ArticleCartCount[]) {
+  protected _updateCartCounts(cartCounts: ArticleCartCount[]) {
+    let totalCount = 0;
     cartCounts.forEach(cartCount => {
       let tile = this._allTiles.find(tile => tile.bean.articleId === cartCount.articleId);
       if (tile) {
         tile.setCartCount(cartCount.cartCount);
       }
+      totalCount += cartCount.cartCount;
     });
+    this.widget('OrderFormHeaderBar').headerBar.setCartCount(totalCount);
   }
 
   protected _onOrderButtonClick() {
     (<Desktop>this.findDesktop()).activateCartPage();
+  }
+
+  protected _onIncrementCartCount() {
+    this.widget('OrderFormHeaderBar').headerBar.incrementCartCount();
   }
 }

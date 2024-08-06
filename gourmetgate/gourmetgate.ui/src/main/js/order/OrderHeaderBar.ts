@@ -7,7 +7,6 @@ export class OrderHeaderBar extends HeaderBar {
     super();
     this.title = '${textKey:Order}';
     this.iconId = ggicons.SHOPPING_CART;
-    this.cartCount = 10;
   }
 
   protected override _init(model: InitModelOf<this>) {

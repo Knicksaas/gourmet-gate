@@ -1,6 +1,8 @@
 import {
+  Event,
   EventHandler,
   Group,
+  GroupEventMap,
   GroupModel,
   InitModelOf,
   scout,
@@ -15,8 +17,14 @@ export interface ArticleAccordionGroupModel extends GroupModel<TileGrid<ArticleT
   articleGroupId?: string;
 }
 
+export interface ArticleAccordionGroupEventMap extends GroupEventMap {
+  'incrementCartCount': Event;
+}
+
 export class ArticleAccordionGroup extends Group<TileGrid<ArticleTile>> implements ArticleAccordionGroupModel {
   declare model: ArticleAccordionGroupModel;
+  declare eventMap: ArticleAccordionGroupEventMap;
+  declare self: ArticleAccordionGroup;
 
   articleGroupId: string;
   protected _tileClickListener: EventHandler<TileClickEvent>;
@@ -36,18 +44,20 @@ export class ArticleAccordionGroup extends Group<TileGrid<ArticleTile>> implemen
     let tile = event.tile as ArticleTile;
     OrderRepository.get().createOrderPosition(tile.bean.articleId)
       .then(data => {
-        tile.incrementCartCount();
-        this._showOptionsForm(tile, data.orderPositionId);
+        if (tile.bean.options) {
+          let optionsForm = this._showOptionsForm(tile, data.orderPositionId);
+          optionsForm.one('close', () => this._incrementCartCount(tile));
+        } else {
+          this._incrementCartCount(tile);
+        }
       });
   }
 
-  protected _showOptionsForm(tile: ArticleTile, orderPositionId: string) {
-    if (!tile.bean.options) {
-      return;
-    }
+  protected _showOptionsForm(tile: ArticleTile, orderPositionId: string): OrderPositionOptionForm {
     let optionsForm = this._createOptionsForm(orderPositionId);
     optionsForm.setTitle('Optionen: ' + tile.bean.name);
     optionsForm.open();
+    return optionsForm;
   }
 
   protected _createOptionsForm(orderPositionId: string): OrderPositionOptionForm {
@@ -55,6 +65,11 @@ export class ArticleAccordionGroup extends Group<TileGrid<ArticleTile>> implemen
       parent: this,
       orderPositionId: orderPositionId
     });
+  }
+
+  protected _incrementCartCount(tile: ArticleTile) {
+    tile.incrementCartCount();
+    this.trigger('incrementCartCount');
   }
 
   override destroy() {
