@@ -1,5 +1,4 @@
-import {BeanTile, BeanTileModel, WidgetModel} from "@eclipse-scout/core";
-import ArticleTileJsonModel from "./ArticleTileJsonModel";
+import {BeanTile, BeanTileModel} from "@eclipse-scout/core";
 import {Article} from "../index";
 
 export interface ArticleTileModel extends BeanTileModel {
@@ -15,10 +14,6 @@ export class ArticleTile extends BeanTile<Article> implements ArticleTileModel {
   $unit: JQuery;
   $price: JQuery;
   $cartCountIndicator: JQuery;
-
-  protected override _jsonModel(): WidgetModel {
-    return ArticleTileJsonModel();
-  }
 
   setCartCount(cartCount: number) {
     this.setProperty('cartCount', cartCount)
@@ -60,5 +55,9 @@ export class ArticleTile extends BeanTile<Article> implements ArticleTileModel {
     if (this.$cartCountIndicator) {
       this.$cartCountIndicator.remove();
     }
+  }
+
+  protected override _renderDisplayStyle() {
+    this.$container.addClass('dashboard');
   }
 }

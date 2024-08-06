@@ -4,11 +4,13 @@ import jakarta.annotation.Generated;
 import org.eclipse.scout.rt.dataobject.DoEntity;
 import org.eclipse.scout.rt.dataobject.DoList;
 import org.eclipse.scout.rt.dataobject.DoValue;
+import org.eclipse.scout.rt.dataobject.TypeName;
 
 import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.List;
 
+@TypeName("gourmetgate.CartFormData")
 public class CartFormDataDo extends DoEntity {
 
   public DoList<CartItemDo> cartItems() {

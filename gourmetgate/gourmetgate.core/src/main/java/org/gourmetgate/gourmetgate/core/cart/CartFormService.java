@@ -16,12 +16,13 @@ public class CartFormService implements IService {
 
   public CartFormDataDo getCartFormData(String orderId) {
     CartFormDataDo formData = BEANS.get(CartFormDataDo.class);
-    Stream<CartItemDo> cartItems = BEANS.get(IOrderPositionRepository.class).getCartItemsByOrderId(orderId)
+    List<CartItemDo> cartItems = BEANS.get(IOrderPositionRepository.class).getCartItemsByOrderId(orderId)
       .map(item -> item.getHasOptions()
-        ? item
-        : item.withOptions(getOrderTextForOrderPositionId(item.getOrderPositionId())));
-    formData.withCartItems(cartItems.toList());
-    formData.withPrice(getPrice(cartItems));
+        ? item.withOptions(getOrderTextForOrderPositionId(item.getOrderPositionId()))
+        : item)
+      .toList();
+    formData.withCartItems(cartItems);
+    formData.withPrice(getPrice(cartItems.stream()));
     return formData;
   }
 
@@ -30,7 +31,7 @@ public class CartFormService implements IService {
       .filter(OrderPositionOptionDo::isSelected)
       .map(OrderPositionOptionDo::getDescription)
       .toList();
-    return "→ " + String.join(",", selectedOptions);
+    return String.join(", ", selectedOptions);
   }
 
   private BigDecimal getPrice(Stream<CartItemDo> cartItems) {

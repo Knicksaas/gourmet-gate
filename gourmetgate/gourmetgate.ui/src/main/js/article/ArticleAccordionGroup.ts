@@ -9,8 +9,7 @@ import {
   WidgetModel
 } from "@eclipse-scout/core";
 import ArticleAccordionGroupJsonModel from "./ArticleAccordionGroupJsonModel";
-import {ArticleTile, OrderRepository} from "../index";
-import {OrderPositionOptionForm} from "../order/options/OrderPositionOptionForm";
+import {ArticleTile, OrderPositionOptionForm, OrderRepository} from "../index";
 
 export interface ArticleAccordionGroupModel extends GroupModel<TileGrid<ArticleTile>> {
   articleGroupId?: string;

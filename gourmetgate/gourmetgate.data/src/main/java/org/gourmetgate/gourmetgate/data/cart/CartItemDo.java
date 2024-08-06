@@ -7,7 +7,7 @@ import org.eclipse.scout.rt.dataobject.TypeName;
 
 import java.math.BigDecimal;
 
-@TypeName("CartItem")
+@TypeName("gourmetgate.CartItem")
 public class CartItemDo extends DoEntity {
 
   public DoValue<String> orderPositionId() {

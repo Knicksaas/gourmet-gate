@@ -15,11 +15,6 @@ export class OrderPositionTile extends BeanTile<CartItem> {
   $editIcon: JQuery;
   $deleteIcon: JQuery;
 
-  constructor() {
-    super();
-    this.displayStyle = 'PLAIN';
-  }
-
   protected override _renderBean() {
     this.$container.addClass('order-position-tile');
     this.$description = this.$container.appendDiv('description');
@@ -48,9 +43,13 @@ export class OrderPositionTile extends BeanTile<CartItem> {
   }
 
   protected _renderOptions() {
-    if (this.bean.hasOptions) {
+    if (this.bean.hasOptions && this.bean.options.length > 0) {
       this.$options = this.$description.appendDiv('options');
-      this.$options.text(this.bean.options);
+      this.$options.text('→ ' + this.bean.options);
     }
+  }
+
+  protected override _renderDisplayStyle() {
+    this.$container.addClass('dashboard');
   }
 }

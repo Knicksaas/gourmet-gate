@@ -3,7 +3,6 @@ package org.gourmetgate.gourmetgate.core.orderposition;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.service.IService;
 import org.gourmetgate.gourmetgate.data.article.ArticleDo;
-import org.gourmetgate.gourmetgate.data.article.IArticleOptionRepository;
 import org.gourmetgate.gourmetgate.data.article.IArticleRepository;
 import org.gourmetgate.gourmetgate.data.cart.ArticleCartCountDo;
 import org.gourmetgate.gourmetgate.data.orderposition.IOrderPositionOptionRepository;
@@ -35,11 +34,7 @@ public class OrderPositionService implements IService {
     if (stream.findAny().isEmpty()) {
       stream = BEANS.get(IOrderPositionOptionRepository.class).createOrderPositionsFromOptions(orderPositionId);
     }
-    return stream.map(orderOption -> orderOption
-      .withDescription(BEANS.get(IArticleOptionRepository.class)
-        .getById(orderOption.getArticleOptionId())
-        .orElseThrow()
-        .getDescription()));
+    return stream;
   }
 
   public Stream<ArticleCartCountDo> getCartCounts(String orderId) {

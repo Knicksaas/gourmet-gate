@@ -1,11 +1,12 @@
 .article-tile {
-  border-radius: @border-radius-large;
-  border-style: solid;
-  border-color: @border-color;
-  padding: @tile-padding-y @tile-padding-x;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  padding: @tile-padding-y @tile-padding-x;
+
+  &.dashboard {
+    overflow: visible;
+  }
 
   & > .article-title {
     width: 100%;

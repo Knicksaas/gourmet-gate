@@ -26,7 +26,7 @@ export default (): FormModel => ({
           objectType: TileGrid,
           cssClass: 'cart-tile-grid',
           gridColumnCount: 1,
-          withPlaceholders: true,
+          withPlaceholders: false,
           layoutConfig: {
             rowHeight: 60,
             columnWidth: 200,
@@ -45,20 +45,20 @@ export default (): FormModel => ({
         gridColumnCount: 1,
         fields: [
           {
-            id: 'PayButton',
+            id: 'BackButton',
             objectType: Button,
             processButton: false,
-            label: '${textKey:Pay}',
+            label: '${textKey:NavigationBackward}',
             cssClass: 'cart-form-order-button',
             gridDataHints: {
               fillHorizontal: true
             }
           },
           {
-            id: 'BackButton',
+            id: 'PayButton',
             objectType: Button,
             processButton: false,
-            label: '${textKey:NavigationBackward}',
+            label: '${textKey:Pay}',
             cssClass: 'cart-form-order-button',
             gridDataHints: {
               fillHorizontal: true
@@ -68,3 +68,16 @@ export default (): FormModel => ({
     ],
   }
 });
+
+/* **************************************************************************
+* GENERATED WIDGET MAPS
+* **************************************************************************/
+
+export type CartFormWidgetMap = {
+  'MainBox': GroupBox;
+  'CartFormHeaderBar': HeaderBarField;
+  'CartTileField': TileField;
+  'OrderButtonBox': GroupBox;
+  'BackButton': Button;
+  'PayButton': Button;
+};

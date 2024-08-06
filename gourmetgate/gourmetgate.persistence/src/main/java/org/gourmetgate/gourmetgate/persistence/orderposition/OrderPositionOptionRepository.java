@@ -7,6 +7,7 @@ import org.gourmetgate.gourmetgate.data.orderposition.IOrderPositionRepository;
 import org.gourmetgate.gourmetgate.data.orderposition.OrderPositionOptionDo;
 import org.gourmetgate.gourmetgate.persistence.common.AbstractRepository;
 import org.gourmetgate.gourmetgate.persistence.common.DoEntityBeanMappings;
+import org.gourmetgate.gourmetgate.persistence.tables.ArticleOption;
 import org.gourmetgate.gourmetgate.persistence.tables.OrderPositionOption;
 import org.gourmetgate.gourmetgate.persistence.tables.records.OrderPositionOptionRecord;
 import org.jooq.Field;
@@ -30,22 +31,35 @@ public class OrderPositionOptionRepository extends AbstractRepository<OrderPosit
   @Override
   public Stream<OrderPositionOptionDo> getOrderPositionsOptions(String orderPositionId) {
     return jooq()
-      .selectFrom(getTable())
-      .where(OrderPositionOption.ORDER_POSITION_OPTION.ORDER_POSITION_ID.eq(orderPositionId))
+      .select(
+        getTable().ORDER_POSITION_OPTION_ID,
+        getTable().ORDER_POSITION_ID,
+        getTable().ARTICLE_OPTION_ID,
+        getTable().SELECTED,
+        ArticleOption.ARTICLE_OPTION.DESCRIPTION)
+      .from(getTable())
+      .join(ArticleOption.ARTICLE_OPTION).on(ArticleOption.ARTICLE_OPTION.ARTICLE_OPTION_ID.eq(getTable().ARTICLE_OPTION_ID))
+      .where(getTable().ORDER_POSITION_ID.eq(orderPositionId))
       .stream()
-      .map(this::fromRecordToDo);
+      .map(rec -> BEANS.get(OrderPositionOptionDo.class)
+        .withOrderPositionOptionId(rec.component1())
+        .withOrderPositionId(rec.component2())
+        .withArticleOptionId(rec.component3())
+        .withSelected(rec.component4())
+        .withDescription(rec.component5()));
   }
 
   @Override
   public Stream<OrderPositionOptionDo> createOrderPositionsFromOptions(String orderPositionId) {
     String articleId = BEANS.get(IOrderPositionRepository.class).getById(orderPositionId).orElseThrow().getArticleId();
-    return BEANS.get(IArticleOptionRepository.class)
+    BEANS.get(IArticleOptionRepository.class)
       .getArticleOptionsForArticle(articleId)
       .map(articleOptionDo -> BEANS.get(OrderPositionOptionDo.class)
         .withOrderPositionId(orderPositionId)
         .withArticleOptionId(articleOptionDo.getArticleOptionId())
         .withSelected(false))
-      .map(this::create);
+      .forEach(this::create);
+    return getOrderPositionsOptions(orderPositionId);
   }
 
   @Override
