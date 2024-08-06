@@ -1,13 +1,22 @@
-import {Form, scout, texts, TileGrid, WidgetModel} from "@eclipse-scout/core";
-import {CartFormData, CartItem, CartRepository, OrderPositionTile} from "../index";
+import {Form, InitModelOf, scout, texts, TileGrid, WidgetModel} from "@eclipse-scout/core";
+import {CartFormData, CartItem, CartRepository, Desktop, OrderPositionTile} from "../index";
 import CartFormModel, {CartFormWidgetMap} from './CartFormModel';
 
 export class CartForm extends Form {
   declare widgetMap: CartFormWidgetMap;
   declare data: CartFormData;
 
+  static PageId: string = 'CartPage';
+
   protected override _jsonModel(): WidgetModel {
     return CartFormModel();
+  }
+
+
+  protected override _init(model: InitModelOf<this>) {
+    super._init(model);
+
+    this.widget('BackButton').on('click', this._onBackButtonClick.bind(this))
   }
 
   protected override _load(): JQuery.Promise<any> {
@@ -27,5 +36,9 @@ export class CartForm extends Form {
       parent: parent,
       bean: data
     });
+  }
+
+  protected _onBackButtonClick() {
+    (<Desktop>this.findDesktop()).activateOrderPage();
   }
 }

@@ -11,6 +11,7 @@ export default (): OutlineModel => ({
       objectType: PersonTablePage
     },
     {
+      id: OrderForm.PageId,
       objectType: PageWithData,
       leaf: true,
       navigateButtonsVisible: false,
@@ -21,6 +22,7 @@ export default (): OutlineModel => ({
       detailTableVisible: false
     },
     {
+      id: CartForm.PageId,
       objectType: PageWithData,
       leaf: true,
       navigateButtonsVisible: false,

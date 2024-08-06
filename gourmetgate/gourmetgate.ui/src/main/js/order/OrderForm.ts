@@ -16,6 +16,7 @@ import {
   ArticleGroup,
   ArticleTile,
   DataChangeEvent,
+  Desktop,
   OrderFormData,
   OrderFormRepository
 } from "../index";
@@ -23,6 +24,8 @@ import {
 export class OrderForm extends Form {
   declare widgetMap: OrderFormWidgetMap;
   declare data: OrderFormData;
+
+  static PageId: string = 'OrderPage';
 
   protected _allGroups: ArticleAccordionGroup[];
   protected _allTiles: ArticleTile[];
@@ -37,6 +40,7 @@ export class OrderForm extends Form {
 
     this._dataChangeListener = this._onDataChange.bind(this);
     this.session.desktop.on('dataChange', this._dataChangeListener);
+    this.widget('OrderButton').on('click', this._onOrderButtonClick.bind(this))
   }
 
   protected _onDataChange(event: DataChangeEvent) {
@@ -106,5 +110,9 @@ export class OrderForm extends Form {
         tile.setCartCount(cartCount.cartCount);
       }
     });
+  }
+
+  protected _onOrderButtonClick() {
+    (<Desktop>this.findDesktop()).activateCartPage();
   }
 }

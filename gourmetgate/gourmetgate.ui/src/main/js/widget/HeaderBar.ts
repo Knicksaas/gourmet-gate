@@ -43,7 +43,7 @@ export class HeaderBar extends Widget implements HeaderBarModel {
       iconDesc: this.iconId
     });
     this.icon.render();
-    this.$container.on('click', this._onIconClick.bind(this));
+    this.icon.$container.on('click', this._onIconClick.bind(this));
   }
 
   protected _removeIconId() {
@@ -58,7 +58,7 @@ export class HeaderBar extends Widget implements HeaderBarModel {
     this.$cartCountIndicator.text(this.cartCount)
     this.$cartCountIndicator.toggleClass('hidden', !this.cartCount)
     this.$cartCountIndicator.addClass('animate');
-    this.$container.on('click', this._onIconClick.bind(this));
+    this.$cartCountIndicator.on('click', this._onIconClick.bind(this));
   }
 
   protected _removeCartCount() {
