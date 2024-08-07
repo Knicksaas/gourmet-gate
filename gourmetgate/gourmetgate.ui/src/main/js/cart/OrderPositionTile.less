@@ -6,6 +6,7 @@
 
   & > .description {
     display: flex;
+    flex: 1;
     flex-direction: column;
 
     & > .static-description {
@@ -15,6 +16,15 @@
   }
 
   & > .icons {
+    display: flex;
+    width: 100px;
 
+    & > * {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      #scout.double-drop-shadow(@spread1: 1px, @color1: @dashboard-tile-border-color, @y2: 0px, @blur2: 0px);
+      margin-left: 10px;
+    }
   }
 }

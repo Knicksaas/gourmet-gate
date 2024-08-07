@@ -32,7 +32,7 @@ export class OrderPositionTile extends BeanTile<CartItem> {
     this.$price = this.$staticDescription.appendDiv('price');
     this.$name.text(this.bean.articleName);
     this.$unit.text(this.bean.unit);
-    this.$price.text(this.bean.price);
+    this.$price.text(this.bean.price + ' CHF');
   }
 
   protected _renderIcons() {
