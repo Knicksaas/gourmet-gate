@@ -4,5 +4,7 @@ export const ggicons = {
 
   /* default font icons (sans-serif, arial) */
   SHOPPING_CART: 'font:gourmet-gate \uE900',
-  CART: 'font:gourmet-gate \uE93a'
+  CART: 'font:gourmet-gate \uE93a',
+  TRASH: 'font:gourmet-gate \ue902',
+  EDIT: 'font:gourmet-gate \uE903'
 }

@@ -12,7 +12,9 @@ export class OrderPositionTile extends BeanTile<CartItem> {
   $price: JQuery;
   $name: JQuery;
 
+  $editIconContainer: JQuery;
   $editIcon: JQuery;
+  $deleteIconContainer: JQuery;
   $deleteIcon: JQuery;
 
   protected override _renderBean() {
@@ -37,9 +39,15 @@ export class OrderPositionTile extends BeanTile<CartItem> {
 
   protected _renderIcons() {
     if (this.bean.hasOptions) {
-      this.$editIcon = this.$icons.appendDiv('edit-order-position');
+      this.$editIconContainer = this.$icons.appendDiv('gg-icon-container bg-blue');
+      this.$editIcon = this.$editIconContainer
+        .appendDiv('gg-icon big')
+        .addClass('gg-icon-edit');
     }
-    this.$deleteIcon = this.$icons.appendDiv('delete-order-position');
+    this.$deleteIconContainer = this.$icons.appendDiv('gg-icon-container bg-red');
+    this.$deleteIcon = this.$deleteIconContainer
+      .appendDiv('gg-icon big')
+      .addClass('gg-icon-trash');
   }
 
   protected _renderOptions() {

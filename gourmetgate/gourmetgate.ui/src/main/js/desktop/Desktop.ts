@@ -11,9 +11,7 @@ import {
   scout
 } from '@eclipse-scout/core';
 import DesktopModel, {DesktopWidgetMap} from './DesktopModel';
-import {OrderForm} from "../order/OrderForm";
-import {DataOutline} from "./DataOutline";
-import {CartForm} from "../cart/CartForm";
+import {CartForm, DataOutline, OrderForm} from "../index";
 
 export class Desktop extends ScoutDesktop {
   declare widgetMap: DesktopWidgetMap;

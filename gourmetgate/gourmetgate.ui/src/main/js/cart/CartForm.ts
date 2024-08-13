@@ -27,7 +27,8 @@ export class CartForm extends Form {
     let tiles = this.data.cartItems
       .map(i => this._createOrderPositionTile(tileGrid, i));
     tileGrid.setTiles(tiles);
-    this.widget('PayButton').setLabel(texts.resolveKey('Pay') + ' (' + this.data.price + ' CHF)')
+    let labelText = texts.resolveText('${textKey:Pay}', this.session.locale.languageTag) + ` (${this.data.price} CHF)`;
+    this.widget('PayButton').setLabel(labelText)
   }
 
   protected _createOrderPositionTile(parent: TileGrid, data: CartItem): OrderPositionTile {
