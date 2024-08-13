@@ -1,5 +1,5 @@
 import {Outline, OutlineModel} from '@eclipse-scout/core';
-import {CartForm, OrderForm, PersonTablePage} from '../index';
+import {CartForm, OrderForm} from '../index';
 import {PageWithData} from './PageWithData';
 
 export default (): OutlineModel => ({
@@ -7,9 +7,6 @@ export default (): OutlineModel => ({
   title: '${textKey:MyDataOutlineTitle}',
   objectType: Outline,
   nodes: [
-    {
-      objectType: PersonTablePage
-    },
     {
       id: OrderForm.PageId,
       objectType: PageWithData,

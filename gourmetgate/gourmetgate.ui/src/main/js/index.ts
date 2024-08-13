@@ -37,15 +37,6 @@ export * from './order/options/OrderPositionOption';
 export * from './order/options/OrderPositionOptionForm';
 export * from './order/options/OrderPositionOptionsListBox';
 export * from './order/options/OrderPositionOptionsLookupCall';
-export * from './person/Person';
-export * from './person/PersonForm';
-export * from './person/PersonFormModel';
-export * from './person/PersonRepository';
-export * from './person/PersonRestriction';
-export * from './person/PersonSearchForm';
-export * from './person/PersonSearchFormModel';
-export * from './person/PersonTablePage';
-export * from './person/PersonTablePageModel';
 
 export default self;
 ObjectFactory.get().registerNamespace('gourmetgate', self);
