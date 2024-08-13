@@ -51,10 +51,12 @@ public class OrderPositionService implements IService {
   }
 
   public void deleteOrderPosition(String orderPositionId) {
-    BEANS.get(IOrderPositionRepository.class).delete(orderPositionId);
+    // Delete order position options
     IOrderPositionOptionRepository repo = BEANS.get(IOrderPositionOptionRepository.class);
     repo.getOrderPositionsOptions(orderPositionId)
       .map(OrderPositionOptionDo::getOrderPositionOptionId)
       .forEach(repo::delete);
+    // Delete order position afterward to avoid constraint violation
+    BEANS.get(IOrderPositionRepository.class).delete(orderPositionId);
   }
 }
