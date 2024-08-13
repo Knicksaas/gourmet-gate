@@ -5,6 +5,7 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/gourmetgate/pom.xml" />
+        <option value="$PROJECT_DIR$/gourmetgate/gourmetgate.payment/pom.xml" />
       </list>
     </option>
   </component>

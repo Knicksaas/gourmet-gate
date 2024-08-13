@@ -44,6 +44,7 @@
     <module>../gourmetgate.core</module>
     <module>../gourmetgate.data</module>
     <module>../gourmetgate.persistence</module>
+    <module>../gourmetgate.payment</module>
 
     <!-- App modules -->
     <module>../gourmetgate.app</module>
@@ -181,6 +182,11 @@
       <dependency>
         <groupId>org.gourmetgate</groupId>
         <artifactId>gourmetgate.core</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.gourmetgate</groupId>
+        <artifactId>gourmetgate.payment</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>

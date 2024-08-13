@@ -27,3 +27,5 @@ target
 
 db
 pnpm-lock.yaml
+
+*.env
