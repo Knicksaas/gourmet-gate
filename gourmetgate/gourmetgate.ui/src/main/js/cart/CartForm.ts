@@ -1,4 +1,4 @@
-import {Form, InitModelOf, scout, texts, TileGrid, WidgetModel} from "@eclipse-scout/core";
+import {Form, InitModelOf, scout, texts, Tile, TileGrid, WidgetModel} from "@eclipse-scout/core";
 import {CartFormData, CartItem, CartRepository, Desktop, OrderPositionTile} from "../index";
 import CartFormModel, {CartFormWidgetMap} from './CartFormModel';
 
@@ -16,6 +16,7 @@ export class CartForm extends Form {
     super._init(model);
 
     this.widget('BackButton').on('click', this._onBackButtonClick.bind(this))
+    this.widget('CartTileGrid').on('propertyChange:tiles', event => this._recalculatePrice(event.newValue));
   }
 
   protected override _load(): JQuery.Promise<any> {
@@ -40,5 +41,12 @@ export class CartForm extends Form {
 
   protected _onBackButtonClick() {
     (<Desktop>this.findDesktop()).activateOrderPage();
+  }
+
+  protected _recalculatePrice(newValue: Tile[]) {
+    let tiles = newValue as OrderPositionTile[];
+    let price = tiles.map(t => t.bean.price).reduce((acc, val) => acc + val, 0);
+    let labelText = texts.resolveText('${textKey:Pay}', this.session.locale.languageTag) + ` (${price} CHF)`;
+    this.widget('PayButton').setLabel(labelText)
   }
 }

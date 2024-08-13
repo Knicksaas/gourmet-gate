@@ -1,5 +1,5 @@
-import {BeanTile} from "@eclipse-scout/core";
-import {CartItem} from "../index";
+import {BeanTile, scout, strings, TileGrid} from "@eclipse-scout/core";
+import {CartItem, OrderPositionOption, OrderPositionOptionForm, OrderRepository} from "../index";
 
 export class OrderPositionTile extends BeanTile<CartItem> {
 
@@ -43,11 +43,13 @@ export class OrderPositionTile extends BeanTile<CartItem> {
       this.$editIcon = this.$editIconContainer
         .appendDiv('gg-icon big')
         .addClass('gg-icon-edit');
+      this.$editIconContainer.on('click', this._onEditClick.bind(this));
     }
     this.$deleteIconContainer = this.$icons.appendDiv('gg-icon-container bg-red');
     this.$deleteIcon = this.$deleteIconContainer
       .appendDiv('gg-icon big')
       .addClass('gg-icon-trash');
+    this.$deleteIconContainer.on('click', this._onDeleteClick.bind(this));
   }
 
   protected _renderOptions() {
@@ -57,7 +59,38 @@ export class OrderPositionTile extends BeanTile<CartItem> {
     }
   }
 
+  protected _removeOptions() {
+    if (this.$options) {
+      this.$options.remove();
+    }
+  }
+
   protected override _renderDisplayStyle() {
     this.$container.addClass('dashboard');
+  }
+
+  protected _onEditClick() {
+    let optionsForm = this._createOptionsForm();
+    optionsForm.one('close', () => this._updateOptionsText(optionsForm.data));
+    optionsForm.open();
+  }
+
+  protected _createOptionsForm(): OrderPositionOptionForm {
+    return scout.create(OrderPositionOptionForm, {
+      parent: this,
+      orderPositionId: this.bean.orderPositionId,
+      title: '${textKey:Options} ' + this.bean.articleName
+    });
+  }
+
+  protected _updateOptionsText(options: OrderPositionOption[]) {
+    this._removeOptions();
+    this.bean.options = strings.join(', ', ...options.filter(o => o.selected).map(o => o.description));
+    this._renderOptions();
+  }
+
+  protected _onDeleteClick() {
+    OrderRepository.get().deleteOrderPosition(this.bean.orderPositionId);
+    (<TileGrid>this.parent).deleteTile(this);
   }
 }

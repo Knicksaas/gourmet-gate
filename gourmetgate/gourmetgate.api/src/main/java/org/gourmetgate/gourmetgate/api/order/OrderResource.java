@@ -25,7 +25,6 @@ public class OrderResource implements IRestResource {
   @POST
   @Path("position/{id}")
   @Produces(MediaType.APPLICATION_JSON)
-  @Consumes(MediaType.APPLICATION_JSON)
   public Response createOrderPosition(@CookieParam("JSESSIONID") Cookie cookie, @PathParam("id") String articleId) {
     String orderId = BEANS.get(OrderFormService.class).getOrderIdForSession(cookie.getValue());
     if (orderId == null) {
@@ -35,6 +34,26 @@ public class OrderResource implements IRestResource {
     GenericReponse<OrderPositionDo> response = m_restHelper.createGenericResponse(OrderPositionDo.class);
     response.withItem(BEANS.get(OrderPositionService.class).createOrderPosition(articleId, orderId));
     return m_restHelper.createJsonResponse(response);
+  }
+
+  @DELETE
+  @Path("position/{id}")
+  @Consumes(MediaType.APPLICATION_JSON)
+  public Response deleteOrderPosition(@CookieParam("JSESSIONID") Cookie cookie, @PathParam("id") String orderPositionId) {
+    // Check order
+    String orderId = BEANS.get(OrderFormService.class).getOrderIdForSession(cookie.getValue());
+    if (orderId == null) {
+      return m_restHelper.createBadRequestResponse("No order for current session");
+    }
+
+    // Check access
+    if (!m_restHelper.checkAccessToOrderPosition(cookie.getValue(), orderPositionId)) {
+      return m_restHelper.createForbiddenResponse();
+    }
+
+    BEANS.get(OrderPositionService.class).deleteOrderPosition(orderPositionId);
+
+    return m_restHelper.createOkResponse();
   }
 
   @GET

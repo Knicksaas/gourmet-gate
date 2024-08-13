@@ -30,11 +30,12 @@ public class OrderPositionService implements IService {
   }
 
   public Stream<OrderPositionOptionDo> getOrCreateOrderPositonOptions(String orderPositionId) {
-    Stream<OrderPositionOptionDo> stream = BEANS.get(IOrderPositionOptionRepository.class).getOrderPositionsOptions(orderPositionId);
-    if (stream.findAny().isEmpty()) {
-      stream = BEANS.get(IOrderPositionOptionRepository.class).createOrderPositionsFromOptions(orderPositionId);
+    List<OrderPositionOptionDo> options = BEANS.get(IOrderPositionOptionRepository.class).getOrderPositionsOptions(orderPositionId).toList();
+    if (options.isEmpty()) {
+      return BEANS.get(IOrderPositionOptionRepository.class).createOrderPositionsFromOptions(orderPositionId);
+    } else {
+      return options.stream();
     }
-    return stream;
   }
 
   public Stream<ArticleCartCountDo> getCartCounts(String orderId) {
@@ -47,5 +48,13 @@ public class OrderPositionService implements IService {
   public void updateOrderPositionOptions(List<OrderPositionOptionDo> items) {
     IOrderPositionOptionRepository repository = BEANS.get(IOrderPositionOptionRepository.class);
     items.forEach(option -> repository.update(option.getOrderPositionOptionId(), option));
+  }
+
+  public void deleteOrderPosition(String orderPositionId) {
+    BEANS.get(IOrderPositionRepository.class).delete(orderPositionId);
+    IOrderPositionOptionRepository repo = BEANS.get(IOrderPositionOptionRepository.class);
+    repo.getOrderPositionsOptions(orderPositionId)
+      .map(OrderPositionOptionDo::getOrderPositionOptionId)
+      .forEach(repo::delete);
   }
 }

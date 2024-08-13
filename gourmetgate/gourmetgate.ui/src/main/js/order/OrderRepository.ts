@@ -16,11 +16,15 @@ export class OrderRepository extends Repository {
       .then(data => this._first(data) as OrderPosition);
   }
 
+  deleteOrderPosition(orderPositionId: string): JQuery.Promise<void> {
+    return this.removeJson(this.targetUrl + 'position/' + orderPositionId);
+  }
+
   getOrderPositionOptions(orderPositionId: string): JQuery.Promise<OrderPositionOption[]> {
     return this.getJson(this.targetUrl + 'position/' + orderPositionId + '/options');
   }
 
-  updateOrderPosition(orderPositionId: string, orderPositionOptions: OrderPositionOption[]): JQuery.Promise<void> {
+  updateOrderPositionOptions(orderPositionId: string, orderPositionOptions: OrderPositionOption[]): JQuery.Promise<void> {
     let body = new GenericRequestBody();
     body.withItems(orderPositionOptions);
     return this.postJson(this.targetUrl + 'position/' + orderPositionId + '/options', this.jsonStringify(body));

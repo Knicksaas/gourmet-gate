@@ -23,6 +23,7 @@ export default (): FormModel => ({
         labelVisible: false,
         statusVisible: false,
         tileGrid: {
+          id: 'CartTileGrid',
           objectType: TileGrid,
           cssClass: 'cart-tile-grid',
           gridColumnCount: 1,
@@ -80,6 +81,7 @@ export type CartFormWidgetMap = {
   'MainBox': GroupBox;
   'CartFormHeaderBar': HeaderBarField;
   'CartTileField': TileField;
+  'CartTileGrid': TileGrid;
   'OrderButtonBox': GroupBox;
   'BackButton': Button;
   'PayButton': Button;

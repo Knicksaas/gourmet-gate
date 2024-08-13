@@ -27,7 +27,11 @@ export class OrderPositionOptionForm extends Form implements OrderPositionOption
   }
 
   override importData() {
-    this.widget('OptionsListField').lookupCall.setData(this.data);
+    let listField = this.widget('OptionsListField');
+    listField.lookupCall.setData(this.data);
+    listField.setValue(this.data
+      .filter(option => option.selected)
+      .map(option => option.orderPositionOptionId));
   }
 
   override exportData(): any {
@@ -40,7 +44,7 @@ export class OrderPositionOptionForm extends Form implements OrderPositionOption
 
 
   protected override _save(data: any): JQuery.Promise<void> {
-    return OrderRepository.get().updateOrderPosition(this.orderPositionId, data);
+    return OrderRepository.get().updateOrderPositionOptions(this.orderPositionId, data);
   }
 
   protected override _render() {
