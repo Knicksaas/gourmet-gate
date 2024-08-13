@@ -8,6 +8,7 @@ export default (): FormModel => ({
     id: 'MainBox',
     objectType: GroupBox,
     cssClass: 'order-form-main-box',
+    gridColumnCount: 1,
     fields: [
       {
         id: 'OrderFormHeaderBar',
@@ -44,19 +45,26 @@ export default (): FormModel => ({
       {
         id: 'OrderButtonBox',
         objectType: GroupBox,
-        fields: [{
-          id: 'OrderButton',
-          objectType: Button,
-          processButton: false,
-          label: '${textKey:Order}',
-          cssClass: 'order-form-order-button',
-          gridDataHints: {
-            fillHorizontal: true
-          },
-          defaultButton: true,
-          preventInitialFocus: true
-        }]
-      }]
+        gridColumnCount: 1,
+        responsive: false,
+        fields: [
+          {
+            id: 'OrderButton',
+            objectType: Button,
+            processButton: false,
+            label: '${textKey:Order}',
+            cssClass: 'order-form-order-button',
+            gridDataHints: {
+              fillHorizontal: true
+            },
+            defaultButton: true,
+            preventInitialFocus: true
+          }],
+        bodyLayoutConfig: {
+          rowHeight: 40
+        }
+      }
+    ],
   }
 });
 

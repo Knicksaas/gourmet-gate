@@ -44,6 +44,7 @@ export default (): FormModel => ({
         id: 'OrderButtonBox',
         objectType: GroupBox,
         gridColumnCount: 1,
+        responsive: false,
         fields: [
           {
             id: 'BackButton',
@@ -52,7 +53,8 @@ export default (): FormModel => ({
             label: '${textKey:NavigationBackward}',
             cssClass: 'cart-form-order-button',
             gridDataHints: {
-              fillHorizontal: true
+              fillHorizontal: true,
+              fillVertical: true
             },
             preventInitialFocus: true
           },
@@ -67,7 +69,10 @@ export default (): FormModel => ({
             },
             defaultButton: true,
             preventInitialFocus: true
-          }]
+          }],
+        bodyLayoutConfig: {
+          rowHeight: 40
+        }
       }
     ],
   }
