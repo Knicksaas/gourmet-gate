@@ -1,5 +1,5 @@
 import {Form, InitModelOf, scout, texts, Tile, TileGrid, WidgetModel} from "@eclipse-scout/core";
-import {CartFormData, CartItem, CartRepository, Desktop, OrderPositionTile} from "../index";
+import {CartFormData, CartItem, CartRepository, Desktop, OrderPositionTile, PaymentRepository} from "../index";
 import CartFormModel, {CartFormWidgetMap} from './CartFormModel';
 
 export class CartForm extends Form {
@@ -15,7 +15,8 @@ export class CartForm extends Form {
   protected override _init(model: InitModelOf<this>) {
     super._init(model);
 
-    this.widget('BackButton').on('click', this._onBackButtonClick.bind(this))
+    this.widget('BackButton').on('click', this._onBackButtonClick.bind(this));
+    this.widget('PayButton').on('click', this._onPayButtonClick.bind(this));
     this.widget('CartTileGrid').on('propertyChange:tiles', event => this._recalculatePrice(event.newValue));
   }
 
@@ -41,6 +42,14 @@ export class CartForm extends Form {
 
   protected _onBackButtonClick() {
     (<Desktop>this.findDesktop()).activateOrderPage();
+  }
+
+  protected _onPayButtonClick() {
+    this.widget('PayButton').setLoading(true);
+    PaymentRepository.get().createPayment()
+      .then(redirect => {
+        window.location.href = redirect.redirectUrl;
+      })
   }
 
   protected _recalculatePrice(newValue: Tile[]) {

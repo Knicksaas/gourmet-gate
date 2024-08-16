@@ -37,6 +37,8 @@ export * from './order/options/OrderPositionOption';
 export * from './order/options/OrderPositionOptionForm';
 export * from './order/options/OrderPositionOptionsListBox';
 export * from './order/options/OrderPositionOptionsLookupCall';
+export * from './payment/PaymentRepository';
+export * from './payment/Redirect';
 
 export default self;
 ObjectFactory.get().registerNamespace('gourmetgate', self);
