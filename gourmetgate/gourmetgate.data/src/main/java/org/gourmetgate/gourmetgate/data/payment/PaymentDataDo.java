@@ -9,26 +9,25 @@ import org.gourmetgate.gourmetgate.data.cart.CartItemDo;
 import java.util.Collection;
 import java.util.List;
 
-@TypeName("gourmetgate.Payment")
-public class PaymentDo extends DoEntity {
+@TypeName("gourmetgate.PaymentData")
+public class PaymentDataDo extends DoEntity {
 
   public DoList<CartItemDo> cartItems() {
     return doList("cartItems");
   }
-
 
   /* **************************************************************************
    * GENERATED CONVENIENCE METHODS
    * *************************************************************************/
 
   @Generated("DoConvenienceMethodsGenerator")
-  public PaymentDo withCartItems(Collection<? extends CartItemDo> cartItems) {
+  public PaymentDataDo withCartItems(Collection<? extends CartItemDo> cartItems) {
     cartItems().updateAll(cartItems);
     return this;
   }
 
   @Generated("DoConvenienceMethodsGenerator")
-  public PaymentDo withCartItems(CartItemDo... cartItems) {
+  public PaymentDataDo withCartItems(CartItemDo... cartItems) {
     cartItems().updateAll(cartItems);
     return this;
   }

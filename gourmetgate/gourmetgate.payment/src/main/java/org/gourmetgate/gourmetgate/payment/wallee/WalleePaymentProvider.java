@@ -12,7 +12,7 @@ import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.config.CONFIG;
 import org.eclipse.scout.rt.platform.exception.DefaultRuntimeExceptionTranslator;
 import org.gourmetgate.gourmetgate.data.cart.CartItemDo;
-import org.gourmetgate.gourmetgate.data.payment.PaymentDo;
+import org.gourmetgate.gourmetgate.data.payment.PaymentDataDo;
 import org.gourmetgate.gourmetgate.payment.common.IPaymentProvider;
 
 import java.math.BigDecimal;
@@ -42,7 +42,7 @@ public class WalleePaymentProvider implements IPaymentProvider {
    * This operation creates the URL to which the user should be redirected to when the payment page should be used.
    */
   @Override
-  public String createPaymentLink(PaymentDo payment) {
+  public String createPaymentLink(PaymentDataDo payment) {
     try {
       Transaction transaction = this.transactionService.create(this.spaceId, createTransactionPayload(payment));
       return this.transactionPaymentPageService.paymentPageUrl(spaceId, transaction.getId());
@@ -51,7 +51,7 @@ public class WalleePaymentProvider implements IPaymentProvider {
     }
   }
 
-  protected TransactionCreate createTransactionPayload(PaymentDo paymentDo) {
+  protected TransactionCreate createTransactionPayload(PaymentDataDo paymentDo) {
     TransactionCreate transactionPayload = new TransactionCreate();
     transactionPayload.autoConfirmationEnabled(true)
       .currency("CHF")
