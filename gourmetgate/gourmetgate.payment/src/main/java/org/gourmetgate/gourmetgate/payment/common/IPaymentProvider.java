@@ -7,4 +7,6 @@ import org.gourmetgate.gourmetgate.data.payment.PaymentDo;
 public interface IPaymentProvider {
 
   String createPaymentLink(PaymentDo payment);
+
+  void registerTransactionChange(String extTransactionId);
 }

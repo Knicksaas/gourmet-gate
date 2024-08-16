@@ -1,5 +1,6 @@
 package org.gourmetgate.gourmetgate.payment.wallee;
 
+import org.eclipse.scout.rt.platform.config.AbstractLongConfigProperty;
 import org.eclipse.scout.rt.platform.config.AbstractStringConfigProperty;
 
 public final class WalleePaymentProperties {
@@ -7,11 +8,7 @@ public final class WalleePaymentProperties {
   private WalleePaymentProperties() {
   }
 
-  public static class WalleeUserIdProperty extends AbstractStringConfigProperty {
-    @Override
-    public String getDefaultValue() {
-      return null;
-    }
+  public static class WalleeUserIdProperty extends AbstractLongConfigProperty {
 
     @Override
     public String getKey() {
@@ -41,11 +38,7 @@ public final class WalleePaymentProperties {
     }
   }
 
-  public static class WalleeSpaceIdProperty extends AbstractStringConfigProperty {
-    @Override
-    public String getDefaultValue() {
-      return null;
-    }
+  public static class WalleeSpaceIdProperty extends AbstractLongConfigProperty {
 
     @Override
     public String getKey() {
