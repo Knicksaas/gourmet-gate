@@ -4,18 +4,24 @@
 package org.gourmetgate.gourmetgate.persistence.tables;
 
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.gourmetgate.gourmetgate.persistence.Keys;
 import org.gourmetgate.gourmetgate.persistence.Schema;
 import org.gourmetgate.gourmetgate.persistence.tables.records.OrderPositionOptionRecord;
+import org.jooq.Field;
+import org.jooq.ForeignKey;
+import org.jooq.Name;
 import org.jooq.Record;
+import org.jooq.Row4;
 import org.jooq.Table;
-import org.jooq.*;
+import org.jooq.TableField;
+import org.jooq.TableOptions;
+import org.jooq.UniqueKey;
 import org.jooq.impl.DSL;
 import org.jooq.impl.SQLDataType;
 import org.jooq.impl.TableImpl;
-
-import java.util.Arrays;
-import java.util.List;
 
 
 /**
@@ -141,7 +147,7 @@ public class OrderPositionOption extends TableImpl<OrderPositionOptionRecord> {
   }
 
   @Override
-    public OrderPositionOption as(Name alias) {
+  public OrderPositionOption as(Name alias) {
     return new OrderPositionOption(alias, this);
   }
 

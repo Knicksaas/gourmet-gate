@@ -1,10 +1,7 @@
 package org.gourmetgate.gourmetgate.payment.wallee;
 
 import com.wallee.sdk.ApiClient;
-import com.wallee.sdk.model.LineItemCreate;
-import com.wallee.sdk.model.LineItemType;
-import com.wallee.sdk.model.Transaction;
-import com.wallee.sdk.model.TransactionCreate;
+import com.wallee.sdk.model.*;
 import com.wallee.sdk.service.TransactionPaymentPageService;
 import com.wallee.sdk.service.TransactionService;
 import jakarta.annotation.PostConstruct;
@@ -12,7 +9,10 @@ import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.config.CONFIG;
 import org.eclipse.scout.rt.platform.exception.DefaultRuntimeExceptionTranslator;
 import org.gourmetgate.gourmetgate.data.cart.CartItemDo;
+import org.gourmetgate.gourmetgate.data.payment.IPaymenetRepository;
 import org.gourmetgate.gourmetgate.data.payment.PaymentDataDo;
+import org.gourmetgate.gourmetgate.data.payment.PaymentDo;
+import org.gourmetgate.gourmetgate.data.payment.PaymentStatus;
 import org.gourmetgate.gourmetgate.payment.common.IPaymentProvider;
 
 import java.math.BigDecimal;
@@ -45,6 +45,7 @@ public class WalleePaymentProvider implements IPaymentProvider {
   public String createPaymentLink(PaymentDataDo payment) {
     try {
       Transaction transaction = this.transactionService.create(this.spaceId, createTransactionPayload(payment));
+      createPaymentInDatabase(transaction, payment);
       return this.transactionPaymentPageService.paymentPageUrl(spaceId, transaction.getId());
     } catch (Exception e) {
       throw BEANS.get(DefaultRuntimeExceptionTranslator.class).translate(e);
@@ -86,13 +87,35 @@ public class WalleePaymentProvider implements IPaymentProvider {
     return name;
   }
 
+  protected void createPaymentInDatabase(Transaction transaction, PaymentDataDo paymentData) {
+    PaymentDo paymentDo = BEANS.get(PaymentDo.class);
+    paymentDo.withPaymentExtId(String.valueOf(transaction.getId()));
+    paymentDo.withOrderId(paymentData.getOrderId());
+    paymentDo.withStatus(PaymentStatus.CREATED);
+    BEANS.get(IPaymenetRepository.class).create(paymentDo);
+  }
+
   @Override
-  public void registerTransactionChange(String extTransactionId) {
+  public PaymentStatus fetchTransactionStatus(String extTransactionId) {
     try {
       Transaction transaction = transactionService.read(this.spaceId, Long.valueOf(extTransactionId));
-      // save state to database
+      return parseStatus(transaction.getState());
     } catch (Exception e) {
       throw BEANS.get(DefaultRuntimeExceptionTranslator.class).translate(e);
+    }
+  }
+
+  protected PaymentStatus parseStatus(TransactionState transactionState) {
+    switch (transactionState) {
+      case FULFILL -> {
+        return PaymentStatus.PAID;
+      }
+      case FAILED, VOIDED, DECLINE -> {
+        return PaymentStatus.FAILED;
+      }
+      default -> {
+        return PaymentStatus.CREATED;
+      }
     }
   }
 }

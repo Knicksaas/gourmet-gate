@@ -4,8 +4,26 @@
 package org.gourmetgate.gourmetgate.persistence;
 
 
-import org.gourmetgate.gourmetgate.persistence.tables.*;
-import org.gourmetgate.gourmetgate.persistence.tables.records.*;
+import org.gourmetgate.gourmetgate.persistence.tables.Article;
+import org.gourmetgate.gourmetgate.persistence.tables.ArticleGroup;
+import org.gourmetgate.gourmetgate.persistence.tables.ArticleOption;
+import org.gourmetgate.gourmetgate.persistence.tables.Order;
+import org.gourmetgate.gourmetgate.persistence.tables.OrderPosition;
+import org.gourmetgate.gourmetgate.persistence.tables.OrderPositionOption;
+import org.gourmetgate.gourmetgate.persistence.tables.Payment;
+import org.gourmetgate.gourmetgate.persistence.tables.Person;
+import org.gourmetgate.gourmetgate.persistence.tables.Table;
+import org.gourmetgate.gourmetgate.persistence.tables.Vat;
+import org.gourmetgate.gourmetgate.persistence.tables.records.ArticleGroupRecord;
+import org.gourmetgate.gourmetgate.persistence.tables.records.ArticleOptionRecord;
+import org.gourmetgate.gourmetgate.persistence.tables.records.ArticleRecord;
+import org.gourmetgate.gourmetgate.persistence.tables.records.OrderPositionOptionRecord;
+import org.gourmetgate.gourmetgate.persistence.tables.records.OrderPositionRecord;
+import org.gourmetgate.gourmetgate.persistence.tables.records.OrderRecord;
+import org.gourmetgate.gourmetgate.persistence.tables.records.PaymentRecord;
+import org.gourmetgate.gourmetgate.persistence.tables.records.PersonRecord;
+import org.gourmetgate.gourmetgate.persistence.tables.records.TableRecord;
+import org.gourmetgate.gourmetgate.persistence.tables.records.VatRecord;
 import org.jooq.ForeignKey;
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
@@ -30,6 +48,7 @@ public class Keys {
   public static final UniqueKey<OrderRecord> ORDER_PK = Internal.createUniqueKey(Order.ORDER, DSL.name("ORDER_PK"), new TableField[]{Order.ORDER.ORDER_ID}, true);
   public static final UniqueKey<OrderPositionRecord> ORDER_POSITION_PK = Internal.createUniqueKey(OrderPosition.ORDER_POSITION, DSL.name("ORDER_POSITION_PK"), new TableField[]{OrderPosition.ORDER_POSITION.ORDER_POSITION_ID}, true);
   public static final UniqueKey<OrderPositionOptionRecord> ORDER_POSITION_OPTION_PK = Internal.createUniqueKey(OrderPositionOption.ORDER_POSITION_OPTION, DSL.name("ORDER_POSITION_OPTION_PK"), new TableField[]{OrderPositionOption.ORDER_POSITION_OPTION.ORDER_POSITION_OPTION_ID}, true);
+  public static final UniqueKey<PaymentRecord> PAYMENT_PK = Internal.createUniqueKey(Payment.PAYMENT, DSL.name("PAYMENT_PK"), new TableField[]{Payment.PAYMENT.PAYMENT_ID}, true);
     public static final UniqueKey<PersonRecord> PERSON_PK = Internal.createUniqueKey(Person.PERSON, DSL.name("person_pk"), new TableField[] { Person.PERSON.PERSON_ID }, true);
     public static final UniqueKey<TableRecord> TABLE_PK = Internal.createUniqueKey(Table.TABLE, DSL.name("TABLE_PK"), new TableField[] { Table.TABLE.TABLE_ID }, true);
   public static final UniqueKey<VatRecord> VAT_PK = Internal.createUniqueKey(Vat.VAT, DSL.name("VAT_PK"), new TableField[]{Vat.VAT.VAT_ID}, true);
@@ -46,4 +65,5 @@ public class Keys {
   public static final ForeignKey<OrderPositionRecord, OrderRecord> ORDER_POSITION_ORDER_ORDER_ID_FK = Internal.createForeignKey(OrderPosition.ORDER_POSITION, DSL.name("ORDER_POSITION_ORDER_ORDER_ID_FK"), new TableField[]{OrderPosition.ORDER_POSITION.ORDER_ID}, Keys.ORDER_PK, new TableField[]{Order.ORDER.ORDER_ID}, true);
   public static final ForeignKey<OrderPositionOptionRecord, ArticleOptionRecord> ORDER_POSITION_OPTION_ARTICLE_OPTION_ARTICLE_OPTION_ID_FK = Internal.createForeignKey(OrderPositionOption.ORDER_POSITION_OPTION, DSL.name("ORDER_POSITION_OPTION_ARTICLE_OPTION_ARTICLE_OPTION_ID_FK"), new TableField[]{OrderPositionOption.ORDER_POSITION_OPTION.ARTICLE_OPTION_ID}, Keys.ARTICLE_OPTION_PK, new TableField[]{ArticleOption.ARTICLE_OPTION.ARTICLE_OPTION_ID}, true);
   public static final ForeignKey<OrderPositionOptionRecord, OrderPositionRecord> ORDER_POSITION_OPTION_ORDER_POSITION_ORDER_POSITION_ID_FK = Internal.createForeignKey(OrderPositionOption.ORDER_POSITION_OPTION, DSL.name("ORDER_POSITION_OPTION_ORDER_POSITION_ORDER_POSITION_ID_FK"), new TableField[]{OrderPositionOption.ORDER_POSITION_OPTION.ORDER_POSITION_ID}, Keys.ORDER_POSITION_PK, new TableField[]{OrderPosition.ORDER_POSITION.ORDER_POSITION_ID}, true);
+  public static final ForeignKey<PaymentRecord, OrderRecord> PAYMENT_ORDER_ORDER_ID_FK = Internal.createForeignKey(Payment.PAYMENT, DSL.name("PAYMENT_ORDER_ORDER_ID_FK"), new TableField[]{Payment.PAYMENT.ORDER_ID}, Keys.ORDER_PK, new TableField[]{Order.ORDER.ORDER_ID}, true);
 }

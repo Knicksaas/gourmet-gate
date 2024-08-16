@@ -44,6 +44,11 @@ public class Tables {
   public static final OrderPositionOption ORDER_POSITION_OPTION = OrderPositionOption.ORDER_POSITION_OPTION;
 
   /**
+   * The table <code>Schema.PAYMENT</code>.
+   */
+  public static final Payment PAYMENT = Payment.PAYMENT;
+
+  /**
    * The table <code>Schema.person</code>.
    */
   public static final Person PERSON = Person.PERSON;
@@ -51,7 +56,7 @@ public class Tables {
   /**
    * The table <code>Schema.table</code>.
    */
-    public static final Table TABLE = Table.TABLE;
+  public static final Table TABLE = Table.TABLE;
 
   /**
    * The table <code>Schema.VAT</code>.

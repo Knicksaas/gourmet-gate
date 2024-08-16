@@ -56,6 +56,11 @@ public class Schema extends SchemaImpl {
   public final OrderPositionOption ORDER_POSITION_OPTION = OrderPositionOption.ORDER_POSITION_OPTION;
 
   /**
+   * The table <code>Schema.PAYMENT</code>.
+   */
+  public final Payment PAYMENT = Payment.PAYMENT;
+
+  /**
    * The table <code>Schema.person</code>.
    */
   public final Person PERSON = Person.PERSON;
@@ -63,7 +68,7 @@ public class Schema extends SchemaImpl {
   /**
    * The table <code>Schema.table</code>.
    */
-    public final Table TABLE = Table.TABLE;
+  public final Table TABLE = Table.TABLE;
 
     /**
      * The table <code>Schema.VAT</code>.
@@ -92,6 +97,7 @@ public class Schema extends SchemaImpl {
           Order.ORDER,
           OrderPosition.ORDER_POSITION,
           OrderPositionOption.ORDER_POSITION_OPTION,
+          Payment.PAYMENT,
           Person.PERSON,
           Table.TABLE,
           Vat.VAT

@@ -4,15 +4,15 @@
 package org.gourmetgate.gourmetgate.persistence.tables.records;
 
 
+import java.math.BigDecimal;
+import java.util.Date;
+
 import org.gourmetgate.gourmetgate.persistence.tables.Order;
 import org.jooq.Field;
 import org.jooq.Record1;
 import org.jooq.Record7;
 import org.jooq.Row7;
 import org.jooq.impl.UpdatableRecordImpl;
-
-import java.math.BigDecimal;
-import java.util.Date;
 
 
 /**
@@ -89,9 +89,9 @@ public class OrderRecord extends UpdatableRecordImpl<OrderRecord> implements Rec
   /**
    * Getter for <code>Schema.order.EVT_CREATE</code>.
    */
-    public Date getEvtCreate() {
-      return (Date) get(4);
-    }
+  public Date getEvtCreate() {
+    return (Date) get(4);
+  }
 
   /**
    * Setter for <code>Schema.order.EVT_PAY</code>.

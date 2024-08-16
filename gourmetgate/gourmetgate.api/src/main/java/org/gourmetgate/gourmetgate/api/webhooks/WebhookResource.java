@@ -18,7 +18,7 @@ public class WebhookResource implements IRestResource {
   @Path("/wallee/transaction")
   @Consumes(MediaType.APPLICATION_JSON)
   public Response postWalleeTransactionUpdate(WalleeWebhookPayloadDo webhookPayload) {
-    BEANS.get(PaymentService.class).registerTransactionChange(String.valueOf(webhookPayload.getEntityId()));
+    BEANS.get(PaymentService.class).handleTransactionStatusChange(String.valueOf(webhookPayload.getEntityId()));
     return BEANS.get(RestHelper.class).createOkResponse();
   }
 }
