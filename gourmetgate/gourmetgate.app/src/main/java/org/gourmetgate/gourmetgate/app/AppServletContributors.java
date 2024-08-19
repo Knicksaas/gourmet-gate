@@ -6,15 +6,20 @@ import org.eclipse.jetty.servlet.ServletHolder;
 import org.eclipse.scout.rt.jetty.IServletContributor;
 import org.eclipse.scout.rt.jetty.IServletFilterContributor;
 import org.eclipse.scout.rt.platform.Order;
+import org.eclipse.scout.rt.platform.Replace;
+import org.eclipse.scout.rt.platform.util.StringUtility;
 import org.eclipse.scout.rt.rest.RestApplication;
 import org.eclipse.scout.rt.server.context.HttpServerRunContextFilter;
+import org.eclipse.scout.rt.ui.html.app.UiServletContributors;
 import org.eclipse.scout.rt.ui.html.app.UiServletContributors.GzipFilterContributor;
 import org.eclipse.scout.rt.ui.html.app.UiServletContributors.UiServletContributor;
 import org.glassfish.jersey.server.ServerProperties;
 import org.glassfish.jersey.servlet.ServletContainer;
 import org.glassfish.jersey.servlet.ServletProperties;
-
 import org.gourmetgate.gourmetgate.api.RestAuthFilter;
+
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * {@link IServletContributor} and {@link IServletFilterContributor} for app.
@@ -24,7 +29,30 @@ public final class AppServletContributors {
   private AppServletContributors() {
   }
 
-  // no auth filter on / for UiServlet required
+  @Replace
+  public static class AuthFilterContributor extends UiServletContributors.AuthFilterContributor {
+
+    @Override
+    public void contribute(ServletContextHandler handler) {
+      FilterHolder filter = handler.addFilter(RestAuthFilter.class, "/*", null);
+      filter.setInitParameter("filter-exclude", StringUtility.join("\n", getFilterExcludes()));
+    }
+
+    @Override
+    protected List<String> getFilterExcludes() {
+      List<String> filterExcludes = super.getFilterExcludes();
+      filterExcludes.addAll(Arrays.asList(
+        "/favicon/*",
+        "/fonts/*",
+        "/logo.png",
+        "sucess.html",
+        "failed.html",
+        "/*login*.js",
+        "/*logout*.js",
+        "/*frwdeluxe-theme*.css"));
+      return filterExcludes;
+    }
+  }
 
   /**
    * Filters for API access.

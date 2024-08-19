@@ -6,6 +6,8 @@ module.exports = (env, args) => {
 
   config.entry = {
     'gourmetgate': './src/main/js/gourmetgate.ts',
+    'login': './src/main/js/login.ts',
+    'logout': './src/main/js/logout.ts',
     'gourmetgate-theme': './src/main/js/gourmetgate-theme.less',
     'gourmetgate-theme-dark': './src/main/js/gourmetgate-theme-dark.less'
   };
