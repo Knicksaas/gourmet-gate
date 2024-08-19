@@ -43,12 +43,12 @@ public class OrderPositionOptionRecord extends UpdatableRecordImpl<OrderPosition
       set(1, value);
     }
 
-  /**
-   * Getter for <code>Schema.ORDER_POSITION_OPTION.ORDER_POSITION_ID</code>.
-   */
-  public String getOrderPositionId() {
-    return (String) get(1);
-  }
+    /**
+     * Getter for <code>Schema.ORDER_POSITION_OPTION.ORDER_POSITION_ID</code>.
+     */
+    public String getOrderPositionId() {
+      return (String) get(1);
+    }
 
   /**
    * Setter for <code>Schema.ORDER_POSITION_OPTION.ARTICLE_OPTION_ID</code>.

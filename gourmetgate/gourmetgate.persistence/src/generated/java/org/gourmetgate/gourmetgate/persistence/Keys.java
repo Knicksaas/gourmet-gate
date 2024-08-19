@@ -13,6 +13,7 @@ import org.gourmetgate.gourmetgate.persistence.tables.OrderPositionOption;
 import org.gourmetgate.gourmetgate.persistence.tables.Payment;
 import org.gourmetgate.gourmetgate.persistence.tables.Person;
 import org.gourmetgate.gourmetgate.persistence.tables.Table;
+import org.gourmetgate.gourmetgate.persistence.tables.User;
 import org.gourmetgate.gourmetgate.persistence.tables.Vat;
 import org.gourmetgate.gourmetgate.persistence.tables.records.ArticleGroupRecord;
 import org.gourmetgate.gourmetgate.persistence.tables.records.ArticleOptionRecord;
@@ -23,6 +24,7 @@ import org.gourmetgate.gourmetgate.persistence.tables.records.OrderRecord;
 import org.gourmetgate.gourmetgate.persistence.tables.records.PaymentRecord;
 import org.gourmetgate.gourmetgate.persistence.tables.records.PersonRecord;
 import org.gourmetgate.gourmetgate.persistence.tables.records.TableRecord;
+import org.gourmetgate.gourmetgate.persistence.tables.records.UserRecord;
 import org.gourmetgate.gourmetgate.persistence.tables.records.VatRecord;
 import org.jooq.ForeignKey;
 import org.jooq.TableField;
@@ -51,6 +53,8 @@ public class Keys {
   public static final UniqueKey<PaymentRecord> PAYMENT_PK = Internal.createUniqueKey(Payment.PAYMENT, DSL.name("PAYMENT_PK"), new TableField[]{Payment.PAYMENT.PAYMENT_ID}, true);
     public static final UniqueKey<PersonRecord> PERSON_PK = Internal.createUniqueKey(Person.PERSON, DSL.name("person_pk"), new TableField[] { Person.PERSON.PERSON_ID }, true);
     public static final UniqueKey<TableRecord> TABLE_PK = Internal.createUniqueKey(Table.TABLE, DSL.name("TABLE_PK"), new TableField[] { Table.TABLE.TABLE_ID }, true);
+  public static final UniqueKey<UserRecord> USER_PK = Internal.createUniqueKey(User.USER, DSL.name("USER_PK"), new TableField[]{User.USER.USER_ID}, true);
+  public static final UniqueKey<UserRecord> USER_PK_2 = Internal.createUniqueKey(User.USER, DSL.name("USER_PK_2"), new TableField[]{User.USER.USER_NAME}, true);
   public static final UniqueKey<VatRecord> VAT_PK = Internal.createUniqueKey(Vat.VAT, DSL.name("VAT_PK"), new TableField[]{Vat.VAT.VAT_ID}, true);
 
   // -------------------------------------------------------------------------

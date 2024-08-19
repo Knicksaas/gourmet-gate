@@ -4,7 +4,17 @@
 package org.gourmetgate.gourmetgate.persistence;
 
 
-import org.gourmetgate.gourmetgate.persistence.tables.*;
+import org.gourmetgate.gourmetgate.persistence.tables.Article;
+import org.gourmetgate.gourmetgate.persistence.tables.ArticleGroup;
+import org.gourmetgate.gourmetgate.persistence.tables.ArticleOption;
+import org.gourmetgate.gourmetgate.persistence.tables.Order;
+import org.gourmetgate.gourmetgate.persistence.tables.OrderPosition;
+import org.gourmetgate.gourmetgate.persistence.tables.OrderPositionOption;
+import org.gourmetgate.gourmetgate.persistence.tables.Payment;
+import org.gourmetgate.gourmetgate.persistence.tables.Person;
+import org.gourmetgate.gourmetgate.persistence.tables.Table;
+import org.gourmetgate.gourmetgate.persistence.tables.User;
+import org.gourmetgate.gourmetgate.persistence.tables.Vat;
 
 
 /**
@@ -57,6 +67,11 @@ public class Tables {
    * The table <code>Schema.table</code>.
    */
   public static final Table TABLE = Table.TABLE;
+
+  /**
+   * The table <code>Schema.user</code>.
+   */
+  public static final User USER = User.USER;
 
   /**
    * The table <code>Schema.VAT</code>.

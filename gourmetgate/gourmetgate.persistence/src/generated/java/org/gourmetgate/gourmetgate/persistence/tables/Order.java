@@ -78,14 +78,14 @@ public class Order extends TableImpl<OrderRecord> {
    */
   public final TableField<OrderRecord, Date> EVT_PAY = createField(DSL.name("EVT_PAY"), SQLDataType.LOCALDATETIME(9), this, "", new DateConverter());
 
-    /**
+  /**
      * The column <code>Schema.order.SESSION_ID</code>.
      */
     public final TableField<OrderRecord, String> SESSION_ID = createField(DSL.name("SESSION_ID"), SQLDataType.VARCHAR(80).nullable(false).defaultValue(DSL.field("'default'", SQLDataType.VARCHAR)), this, "");
 
-  private Order(Name alias, Table<OrderRecord> aliased) {
-    this(alias, aliased, null);
-  }
+    private Order(Name alias, Table<OrderRecord> aliased) {
+      this(alias, aliased, null);
+    }
 
   private Order(Name alias, Table<OrderRecord> aliased, Field<?>[] parameters) {
     super(alias, null, aliased, parameters, DSL.comment(""), TableOptions.table());
