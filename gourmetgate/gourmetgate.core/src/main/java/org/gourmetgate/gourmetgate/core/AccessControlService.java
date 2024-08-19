@@ -1,12 +1,14 @@
 package org.gourmetgate.gourmetgate.core;
 
 import org.eclipse.scout.rt.platform.BEANS;
-import org.eclipse.scout.rt.security.*;
+import org.eclipse.scout.rt.security.AbstractAccessControlService;
+import org.eclipse.scout.rt.security.DefaultPermissionCollection;
+import org.eclipse.scout.rt.security.IPermissionCollection;
+import org.eclipse.scout.rt.security.PermissionLevel;
 import org.eclipse.scout.rt.shared.session.Sessions;
 import org.gourmetgate.gourmetgate.core.article.ArticleTablePagePermission;
+import org.gourmetgate.gourmetgate.core.desktop.EscapeShopViewPermission;
 import org.gourmetgate.gourmetgate.data.user.IUserRepository;
-
-import java.util.stream.Collectors;
 
 public class AccessControlService extends AbstractAccessControlService<String> {
 
@@ -30,6 +32,7 @@ public class AccessControlService extends AbstractAccessControlService<String> {
   }
 
   protected void addAllAdminPermissions(IPermissionCollection permissions) {
+    permissions.add(new EscapeShopViewPermission(), PermissionLevel.ALL);
     permissions.add(new ArticleTablePagePermission(), PermissionLevel.ALL);
   }
 }

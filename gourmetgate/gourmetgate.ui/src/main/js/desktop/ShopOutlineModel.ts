@@ -32,6 +32,6 @@ export default (): OutlineModel => ({
   ]
 });
 
-export type DataOutlineWidgetMap = {
+export type ShopOutlineWidgetMap = {
   'gourmetgate.DataOutline': Outline;
 };

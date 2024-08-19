@@ -1,5 +1,5 @@
 import {DesktopModel, Menu} from '@eclipse-scout/core';
-import {DataOutline, Desktop} from '../index';
+import {Desktop, ShopOutline} from '../index';
 
 export default (): DesktopModel => ({
   id: 'gourmetgate.Desktop',
@@ -10,7 +10,7 @@ export default (): DesktopModel => ({
     iconId: 'img/eclipse_scout_logo.png'
   },
   outline: {
-    objectType: DataOutline
+    objectType: ShopOutline
   },
   navigationHandleVisible: false,
   navigationVisible: false,

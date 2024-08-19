@@ -1,8 +1,8 @@
 import {InitModelOf, Outline, OutlineModel} from '@eclipse-scout/core';
-import DataOutlineModel from './DataOutlineModel';
+import DataOutlineModel from './ShopOutlineModel';
 import {OrderForm} from "../index";
 
-export class DataOutline extends Outline {
+export class ShopOutline extends Outline {
 
   protected override _jsonModel(): OutlineModel {
     return DataOutlineModel();
