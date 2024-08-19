@@ -4,11 +4,14 @@ import jakarta.annotation.Generated;
 import org.eclipse.scout.rt.dataobject.DoEntity;
 import org.eclipse.scout.rt.dataobject.DoValue;
 import org.eclipse.scout.rt.dataobject.TypeName;
+import org.eclipse.scout.rt.dataobject.ValueFormat;
 
 import java.util.Date;
 
 @TypeName("wallee.WebhookPayload")
 public class WalleeWebhookPayloadDo extends DoEntity {
+
+  private final static String DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ssXX";
 
   public DoValue<Long> eventId() {
     return doValue("eventId");
@@ -22,7 +25,7 @@ public class WalleeWebhookPayloadDo extends DoEntity {
     return doValue("listenerEntityId");
   }
 
-  public DoValue<Long> listenerEntityTechnicalName() {
+  public DoValue<String> listenerEntityTechnicalName() {
     return doValue("listenerEntityTechnicalName");
   }
 
@@ -34,6 +37,7 @@ public class WalleeWebhookPayloadDo extends DoEntity {
     return doValue("webhookListenerId");
   }
 
+  @ValueFormat(pattern = DATE_FORMAT)
   public DoValue<Date> timestamp() {
     return doValue("timestamp");
   }
@@ -80,13 +84,13 @@ public class WalleeWebhookPayloadDo extends DoEntity {
   }
 
   @Generated("DoConvenienceMethodsGenerator")
-  public WalleeWebhookPayloadDo withListenerEntityTechnicalName(Long listenerEntityTechnicalName) {
+  public WalleeWebhookPayloadDo withListenerEntityTechnicalName(String listenerEntityTechnicalName) {
     listenerEntityTechnicalName().set(listenerEntityTechnicalName);
     return this;
   }
 
   @Generated("DoConvenienceMethodsGenerator")
-  public Long getListenerEntityTechnicalName() {
+  public String getListenerEntityTechnicalName() {
     return listenerEntityTechnicalName().get();
   }
 
