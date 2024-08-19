@@ -42,6 +42,8 @@ export class Desktop extends ScoutDesktop {
     outline.selectNode(cartPage);
     cartPage.reloadPage();
   }
+
+
 }
 
 export interface DataChangeEvent<T = Desktop> extends Event<T> {

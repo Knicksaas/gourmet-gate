@@ -14,32 +14,7 @@ export default (): DesktopModel => ({
   },
   navigationHandleVisible: false,
   navigationVisible: false,
-  headerVisible: false,
-  menus: [
-    {
-      id: 'ThemeMenu',
-      objectType: Menu,
-      text: '${textKey:Theme}',
-      childActions: [
-        {
-          id: 'DefaultThemeMenu',
-          objectType: Menu,
-          text: 'Default'
-        },
-        {
-          id: 'DarkThemeMenu',
-          objectType: Menu,
-          text: 'Dark'
-        }
-      ]
-    },
-    {
-      id: 'AboutMenu',
-      objectType: Menu,
-      text: '${textKey:About}',
-      cssClass: 'about-menu'
-    }
-  ]
+  headerVisible: false
 });
 
 /* **************************************************************************

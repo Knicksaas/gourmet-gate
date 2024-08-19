@@ -4,7 +4,7 @@ import {PageWithData} from './PageWithData';
 
 export default (): OutlineModel => ({
   id: 'gourmetgate.DataOutline',
-  title: '${textKey:MyDataOutlineTitle}',
+  title: '${textKey:Shop}',
   objectType: Outline,
   nodes: [
     {
