@@ -1,4 +1,4 @@
-import {App, Article, Repository} from "../index";
+import {App, Article, ArticleTablePageEntry, Repository} from "../index";
 import {scout} from "@eclipse-scout/core";
 
 let repository: ArticleRepository;
@@ -11,8 +11,8 @@ export class ArticleRepository extends Repository {
     this.targetUrl = `${App.get().apiUrl}article/`;
   }
 
-  all(): JQuery.Promise<Article[]> {
-    return this._all();
+  getArticleTablePageData(): JQuery.Promise<ArticleTablePageEntry[]> {
+    return this.getJson(this.targetUrl + 'tablePageData');
   }
 
   static get(): ArticleRepository {

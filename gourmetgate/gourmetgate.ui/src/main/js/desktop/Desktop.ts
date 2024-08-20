@@ -1,6 +1,7 @@
 import {
   access,
   Desktop as ScoutDesktop,
+  DesktopHeader,
   DesktopModel as ScoutDesktopModel,
   Event,
   InitModelOf
@@ -44,6 +45,11 @@ export class Desktop extends ScoutDesktop {
   }
 
 
+  protected override _createHeader(): DesktopHeader {
+    let header = super._createHeader();
+    header.setViewButtonBoxVisible(true);
+    return header;
+  }
 }
 
 export interface DataChangeEvent<T = Desktop> extends Event<T> {

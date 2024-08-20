@@ -1,6 +1,7 @@
 import {Outline, OutlineModel} from '@eclipse-scout/core';
 import {CartForm, OrderForm} from '../index';
 import {PageWithData} from './PageWithData';
+import {ArticleTablePage} from '../article/ArticleTablePage';
 
 export default (): OutlineModel => ({
   id: 'gourmetgate.DataOutline',
@@ -28,6 +29,9 @@ export default (): OutlineModel => ({
         objectType: CartForm,
       },
       detailTableVisible: false
+    },
+    {
+      objectType: ArticleTablePage
     }
   ]
 });
