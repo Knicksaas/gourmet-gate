@@ -24,6 +24,10 @@ public class RestHelper {
     return Response.ok(BEANS.get(IDataObjectMapper.class).writeValue(dataObject)).build();
   }
 
+  public Response createNotFoundResponse() {
+    return Response.status(Response.Status.NOT_FOUND).build();
+  }
+
   public Response createForbiddenResponse() {
     return Response.status(Response.Status.FORBIDDEN).build();
   }

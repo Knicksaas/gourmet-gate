@@ -2,7 +2,6 @@ package org.gourmetgate.gourmetgate.core.article;
 
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.service.IService;
-import org.gourmetgate.gourmetgate.core.articlegroup.ArticleGroupService;
 import org.gourmetgate.gourmetgate.data.article.ArticleDo;
 import org.gourmetgate.gourmetgate.data.article.ArticleTablePageEntryDo;
 import org.gourmetgate.gourmetgate.data.article.IArticleRepository;

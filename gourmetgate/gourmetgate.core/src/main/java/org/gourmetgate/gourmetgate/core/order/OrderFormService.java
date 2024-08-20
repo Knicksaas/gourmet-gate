@@ -2,8 +2,8 @@ package org.gourmetgate.gourmetgate.core.order;
 
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.service.IService;
+import org.gourmetgate.gourmetgate.core.article.ArticleGroupService;
 import org.gourmetgate.gourmetgate.core.article.ArticleService;
-import org.gourmetgate.gourmetgate.core.articlegroup.ArticleGroupService;
 import org.gourmetgate.gourmetgate.core.orderposition.OrderPositionService;
 import org.gourmetgate.gourmetgate.data.order.IOrderRepository;
 import org.gourmetgate.gourmetgate.data.order.OrderFormDataDo;

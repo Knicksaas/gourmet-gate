@@ -8,6 +8,7 @@ export class ArticleTablePageEntry {
   unit: string;
   price: number;
   options: boolean;
+  active: boolean;
 
   static ENTITY_TYPE = 'articleTablePageEntry';
 

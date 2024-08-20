@@ -1,4 +1,4 @@
-import {BooleanColumn, Column, PageWithTable, PageWithTableModel, Table} from '@eclipse-scout/core';
+import {BooleanColumn, Column, icons, Menu, PageWithTable, PageWithTableModel, Table} from '@eclipse-scout/core';
 
 export default (): PageWithTableModel => ({
   id: 'ArticleTablePage',
@@ -44,6 +44,49 @@ export default (): PageWithTableModel => ({
         objectType: BooleanColumn,
         text: '${textKey:HasOptions}',
         width: 30
+      },
+      {
+        id: 'ActiveColumn',
+        objectType: BooleanColumn,
+        text: '${textKey:Active}',
+        width: 30
+      }
+    ],
+    menus: [
+      {
+        id: 'CreateArticleGroupMenu',
+        objectType: Menu,
+        text: '${textKey:CreateArticleGroup}',
+        iconId: icons.PLUS,
+        menuTypes: [Table.MenuType.EmptySpace]
+      },
+      {
+        id: 'CreateArticleMenu',
+        objectType: Menu,
+        text: '${textKey:CreateArticleGroup}',
+        iconId: icons.PLUS,
+        menuTypes: [Table.MenuType.EmptySpace]
+      },
+      {
+        id: 'EditEntryMenu',
+        objectType: Menu,
+        text: '${textKey:Edit}',
+        iconId: icons.PENCIL,
+        menuTypes: [Table.MenuType.SingleSelection]
+      },
+      {
+        id: 'ChangeStatusMenu',
+        objectType: Menu,
+        text: '${textKey:ChangeStatus}',
+        iconId: icons.ROTATE_RIGHT,
+        menuTypes: [Table.MenuType.SingleSelection]
+      },
+      {
+        id: 'DeleteMenu',
+        objectType: Menu,
+        text: '${textKey:Delete}',
+        iconId: icons.REMOVE,
+        menuTypes: [Table.MenuType.SingleSelection]
       }
     ]
   }
@@ -54,8 +97,17 @@ export default (): PageWithTableModel => ({
 * **************************************************************************/
 
 export class ArticleTable extends Table {
+  declare widgetMap: ArticleTableWidgetMap;
   declare columnMap: ArticleTableColumnMap;
 }
+
+export type ArticleTableWidgetMap = {
+  'CreateArticleGroupMenu': Menu;
+  'CreateArticleMenu': Menu;
+  'EditEntryMenu': Menu;
+  'ChangeStatusMenu': Menu;
+  'DeleteMenu': Menu;
+};
 
 export type ArticleTableColumnMap = {
   'IdColumn': Column;
@@ -63,5 +115,6 @@ export type ArticleTableColumnMap = {
   'NameColumn': Column;
   'UnitColumn': Column;
   'PriceColumn': Column;
-  'HasOptionsColumn': Column;
+  'HasOptionsColumn': BooleanColumn;
+  'ActiveColumn': BooleanColumn;
 };

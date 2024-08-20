@@ -3,15 +3,9 @@ import $ from "jquery";
 export class ArticleGroup {
   articleGroupId: string;
   name: string;
-  status: string;
+  enabled: boolean;
 
   static ENTITY_TYPE = 'articleGroup';
-
-  constructor() {
-    this.articleGroupId = null;
-    this.name = null;
-    this.status = null;
-  }
 
   init(model: any) {
     $.extend(this, model);
@@ -25,7 +19,7 @@ export class ArticleGroup {
     this.name = name;
   }
 
-  setstatus(status: string) {
-    this.status = status;
+  setEnabled(status: boolean) {
+    this.enabled = status;
   }
 }
