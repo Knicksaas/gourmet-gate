@@ -7,9 +7,9 @@ export class Article {
   unit: string;
   price: number;
   options: boolean;
-  status: string;
   vatId: string;
   cartCount: number;
+  enabled: boolean;
 
   static ENTITY_TYPE = 'article';
 
@@ -20,9 +20,9 @@ export class Article {
     this.unit = null;
     this.price = 0;
     this.options = null;
-    this.status = null;
     this.vatId = null;
     this.cartCount = 0;
+    this.enabled = null;
   }
 
   init(model: any) {
@@ -53,8 +53,8 @@ export class Article {
     this.options = options;
   }
 
-  setstatus(status: string) {
-    this.status = status;
+  setEnabled(status: boolean) {
+    this.enabled = status;
   }
 
   setCartCount(count: number) {

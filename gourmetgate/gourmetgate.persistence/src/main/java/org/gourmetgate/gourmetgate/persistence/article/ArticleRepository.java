@@ -30,6 +30,6 @@ public class ArticleRepository extends AbstractRepository<Article, ArticleRecord
       .with(ArticleDo::price, ArticleRecord::getPrice, ArticleRecord::setPrice)
       .with(ArticleDo::options, ArticleRecord::getHasOptions, ArticleRecord::setHasOptions)
       .with(ArticleDo::vatId, ArticleRecord::getVatId, ArticleRecord::setVatId)
-      .with(ArticleDo::status, ArticleRecord::getStatus, ArticleRecord::setStatus);
+      .with(ArticleDo::enabled, ArticleRecord::getEnabled, ArticleRecord::setEnabled);
   }
 }

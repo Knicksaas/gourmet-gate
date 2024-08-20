@@ -25,6 +25,6 @@ public class ArticleGroupRepository extends AbstractRepository<ArticleGroup, Art
     return new DoEntityBeanMappings<ArticleGroupDo, ArticleGroupRecord>()
       .with(ArticleGroupDo::articleGroupId, ArticleGroupRecord::getArticleGroupId, ArticleGroupRecord::setArticleGroupId)
       .with(ArticleGroupDo::name, ArticleGroupRecord::getName, ArticleGroupRecord::setName)
-      .with(ArticleGroupDo::enabled, ArticleGroupRecord::getStatus, ArticleGroupRecord::setStatus);
+      .with(ArticleGroupDo::enabled, ArticleGroupRecord::getEnabled, ArticleGroupRecord::setEnabled);
   }
 }

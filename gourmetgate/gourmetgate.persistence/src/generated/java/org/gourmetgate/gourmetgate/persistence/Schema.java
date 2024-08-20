@@ -77,7 +77,7 @@ public class Schema extends SchemaImpl {
 
   /**
    * The table <code>Schema.VAT</code>.
-     */
+   */
     public final Vat VAT = Vat.VAT;
 
     /**

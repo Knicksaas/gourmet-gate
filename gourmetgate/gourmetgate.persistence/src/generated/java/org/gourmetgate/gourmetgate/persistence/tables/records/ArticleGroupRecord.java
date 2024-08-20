@@ -49,16 +49,16 @@ public class ArticleGroupRecord extends UpdatableRecordImpl<ArticleGroupRecord> 
   }
 
   /**
-   * Setter for <code>Schema.ARTICLE_GROUP.STATUS</code>.
+   * Setter for <code>Schema.ARTICLE_GROUP.ENABLED</code>.
    */
-  public void setStatus(Boolean value) {
+  public void setEnabled(Boolean value) {
     set(2, value);
   }
 
   /**
-   * Getter for <code>Schema.ARTICLE_GROUP.STATUS</code>.
+   * Getter for <code>Schema.ARTICLE_GROUP.ENABLED</code>.
    */
-  public Boolean getStatus() {
+  public Boolean getEnabled() {
     return (Boolean) get(2);
   }
 
@@ -97,7 +97,7 @@ public class ArticleGroupRecord extends UpdatableRecordImpl<ArticleGroupRecord> 
 
   @Override
   public Field<Boolean> field3() {
-    return ArticleGroup.ARTICLE_GROUP.STATUS;
+    return ArticleGroup.ARTICLE_GROUP.ENABLED;
   }
 
   @Override
@@ -112,7 +112,7 @@ public class ArticleGroupRecord extends UpdatableRecordImpl<ArticleGroupRecord> 
 
   @Override
   public Boolean component3() {
-    return getStatus();
+    return getEnabled();
   }
 
   @Override
@@ -127,7 +127,7 @@ public class ArticleGroupRecord extends UpdatableRecordImpl<ArticleGroupRecord> 
 
   @Override
   public Boolean value3() {
-    return getStatus();
+    return getEnabled();
   }
 
   @Override
@@ -144,7 +144,7 @@ public class ArticleGroupRecord extends UpdatableRecordImpl<ArticleGroupRecord> 
 
   @Override
   public ArticleGroupRecord value3(Boolean value) {
-    setStatus(value);
+    setEnabled(value);
     return this;
   }
 
@@ -170,11 +170,11 @@ public class ArticleGroupRecord extends UpdatableRecordImpl<ArticleGroupRecord> 
   /**
    * Create a detached, initialised ArticleGroupRecord
    */
-  public ArticleGroupRecord(String articleGroupId, String name, Boolean status) {
+  public ArticleGroupRecord(String articleGroupId, String name, Boolean enabled) {
     super(ArticleGroup.ARTICLE_GROUP);
 
     setArticleGroupId(articleGroupId);
     setName(name);
-    setStatus(status);
+    setEnabled(enabled);
   }
 }

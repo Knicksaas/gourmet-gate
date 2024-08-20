@@ -34,6 +34,9 @@ public class ArticleTablePageEntryDo extends DoEntity {
     return doValue("options");
   }
 
+  public DoValue<Boolean> enabled() {
+    return doValue("enabled");
+  }
 
   /* **************************************************************************
    * GENERATED CONVENIENCE METHODS
@@ -108,5 +111,21 @@ public class ArticleTablePageEntryDo extends DoEntity {
   @Generated("DoConvenienceMethodsGenerator")
   public boolean isOptions() {
     return nvl(getOptions());
+  }
+
+  @Generated("DoConvenienceMethodsGenerator")
+  public ArticleTablePageEntryDo withEnabled(Boolean enabled) {
+    enabled().set(enabled);
+    return this;
+  }
+
+  @Generated("DoConvenienceMethodsGenerator")
+  public Boolean getEnabled() {
+    return enabled().get();
+  }
+
+  @Generated("DoConvenienceMethodsGenerator")
+  public boolean isEnabled() {
+    return nvl(getEnabled());
   }
 }

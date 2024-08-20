@@ -72,11 +72,6 @@ public class Article extends TableImpl<ArticleRecord> {
   public final TableField<ArticleRecord, String> VAT_ID = createField(DSL.name("VAT_ID"), SQLDataType.VARCHAR(36).nullable(false), this, "");
 
   /**
-   * The column <code>Schema.ARTICLE.STATUS</code>.
-   */
-  public final TableField<ArticleRecord, String> STATUS = createField(DSL.name("STATUS"), SQLDataType.VARCHAR(80).nullable(false), this, "");
-
-  /**
    * The column <code>Schema.ARTICLE.PRICE</code>.
    */
   public final TableField<ArticleRecord, BigDecimal> PRICE = createField(DSL.name("PRICE"), SQLDataType.DECIMAL(15, 10).nullable(false).defaultValue(DSL.field("0.0", SQLDataType.DECIMAL)), this, "");
@@ -85,6 +80,11 @@ public class Article extends TableImpl<ArticleRecord> {
    * The column <code>Schema.ARTICLE.ARTICLE_GROUP_ID</code>.
    */
   public final TableField<ArticleRecord, String> ARTICLE_GROUP_ID = createField(DSL.name("ARTICLE_GROUP_ID"), SQLDataType.VARCHAR(36).nullable(false).defaultValue(DSL.field("''", SQLDataType.VARCHAR)), this, "");
+
+  /**
+   * The column <code>Schema.ARTICLE.ENABLED</code>.
+   */
+  public final TableField<ArticleRecord, Boolean> ENABLED = createField(DSL.name("ENABLED"), SQLDataType.BOOLEAN.nullable(false).defaultValue(DSL.field("true", SQLDataType.BOOLEAN)), this, "");
 
   private Article(Name alias, Table<ArticleRecord> aliased) {
     this(alias, aliased, null);
@@ -189,7 +189,7 @@ public class Article extends TableImpl<ArticleRecord> {
   // -------------------------------------------------------------------------
 
   @Override
-  public Row8<String, String, String, Boolean, String, String, BigDecimal, String> fieldsRow() {
+  public Row8<String, String, String, Boolean, String, BigDecimal, String, Boolean> fieldsRow() {
     return (Row8) super.fieldsRow();
   }
 }

@@ -53,9 +53,9 @@ public class ArticleGroup extends TableImpl<ArticleGroupRecord> {
   public final TableField<ArticleGroupRecord, String> NAME = createField(DSL.name("NAME"), SQLDataType.VARCHAR(80).nullable(false), this, "");
 
   /**
-   * The column <code>Schema.ARTICLE_GROUP.STATUS</code>.
+   * The column <code>Schema.ARTICLE_GROUP.ENABLED</code>.
    */
-  public final TableField<ArticleGroupRecord, Boolean> STATUS = createField(DSL.name("STATUS"), SQLDataType.BOOLEAN.nullable(false).defaultValue(DSL.field("true", SQLDataType.BOOLEAN)), this, "");
+  public final TableField<ArticleGroupRecord, Boolean> ENABLED = createField(DSL.name("ENABLED"), SQLDataType.BOOLEAN.nullable(false).defaultValue(DSL.field("true", SQLDataType.BOOLEAN)), this, "");
 
   private ArticleGroup(Name alias, Table<ArticleGroupRecord> aliased) {
     this(alias, aliased, null);

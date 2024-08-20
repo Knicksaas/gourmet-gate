@@ -74,7 +74,7 @@ public class Order extends TableImpl<OrderRecord> {
 
   /**
    * The column <code>Schema.order.SESSION_ID</code>.
-     */
+   */
     public final TableField<OrderRecord, String> SESSION_ID = createField(DSL.name("SESSION_ID"), SQLDataType.VARCHAR(80).nullable(false).defaultValue(DSL.field("'default'", SQLDataType.VARCHAR)), this, "");
 
     private Order(Name alias, Table<OrderRecord> aliased) {

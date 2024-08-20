@@ -33,7 +33,7 @@ export class ArticleTablePage extends PageWithTable {
             tableEntry.unit,
             tableEntry.price,
             tableEntry.options,
-            tableEntry.active
+            tableEntry.enabled
           ]
         };
       });

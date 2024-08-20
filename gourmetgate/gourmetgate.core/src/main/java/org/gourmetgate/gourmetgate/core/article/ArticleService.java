@@ -25,7 +25,8 @@ public class ArticleService implements IService {
   protected ArticleTablePageEntryDo translateArticleGroup(ArticleGroupDo articleGroup) {
     return BEANS.get(ArticleTablePageEntryDo.class)
       .withId(articleGroup.getArticleGroupId())
-      .withName(articleGroup.getName());
+      .withName(articleGroup.getName())
+      .withEnabled(articleGroup.getEnabled());
   }
 
   protected ArticleTablePageEntryDo translateArticle(ArticleDo article) {
@@ -35,6 +36,7 @@ public class ArticleService implements IService {
       .withName(article.getName())
       .withUnit(article.getUnit())
       .withPrice(article.getPrice())
-      .withOptions(article.getOptions());
+      .withOptions(article.getOptions())
+      .withEnabled(article.isEnabled());
   }
 }
