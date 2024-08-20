@@ -25,7 +25,8 @@ export default (): PageWithTableModel => ({
         id: 'NameColumn',
         objectType: Column,
         text: '${textKey:Name}',
-        width: 100
+        width: 100,
+        mandatory: true
       },
       {
         id: 'UnitColumn',
@@ -82,7 +83,7 @@ export default (): PageWithTableModel => ({
         menuTypes: [Table.MenuType.SingleSelection]
       },
       {
-        id: 'DeleteMenu',
+        id: 'DeleteEntryMenu',
         objectType: Menu,
         text: '${textKey:Delete}',
         iconId: icons.REMOVE,
@@ -106,7 +107,7 @@ export type ArticleTableWidgetMap = {
   'CreateArticleMenu': Menu;
   'EditEntryMenu': Menu;
   'ChangeStatusMenu': Menu;
-  'DeleteMenu': Menu;
+  'DeleteEntryMenu': Menu;
 };
 
 export type ArticleTableColumnMap = {

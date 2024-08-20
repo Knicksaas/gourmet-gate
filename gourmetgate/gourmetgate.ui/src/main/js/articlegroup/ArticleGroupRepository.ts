@@ -11,6 +11,15 @@ export class ArticleGroupRepository extends Repository {
     this.targetUrl = `${App.get().apiUrl}article/group/`;
   }
 
+  createArticleGroup(): JQuery.Promise<ArticleGroup> {
+    let articleGroup = scout.create(ArticleGroup, {
+      name: 'New article group',
+      enabled: true
+    });
+    return this.postJson(this.targetUrl, articleGroup)
+      .then(data => this._first(data));
+  }
+
   getArticleGroup(articleGroupId: string): JQuery.Promise<ArticleGroup> {
     return this.getJson(this.targetUrl + articleGroupId)
       .then(data => this._first(data));
@@ -18,6 +27,10 @@ export class ArticleGroupRepository extends Repository {
 
   saveArticleGroup(data: ArticleGroup): JQuery.Promise<void> {
     return this.putJson(this.targetUrl + data.articleGroupId, data);
+  }
+
+  deleteArticleGroup(articleGroupId: string): JQuery.Promise<void> {
+    return this.removeJson(this.targetUrl + articleGroupId);
   }
 
   static get(): ArticleGroupRepository {

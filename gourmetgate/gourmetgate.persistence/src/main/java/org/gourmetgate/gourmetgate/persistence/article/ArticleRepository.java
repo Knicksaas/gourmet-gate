@@ -8,6 +8,8 @@ import org.gourmetgate.gourmetgate.persistence.tables.Article;
 import org.gourmetgate.gourmetgate.persistence.tables.records.ArticleRecord;
 import org.jooq.Field;
 
+import static org.gourmetgate.gourmetgate.persistence.JooqSqlService.jooq;
+
 public class ArticleRepository extends AbstractRepository<Article, ArticleRecord, ArticleDo> implements IArticleRepository {
 
   @Override
@@ -18,6 +20,14 @@ public class ArticleRepository extends AbstractRepository<Article, ArticleRecord
   @Override
   public Field<String> getIdColumn() {
     return Article.ARTICLE.ARTICLE_ID;
+  }
+
+  @Override
+  public int deleteByGroupId(String articleGroupId) {
+    return jooq()
+      .deleteFrom(getTable())
+      .where(getTable().ARTICLE_GROUP_ID.eq(articleGroupId))
+      .execute();
   }
 
   @Override

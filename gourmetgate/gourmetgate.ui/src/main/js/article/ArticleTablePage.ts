@@ -1,5 +1,20 @@
-import {ObjectOrModel, PageWithTable, scout, Table, TableRow} from "@eclipse-scout/core";
-import {ArticleGroupForm, ArticleRepository, ArticleTable, ArticleTablePageEntry} from "../index";
+import {
+  MessageBox,
+  MessageBoxes,
+  ObjectOrModel,
+  PageWithTable,
+  scout,
+  Status,
+  Table,
+  TableRow
+} from "@eclipse-scout/core";
+import {
+  ArticleGroupForm,
+  ArticleGroupRepository,
+  ArticleRepository,
+  ArticleTable,
+  ArticleTablePageEntry
+} from "../index";
 import ArticleTablePageModel from "./ArticleTablePageModel";
 
 export class ArticleTablePage extends PageWithTable {
@@ -12,7 +27,9 @@ export class ArticleTablePage extends PageWithTable {
   protected override _initDetailTable(table: Table) {
     super._initDetailTable(table);
 
+    this.detailTable.widget('CreateArticleGroupMenu').on('action', this._createArticleGroup.bind(this));
     this.detailTable.widget('EditEntryMenu').on('action', this._modifyEntryMenuAction.bind(this));
+    this.detailTable.widget('DeleteEntryMenu').on('action', this._deleteTableEntry.bind(this));
   }
 
   protected override _loadTableData(): JQuery.Promise<ArticleTablePageEntry[]> {
@@ -39,14 +56,34 @@ export class ArticleTablePage extends PageWithTable {
       });
   }
 
+  protected _createArticleGroup() {
+    ArticleGroupRepository.get().createArticleGroup()
+      .then(articleGroup => {
+        this._createArticleGroupForm(articleGroup.articleGroupId).open();
+      });
+  }
+
   protected _modifyEntryMenuAction() {
     let row = this.detailTable.selectedRow();
-    if (row.parentRow) {
-
-    } else {
-      // Must be an ArticleGroup when no parent row is present
+    if (this._isArticleGroup(row)) {
       this._createArticleGroupForm(row.id).open();
+    } else {
+      // TBD
     }
+  }
+
+  protected _deleteTableEntry() {
+    let row = this.detailTable.selectedRow();
+    MessageBoxes.openYesNo(this.getOutline(), '${textKey:DeleteWarning}', Status.Severity.WARNING)
+      .then(option => {
+        if (option == MessageBox.Buttons.YES) {
+          if (this._isArticleGroup(row)) {
+            ArticleGroupRepository.get().deleteArticleGroup(row.id);
+          } else {
+            // TBD
+          }
+        }
+      });
   }
 
   protected _createArticleGroupForm(articleGroupId: string): ArticleGroupForm {
@@ -55,5 +92,9 @@ export class ArticleTablePage extends PageWithTable {
       parent: outline,
       articleGroupId: articleGroupId
     });
+  }
+
+  protected _isArticleGroup(row: TableRow): boolean {
+    return !row.parentRow;
   }
 }
