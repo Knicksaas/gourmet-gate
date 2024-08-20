@@ -55,7 +55,7 @@ public class ArticleGroup extends TableImpl<ArticleGroupRecord> {
   /**
    * The column <code>Schema.ARTICLE_GROUP.STATUS</code>.
    */
-  public final TableField<ArticleGroupRecord, String> STATUS = createField(DSL.name("STATUS"), SQLDataType.VARCHAR(80).nullable(false), this, "");
+  public final TableField<ArticleGroupRecord, Boolean> STATUS = createField(DSL.name("STATUS"), SQLDataType.BOOLEAN.nullable(false).defaultValue(DSL.field("true", SQLDataType.BOOLEAN)), this, "");
 
   private ArticleGroup(Name alias, Table<ArticleGroupRecord> aliased) {
     this(alias, aliased, null);
@@ -131,7 +131,7 @@ public class ArticleGroup extends TableImpl<ArticleGroupRecord> {
   // -------------------------------------------------------------------------
 
   @Override
-  public Row3<String, String, String> fieldsRow() {
+  public Row3<String, String, Boolean> fieldsRow() {
     return (Row3) super.fieldsRow();
   }
 }

@@ -4,27 +4,21 @@
 package org.gourmetgate.gourmetgate.persistence.tables;
 
 
-import java.math.BigDecimal;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
-
 import org.gourmetgate.gourmetgate.persistence.Keys;
 import org.gourmetgate.gourmetgate.persistence.Schema;
 import org.gourmetgate.gourmetgate.persistence.common.DateConverter;
 import org.gourmetgate.gourmetgate.persistence.tables.records.OrderRecord;
-import org.jooq.Field;
-import org.jooq.ForeignKey;
-import org.jooq.Name;
 import org.jooq.Record;
-import org.jooq.Row7;
 import org.jooq.Table;
-import org.jooq.TableField;
-import org.jooq.TableOptions;
-import org.jooq.UniqueKey;
+import org.jooq.*;
 import org.jooq.impl.DSL;
 import org.jooq.impl.SQLDataType;
 import org.jooq.impl.TableImpl;
+
+import java.math.BigDecimal;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
 
 
 /**
@@ -79,7 +73,7 @@ public class Order extends TableImpl<OrderRecord> {
   public final TableField<OrderRecord, Date> EVT_PAY = createField(DSL.name("EVT_PAY"), SQLDataType.LOCALDATETIME(9), this, "", new DateConverter());
 
   /**
-     * The column <code>Schema.order.SESSION_ID</code>.
+   * The column <code>Schema.order.SESSION_ID</code>.
      */
     public final TableField<OrderRecord, String> SESSION_ID = createField(DSL.name("SESSION_ID"), SQLDataType.VARCHAR(80).nullable(false).defaultValue(DSL.field("'default'", SQLDataType.VARCHAR)), this, "");
 

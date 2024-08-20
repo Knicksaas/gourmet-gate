@@ -4,22 +4,12 @@
 package org.gourmetgate.gourmetgate.persistence;
 
 
-import java.util.Arrays;
-import java.util.List;
-
-import org.gourmetgate.gourmetgate.persistence.tables.Article;
-import org.gourmetgate.gourmetgate.persistence.tables.ArticleGroup;
-import org.gourmetgate.gourmetgate.persistence.tables.ArticleOption;
-import org.gourmetgate.gourmetgate.persistence.tables.Order;
-import org.gourmetgate.gourmetgate.persistence.tables.OrderPosition;
-import org.gourmetgate.gourmetgate.persistence.tables.OrderPositionOption;
-import org.gourmetgate.gourmetgate.persistence.tables.Payment;
-import org.gourmetgate.gourmetgate.persistence.tables.Person;
-import org.gourmetgate.gourmetgate.persistence.tables.Table;
-import org.gourmetgate.gourmetgate.persistence.tables.User;
-import org.gourmetgate.gourmetgate.persistence.tables.Vat;
+import org.gourmetgate.gourmetgate.persistence.tables.*;
 import org.jooq.Catalog;
 import org.jooq.impl.SchemaImpl;
+
+import java.util.Arrays;
+import java.util.List;
 
 
 /**
@@ -86,7 +76,7 @@ public class Schema extends SchemaImpl {
   public final User USER = User.USER;
 
   /**
-     * The table <code>Schema.VAT</code>.
+   * The table <code>Schema.VAT</code>.
      */
     public final Vat VAT = Vat.VAT;
 

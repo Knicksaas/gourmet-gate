@@ -16,8 +16,8 @@ public class ArticleGroupDo extends DoEntity {
     return doValue("name");
   }
 
-  public DoValue<String> status() {
-    return doValue("status");
+  public DoValue<Boolean> enabled() {
+    return doValue("enabled");
   }
 
   /* **************************************************************************
@@ -47,13 +47,18 @@ public class ArticleGroupDo extends DoEntity {
   }
 
   @Generated("DoConvenienceMethodsGenerator")
-  public ArticleGroupDo withStatus(String status) {
-    status().set(status);
+  public ArticleGroupDo withEnabled(Boolean enabled) {
+    enabled().set(enabled);
     return this;
   }
 
   @Generated("DoConvenienceMethodsGenerator")
-  public String getStatus() {
-    return status().get();
+  public Boolean getEnabled() {
+    return enabled().get();
+  }
+
+  @Generated("DoConvenienceMethodsGenerator")
+  public boolean isEnabled() {
+    return nvl(getEnabled());
   }
 }
