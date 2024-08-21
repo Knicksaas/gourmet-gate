@@ -17,6 +17,7 @@ export * from './desktop/ShopOutline';
 export * from './desktop/ShopOutlineModel';
 export * from './article/Article';
 export * from './article/ArticleAccordionGroup';
+export * from './article/ArticleForm';
 export * from './article/ArticleRepository';
 export * from './article/ArticleTablePage';
 export * from './article/ArticleTablePageEntry';

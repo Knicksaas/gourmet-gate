@@ -64,8 +64,9 @@ export default (): PageWithTableModel => ({
       {
         id: 'CreateArticleMenu',
         objectType: Menu,
-        text: '${textKey:CreateArticleGroup}',
+        text: '${textKey:CreateArticle}',
         iconId: icons.PLUS,
+        visible: false,
         menuTypes: [Table.MenuType.EmptySpace]
       },
       {
