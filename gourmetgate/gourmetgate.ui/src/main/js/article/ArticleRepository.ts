@@ -29,6 +29,15 @@ export class ArticleRepository extends Repository {
       .then(data => this._first(data));
   }
 
+  getArticle(articleId: string) {
+    return this.getJson(this.targetUrl + articleId)
+      .then(data => this._first(data));
+  }
+
+  updateArticle(articleId: string, data: Article): JQuery.Promise<void> {
+    return this.putJson(this.targetUrl + articleId, data);
+  }
+
   static get(): ArticleRepository {
     if (!repository) {
       repository = scout.create(ArticleRepository);

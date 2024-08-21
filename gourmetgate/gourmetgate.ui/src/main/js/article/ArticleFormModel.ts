@@ -145,3 +145,41 @@ export default (): FormModel => ({
     ]
   }
 });
+
+/* **************************************************************************
+* GENERATED WIDGET MAPS
+* **************************************************************************/
+
+export type ArticleFormWidgetMap = {
+  'MainBox': GroupBox;
+  'ArticleConfigBox': GroupBox;
+  'IdField': StringField;
+  'NameField': StringField;
+  'ArticleGroupField': SmartField<any>;
+  'UnitField': StringField;
+  'PriceField': NumberField;
+  'VatField': SmartField<any>;
+  'EnabledField': CheckBoxField;
+  'HasOptionsField': CheckBoxField;
+  'ArticleOptionsConfigBox': GroupBox;
+  'ArticleOptionTableField': TableField;
+  'ArticleOptionTable': ArticleOptionTable;
+  'OkMenu': OkMenu;
+  'CancelMenu': CancelMenu;
+} & ArticleOptionTableWidgetMap;
+
+export class ArticleOptionTable extends Table {
+  declare widgetMap: ArticleOptionTableWidgetMap;
+  declare columnMap: ArticleOptionTableColumnMap;
+}
+
+export type ArticleOptionTableWidgetMap = {
+  'AddArticleOptionMenu': Menu;
+  'DeleteArticleOptionMenu': Menu;
+};
+
+export type ArticleOptionTableColumnMap = {
+  'ArticleOptionIdColumn': Column;
+  'ArticleIdColumn': Column;
+  'ArticleOptionDescriptionColumn': Column;
+};
