@@ -4,7 +4,7 @@ export default (): PageWithTableModel => ({
   id: 'ArticleTablePage',
   objectType: PageWithTable,
   text: '${textKey:Articles}',
-  alwaysCreateChildPage: true,
+  leaf: true,
   detailTable: {
     id: 'ArticleTable',
     objectType: Table,

@@ -48,6 +48,9 @@ export * from './order/options/OrderPositionOptionsListBox';
 export * from './order/options/OrderPositionOptionsLookupCall';
 export * from './payment/PaymentRepository';
 export * from './payment/Redirect';
+export * from './table/HallForm';
+export * from './table/Table';
+export * from './table/TableTile';
 export * from './vat/Vat';
 export * from './vat/VatLookupCall';
 

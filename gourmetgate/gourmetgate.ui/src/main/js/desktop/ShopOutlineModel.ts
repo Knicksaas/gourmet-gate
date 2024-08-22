@@ -2,6 +2,7 @@ import {Outline, OutlineModel} from '@eclipse-scout/core';
 import {CartForm, OrderForm} from '../index';
 import {PageWithData} from './PageWithData';
 import {ArticleTablePage} from '../article/ArticleTablePage';
+import {HallForm} from "../table/HallForm";
 
 export default (): OutlineModel => ({
   id: 'gourmetgate.DataOutline',
@@ -32,6 +33,17 @@ export default (): OutlineModel => ({
     },
     {
       objectType: ArticleTablePage
+    },
+    {
+      id: HallForm.PageId,
+      objectType: PageWithData,
+      leaf: true,
+      navigateButtonsVisible: false,
+      text: '${textKey:Tables}',
+      detailForm: {
+        objectType: HallForm,
+      },
+      detailTableVisible: false
     }
   ]
 });
