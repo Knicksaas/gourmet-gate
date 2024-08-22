@@ -2,7 +2,6 @@ package org.gourmetgate.gourmetgate.core.article;
 
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.service.IService;
-import org.gourmetgate.gourmetgate.data.article.IArticleOptionRepository;
 import org.gourmetgate.gourmetgate.data.article.IArticleRepository;
 import org.gourmetgate.gourmetgate.data.articlegroup.ArticleGroupDo;
 import org.gourmetgate.gourmetgate.data.articlegroup.IArticleGroupRepository;
@@ -33,7 +32,7 @@ public class ArticleGroupService implements IService {
   }
 
   public boolean deleteArticleGroup(String articleGroupId) {
-    BEANS.get(IArticleOptionRepository.class).deleteArticleOptionsForArticleGroup(articleGroupId);
+    BEANS.get(ArticleOptionService.class).deleteArticleOptionsForArticleGroup(articleGroupId);
     BEANS.get(IArticleRepository.class).deleteByGroupId(articleGroupId);
     return BEANS.get(IArticleGroupRepository.class).delete(articleGroupId) == 1;
   }

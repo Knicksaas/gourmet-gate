@@ -3,11 +3,12 @@ package org.gourmetgate.gourmetgate.core.article;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.service.IService;
 import org.gourmetgate.gourmetgate.data.article.ArticleDo;
+import org.gourmetgate.gourmetgate.data.article.ArticleOptionDo;
 import org.gourmetgate.gourmetgate.data.article.ArticleTablePageEntryDo;
-import org.gourmetgate.gourmetgate.data.article.IArticleOptionRepository;
 import org.gourmetgate.gourmetgate.data.article.IArticleRepository;
 import org.gourmetgate.gourmetgate.data.articlegroup.ArticleGroupDo;
 
+import java.util.List;
 import java.util.stream.Stream;
 
 public class ArticleService implements IService {
@@ -42,19 +43,34 @@ public class ArticleService implements IService {
   }
 
   public ArticleDo createArticle(ArticleDo article) {
-    return BEANS.get(IArticleRepository.class).create(article);
+    List<ArticleOptionDo> articleOptions = article.getArticleOptions();
+    ArticleDo newArticle = BEANS.get(IArticleRepository.class).create(article);
+    articleOptions.forEach(articleOptionDo -> articleOptionDo.withArticleId(newArticle.getArticleId()));
+    List<ArticleOptionDo> newArticleOptions = BEANS.get(ArticleOptionService.class).createArticleOptions(articleOptions).toList();
+    return newArticle.withArticleOptions(newArticleOptions);
   }
 
   public ArticleDo getArticleById(String articleId) {
-    return BEANS.get(IArticleRepository.class).getById(articleId).orElse(null);
+    return BEANS.get(IArticleRepository.class)
+      .getById(articleId)
+      .map(article -> {
+        if (article.isOptions()) {
+          article.withArticleOptions(BEANS.get(ArticleOptionService.class)
+            .getArticleOptionForArticle(article.getArticleId())
+            .toList());
+        }
+        return article;
+      })
+      .orElse(null);
   }
 
   public void updateArticle(String id, ArticleDo article) {
     BEANS.get(IArticleRepository.class).update(id, article);
+    BEANS.get(ArticleOptionService.class).updateArticleOptions(article.getArticleId(), article.getArticleOptions());
   }
 
   public int deleteArticle(String articleId) {
-    BEANS.get(IArticleOptionRepository.class).deleteArticleOptionsForArticle(articleId);
+    BEANS.get(ArticleOptionService.class).deleteArticleOptionsForArticle(articleId);
     return BEANS.get(IArticleRepository.class).delete(articleId);
   }
 }

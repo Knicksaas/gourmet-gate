@@ -1,4 +1,5 @@
 import $ from "jquery";
+import {ArticleOption} from "../index";
 
 export class Article {
   articleId: string;
@@ -10,6 +11,7 @@ export class Article {
   vatId: string;
   cartCount: number;
   enabled: boolean;
+  articleOptions: ArticleOption[]
 
   static ENTITY_TYPE = 'article';
 
@@ -23,6 +25,7 @@ export class Article {
     this.vatId = null;
     this.cartCount = 0;
     this.enabled = null;
+    this.articleOptions = [];
   }
 
   init(model: any) {

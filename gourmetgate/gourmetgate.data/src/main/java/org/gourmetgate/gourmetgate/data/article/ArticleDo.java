@@ -2,10 +2,14 @@ package org.gourmetgate.gourmetgate.data.article;
 
 import jakarta.annotation.Generated;
 import org.eclipse.scout.rt.dataobject.DoEntity;
+import org.eclipse.scout.rt.dataobject.DoList;
 import org.eclipse.scout.rt.dataobject.DoValue;
 import org.eclipse.scout.rt.dataobject.TypeName;
+import org.gourmetgate.gourmetgate.data.common.NotPersisted;
 
 import java.math.BigDecimal;
+import java.util.Collection;
+import java.util.List;
 
 @TypeName("gourmetgate.Article")
 public class ArticleDo extends DoEntity {
@@ -40,6 +44,11 @@ public class ArticleDo extends DoEntity {
 
   public DoValue<Boolean> enabled() {
     return doValue("enabled");
+  }
+
+  @NotPersisted
+  public DoList<ArticleOptionDo> articleOptions() {
+    return doList("articleOptions");
   }
 
   /* **************************************************************************
@@ -142,5 +151,25 @@ public class ArticleDo extends DoEntity {
   @Generated("DoConvenienceMethodsGenerator")
   public boolean isEnabled() {
     return nvl(getEnabled());
+  }
+
+  @NotPersisted
+  @Generated("DoConvenienceMethodsGenerator")
+  public ArticleDo withArticleOptions(Collection<? extends ArticleOptionDo> articleOptions) {
+    articleOptions().updateAll(articleOptions);
+    return this;
+  }
+
+  @NotPersisted
+  @Generated("DoConvenienceMethodsGenerator")
+  public ArticleDo withArticleOptions(ArticleOptionDo... articleOptions) {
+    articleOptions().updateAll(articleOptions);
+    return this;
+  }
+
+  @NotPersisted
+  @Generated("DoConvenienceMethodsGenerator")
+  public List<ArticleOptionDo> getArticleOptions() {
+    return articleOptions().get();
   }
 }

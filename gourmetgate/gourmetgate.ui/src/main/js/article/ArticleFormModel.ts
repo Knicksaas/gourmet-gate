@@ -1,20 +1,15 @@
 import {
   CancelMenu,
   CheckBoxField,
-  Column,
   Form,
   FormModel,
   GroupBox,
-  icons,
-  Menu,
   NumberField,
   OkMenu,
   SmartField,
-  StringField,
-  Table,
-  TableField
+  StringField
 } from '@eclipse-scout/core';
-import {ArticleGroupLookupCall, VatLookupCall} from '../index';
+import {ArticleGroupLookupCall, ArticleOptionTableField, VatLookupCall} from '../index';
 
 export default (): FormModel => ({
   id: 'ArticleForm',
@@ -86,52 +81,12 @@ export default (): FormModel => ({
         objectType: GroupBox,
         label: '${textKey:ArticleOptions}',
         labelVisible: true,
-        enabled: false,
-        fields: [{
-          id: 'ArticleOptionTableField',
-          objectType: TableField,
-          labelVisible: false,
-          table: {
-            id: 'ArticleOptionTable',
-            objectType: Table,
-            columns: [
-              {
-                id: 'ArticleOptionIdColumn',
-                objectType: Column,
-                text: '${textKey:Id}',
-                visible: false
-              },
-              {
-                id: 'ArticleIdColumn',
-                objectType: Column,
-                text: '${textKey:ArticleId}',
-                visible: false
-              },
-              {
-                id: 'ArticleOptionDescriptionColumn',
-                objectType: Column,
-                text: '${textKey:Name}',
-                editable: true
-              }
-            ],
-            menus: [
-              {
-                id: 'AddArticleOptionMenu',
-                objectType: Menu,
-                text: '${textKey:New}',
-                iconId: icons.PLUS,
-                menuTypes: [Table.MenuType.EmptySpace]
-              },
-              {
-                id: 'DeleteArticleOptionMenu',
-                objectType: Menu,
-                text: '${textKey:Delete}',
-                iconId: icons.REMOVE,
-                menuTypes: [Table.MenuType.SingleSelection]
-              }
-            ]
+        fields: [
+          {
+            id: 'ArticleOptionTableField',
+            objectType: ArticleOptionTableField
           }
-        }]
+        ]
       }
     ],
     menus: [
@@ -165,24 +120,7 @@ export type ArticleFormWidgetMap = {
   'EnabledField': CheckBoxField;
   'HasOptionsField': CheckBoxField;
   'ArticleOptionsConfigBox': GroupBox;
-  'ArticleOptionTableField': TableField;
-  'ArticleOptionTable': ArticleOptionTable;
+  'ArticleOptionTableField': ArticleOptionTableField;
   'OkMenu': OkMenu;
   'CancelMenu': CancelMenu;
-} & ArticleOptionTableWidgetMap;
-
-export class ArticleOptionTable extends Table {
-  declare widgetMap: ArticleOptionTableWidgetMap;
-  declare columnMap: ArticleOptionTableColumnMap;
-}
-
-export type ArticleOptionTableWidgetMap = {
-  'AddArticleOptionMenu': Menu;
-  'DeleteArticleOptionMenu': Menu;
-};
-
-export type ArticleOptionTableColumnMap = {
-  'ArticleOptionIdColumn': Column;
-  'ArticleIdColumn': Column;
-  'ArticleOptionDescriptionColumn': Column;
 };

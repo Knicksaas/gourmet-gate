@@ -23,6 +23,8 @@ export * from './article/ArticleTablePage';
 export * from './article/ArticleTablePageEntry';
 export * from './article/ArticleTablePageModel';
 export * from './article/ArticleTile';
+export * from './article/options/ArticleOption';
+export * from './article/options/ArticleOptionTableField';
 export * from './articlegroup/ArticleGroup';
 export * from './articlegroup/ArticleGroupRepository';
 export * from './articlegroup/ArticleGroupForm';
