@@ -19,6 +19,10 @@ public class ArticleGroupService implements IService {
     return BEANS.get(IArticleGroupRepository.class).all();
   }
 
+  public Stream<ArticleGroupDo> allEnabled() {
+    return BEANS.get(IArticleGroupRepository.class).getAllEnabled();
+  }
+
   public ArticleGroupDo createArticleGroup(ArticleGroupDo articleGroupDo) {
     return BEANS.get(IArticleGroupRepository.class).create(articleGroupDo);
   }

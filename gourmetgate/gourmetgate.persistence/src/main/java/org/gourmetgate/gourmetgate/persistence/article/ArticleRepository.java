@@ -8,6 +8,8 @@ import org.gourmetgate.gourmetgate.persistence.tables.Article;
 import org.gourmetgate.gourmetgate.persistence.tables.records.ArticleRecord;
 import org.jooq.Field;
 
+import java.util.stream.Stream;
+
 import static org.gourmetgate.gourmetgate.persistence.JooqSqlService.jooq;
 
 public class ArticleRepository extends AbstractRepository<Article, ArticleRecord, ArticleDo> implements IArticleRepository {
@@ -28,6 +30,15 @@ public class ArticleRepository extends AbstractRepository<Article, ArticleRecord
       .deleteFrom(getTable())
       .where(getTable().ARTICLE_GROUP_ID.eq(articleGroupId))
       .execute();
+  }
+
+  @Override
+  public Stream<ArticleDo> allEnabled() {
+    return jooq()
+      .selectFrom(getTable())
+      .where(getTable().ENABLED.eq(true))
+      .stream()
+      .map(this::fromRecordToDo);
   }
 
   @Override

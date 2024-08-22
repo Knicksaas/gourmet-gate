@@ -8,6 +8,10 @@ import org.gourmetgate.gourmetgate.persistence.tables.ArticleGroup;
 import org.gourmetgate.gourmetgate.persistence.tables.records.ArticleGroupRecord;
 import org.jooq.Field;
 
+import java.util.stream.Stream;
+
+import static org.gourmetgate.gourmetgate.persistence.JooqSqlService.jooq;
+
 public class ArticleGroupRepository extends AbstractRepository<ArticleGroup, ArticleGroupRecord, ArticleGroupDo> implements IArticleGroupRepository {
 
   @Override
@@ -23,6 +27,15 @@ public class ArticleGroupRepository extends AbstractRepository<ArticleGroup, Art
   @Override
   protected Field<String> getTextColumn() {
     return getTable().NAME;
+  }
+
+  @Override
+  public Stream<ArticleGroupDo> getAllEnabled() {
+    return jooq()
+      .selectFrom(getTable())
+      .where(getTable().ENABLED.eq(true))
+      .stream()
+      .map(this::fromRecordToDo);
   }
 
   @Override

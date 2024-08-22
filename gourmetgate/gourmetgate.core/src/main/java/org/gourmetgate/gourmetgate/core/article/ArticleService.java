@@ -17,6 +17,10 @@ public class ArticleService implements IService {
     return BEANS.get(IArticleRepository.class).all();
   }
 
+  public Stream<ArticleDo> allEnabled() {
+    return BEANS.get(IArticleRepository.class).allEnabled();
+  }
+
   public Stream<ArticleTablePageEntryDo> getArticelTablePageData() {
     return Stream.concat(
       BEANS.get(ArticleGroupService.class).all().map(this::translateArticleGroup),
