@@ -79,7 +79,7 @@ export class OrderPositionTile extends BeanTile<CartItem> {
     return scout.create(OrderPositionOptionForm, {
       parent: this,
       orderPositionId: this.bean.orderPositionId,
-      title: '${textKey:Options} ' + this.bean.articleName
+      title: '${textKey:Options_} ' + this.bean.articleName
     });
   }
 

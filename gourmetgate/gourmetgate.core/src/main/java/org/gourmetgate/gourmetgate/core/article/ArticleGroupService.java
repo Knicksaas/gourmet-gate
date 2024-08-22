@@ -6,7 +6,11 @@ import org.gourmetgate.gourmetgate.data.article.IArticleOptionRepository;
 import org.gourmetgate.gourmetgate.data.article.IArticleRepository;
 import org.gourmetgate.gourmetgate.data.articlegroup.ArticleGroupDo;
 import org.gourmetgate.gourmetgate.data.articlegroup.IArticleGroupRepository;
+import org.gourmetgate.gourmetgate.data.lookup.LookupRestrictionDo;
+import org.gourmetgate.gourmetgate.data.lookup.LookupResultDo;
+import org.gourmetgate.gourmetgate.data.lookup.LookupRowDo;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
 
@@ -32,5 +36,21 @@ public class ArticleGroupService implements IService {
     BEANS.get(IArticleOptionRepository.class).deleteArticleOptionsForArticleGroup(articleGroupId);
     BEANS.get(IArticleRepository.class).deleteByGroupId(articleGroupId);
     return BEANS.get(IArticleGroupRepository.class).delete(articleGroupId) == 1;
+  }
+
+  public LookupResultDo lookupArticleGroup(LookupRestrictionDo restriction) {
+    LookupResultDo result = BEANS.get(LookupResultDo.class);
+    List<LookupRowDo> lookupRows = BEANS.get(IArticleGroupRepository.class).search(restriction)
+      .map(this::fromDoToLookupRow)
+      .toList();
+    result.withRows(lookupRows);
+    return result;
+  }
+
+  protected LookupRowDo fromDoToLookupRow(ArticleGroupDo group) {
+    return BEANS.get(LookupRowDo.class)
+      .withId(group.getArticleGroupId())
+      .withText(group.getName())
+      .withActive(group.getEnabled());
   }
 }

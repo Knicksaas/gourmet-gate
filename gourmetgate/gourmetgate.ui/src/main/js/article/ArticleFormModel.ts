@@ -14,6 +14,7 @@ import {
   Table,
   TableField
 } from '@eclipse-scout/core';
+import {ArticleGroupLookupCall, VatLookupCall} from '../index';
 
 export default (): FormModel => ({
   id: 'ArticleForm',
@@ -43,9 +44,10 @@ export default (): FormModel => ({
           },
           {
             id: 'ArticleGroupField',
-            objectType: SmartField,
+            objectType: SmartField<string>,
             label: '${textKey:ArticleGroup}',
-            mandatory: true
+            mandatory: true,
+            lookupCall: ArticleGroupLookupCall
           },
           {
             id: 'UnitField',
@@ -62,9 +64,10 @@ export default (): FormModel => ({
           },
           {
             id: 'VatField',
-            objectType: SmartField,
+            objectType: SmartField<string>,
             label: '${textKey:Vat}',
-            mandatory: true
+            mandatory: true,
+            lookupCall: VatLookupCall
           },
           {
             id: 'EnabledField',
@@ -155,10 +158,10 @@ export type ArticleFormWidgetMap = {
   'ArticleConfigBox': GroupBox;
   'IdField': StringField;
   'NameField': StringField;
-  'ArticleGroupField': SmartField<any>;
+  'ArticleGroupField': SmartField<string>;
   'UnitField': StringField;
   'PriceField': NumberField;
-  'VatField': SmartField<any>;
+  'VatField': SmartField<string>;
   'EnabledField': CheckBoxField;
   'HasOptionsField': CheckBoxField;
   'ArticleOptionsConfigBox': GroupBox;

@@ -26,6 +26,7 @@ export * from './article/ArticleTile';
 export * from './articlegroup/ArticleGroup';
 export * from './articlegroup/ArticleGroupRepository';
 export * from './articlegroup/ArticleGroupForm';
+export * from './articlegroup/ArticleGroupLookupCall';
 export * from './cart/ArticleCartCount';
 export * from './cart/CartForm';
 export * from './cart/CartFormData';
@@ -45,6 +46,8 @@ export * from './order/options/OrderPositionOptionsListBox';
 export * from './order/options/OrderPositionOptionsLookupCall';
 export * from './payment/PaymentRepository';
 export * from './payment/Redirect';
+export * from './vat/Vat';
+export * from './vat/VatLookupCall';
 
 export default self;
 ObjectFactory.get().registerNamespace('gourmetgate', self);

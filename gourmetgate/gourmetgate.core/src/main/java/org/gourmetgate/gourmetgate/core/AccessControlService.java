@@ -11,6 +11,7 @@ import org.gourmetgate.gourmetgate.core.article.DeleteArticlePermission;
 import org.gourmetgate.gourmetgate.core.article.ReadArticlePermission;
 import org.gourmetgate.gourmetgate.core.article.UpdateArticlePermission;
 import org.gourmetgate.gourmetgate.core.desktop.EscapeShopViewPermission;
+import org.gourmetgate.gourmetgate.core.vat.ReadVatPermission;
 import org.gourmetgate.gourmetgate.data.user.IUserRepository;
 
 public class AccessControlService extends AbstractAccessControlService<String> {
@@ -40,5 +41,6 @@ public class AccessControlService extends AbstractAccessControlService<String> {
     permissions.add(new ReadArticlePermission(), PermissionLevel.ALL);
     permissions.add(new UpdateArticlePermission(), PermissionLevel.ALL);
     permissions.add(new DeleteArticlePermission(), PermissionLevel.ALL);
+    permissions.add(new ReadVatPermission(), PermissionLevel.ALL);
   }
 }

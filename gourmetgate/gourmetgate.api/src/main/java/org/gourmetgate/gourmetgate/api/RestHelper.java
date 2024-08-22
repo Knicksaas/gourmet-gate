@@ -5,8 +5,11 @@ import org.eclipse.scout.rt.dataobject.DoEntity;
 import org.eclipse.scout.rt.dataobject.IDataObjectMapper;
 import org.eclipse.scout.rt.platform.ApplicationScoped;
 import org.eclipse.scout.rt.platform.BEANS;
+import org.eclipse.scout.rt.platform.util.CollectionUtility;
 import org.gourmetgate.gourmetgate.data.common.GenericReponse;
 import org.gourmetgate.gourmetgate.data.orderposition.IOrderPositionRepository;
+
+import java.util.List;
 
 @ApplicationScoped
 public class RestHelper {
@@ -41,5 +44,17 @@ public class RestHelper {
   @SuppressWarnings("unchecked")
   public <T extends DoEntity> GenericReponse<T> createGenericResponse(Class<T> typeClass) {
     return BEANS.get(GenericReponse.class);
+  }
+
+  public <T extends DoEntity> Response createGenericJsonResponse(T dataObject) {
+    return createGenericJsonResponse(CollectionUtility.arrayList(dataObject));
+  }
+
+  @SuppressWarnings("unchecked")
+  public <T extends DoEntity> Response createGenericJsonResponse(List<T> dataObjects) {
+    Class<T> doClass = (Class<T>) dataObjects.stream().findAny().map(Object::getClass).orElseThrow();
+    GenericReponse<T> genericReponse = createGenericResponse(doClass);
+    genericReponse.withItems(dataObjects);
+    return createJsonResponse(genericReponse);
   }
 }

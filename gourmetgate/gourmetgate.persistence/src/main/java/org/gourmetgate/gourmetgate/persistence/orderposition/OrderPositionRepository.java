@@ -63,6 +63,7 @@ public class OrderPositionRepository extends AbstractRepository<OrderPosition, O
       .join(OrderPosition.ORDER_POSITION).on(Order.ORDER.ORDER_ID.eq(OrderPosition.ORDER_POSITION.ORDER_ID))
       .join(Article.ARTICLE).on(OrderPosition.ORDER_POSITION.ARTICLE_ID.eq(Article.ARTICLE.ARTICLE_ID))
       .where(Order.ORDER.ORDER_ID.eq(orderId))
+      .orderBy(Article.ARTICLE.ARTICLE_GROUP_ID)
       .stream()
       .map(rec -> BEANS.get(CartItemDo.class)
         .withOrderPositionId(rec.component1())

@@ -43,7 +43,7 @@ export default (): PageWithTableModel => ({
       {
         id: 'HasOptionsColumn',
         objectType: BooleanColumn,
-        text: '${textKey:HasOptions}',
+        text: '${textKey:Options}',
         width: 30
       },
       {
@@ -72,6 +72,7 @@ export default (): PageWithTableModel => ({
       {
         id: 'EditEntryMenu',
         objectType: Menu,
+        defaultMenu: true,
         text: '${textKey:Edit}',
         iconId: icons.PENCIL,
         menuTypes: [Table.MenuType.SingleSelection]

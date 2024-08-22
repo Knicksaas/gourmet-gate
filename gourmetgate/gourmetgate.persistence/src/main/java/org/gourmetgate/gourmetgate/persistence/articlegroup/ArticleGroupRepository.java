@@ -21,6 +21,11 @@ public class ArticleGroupRepository extends AbstractRepository<ArticleGroup, Art
   }
 
   @Override
+  protected Field<String> getTextColumn() {
+    return getTable().NAME;
+  }
+
+  @Override
   protected DoEntityBeanMappings<ArticleGroupDo, ArticleGroupRecord> mappings() {
     return new DoEntityBeanMappings<ArticleGroupDo, ArticleGroupRecord>()
       .with(ArticleGroupDo::articleGroupId, ArticleGroupRecord::getArticleGroupId, ArticleGroupRecord::setArticleGroupId)

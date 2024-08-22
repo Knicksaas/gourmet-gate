@@ -2,10 +2,16 @@ package org.gourmetgate.gourmetgate.persistence.common;
 
 import org.eclipse.scout.rt.dataobject.DoEntity;
 import org.eclipse.scout.rt.platform.BEANS;
+import org.eclipse.scout.rt.platform.exception.PlatformException;
 import org.eclipse.scout.rt.platform.util.TypeCastUtility;
+import org.gourmetgate.gourmetgate.data.lookup.LookupRestrictionDo;
+import org.jooq.Condition;
+import org.jooq.Field;
 import org.jooq.Table;
 import org.jooq.UpdatableRecord;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Stream;
@@ -97,6 +103,29 @@ public abstract class AbstractRepository<TABLE extends Table<RECORD>, RECORD ext
       .deleteFrom(getTable())
       .where(getIdColumn().eq(id))
       .execute();
+  }
+
+  public Stream<DO> search(LookupRestrictionDo restriction) {
+    return jooq()
+      .selectFrom(getTable())
+      .where(buildSearchCondition(restriction))
+      .stream()
+      .map(this::fromRecordToDo);
+  }
+
+  protected List<Condition> buildSearchCondition(LookupRestrictionDo restriction) {
+    List<Condition> conditions = new ArrayList<>();
+    if (restriction.ids().exists()) {
+      conditions.add(getIdColumn().in(restriction.getIds()));
+    }
+    if (restriction.text().exists()) {
+      conditions.add(getTextColumn().eq(restriction.getText()));
+    }
+    return conditions;
+  }
+
+  protected Field<String> getTextColumn() {
+    throw new PlatformException("Override getTextColumn in your repository to enable lookup by text");
   }
 
 

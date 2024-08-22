@@ -14,6 +14,8 @@ import org.gourmetgate.gourmetgate.core.article.ReadArticlePermission;
 import org.gourmetgate.gourmetgate.core.article.UpdateArticlePermission;
 import org.gourmetgate.gourmetgate.data.articlegroup.ArticleGroupDo;
 import org.gourmetgate.gourmetgate.data.common.GenericReponse;
+import org.gourmetgate.gourmetgate.data.lookup.LookupRestrictionDo;
+import org.gourmetgate.gourmetgate.data.lookup.LookupResultDo;
 
 @Path("article/group")
 public class ArticleGroupResource implements IRestResource {
@@ -79,4 +81,16 @@ public class ArticleGroupResource implements IRestResource {
     }
   }
 
+  @POST
+  @Path("lookup")
+  @Consumes(MediaType.APPLICATION_JSON)
+  @Produces(MediaType.APPLICATION_JSON)
+  public Response postLookupArticleGroup(LookupRestrictionDo restriction) {
+    if (!ACCESS.check(new ReadArticlePermission())) {
+      return m_restHelper.createForbiddenResponse();
+    }
+
+    LookupResultDo result = BEANS.get(ArticleGroupService.class).lookupArticleGroup(restriction);
+    return m_restHelper.createJsonResponse(result);
+  }
 }
