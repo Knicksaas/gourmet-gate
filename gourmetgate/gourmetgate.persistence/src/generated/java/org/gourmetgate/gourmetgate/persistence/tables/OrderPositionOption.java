@@ -4,18 +4,24 @@
 package org.gourmetgate.gourmetgate.persistence.tables;
 
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.gourmetgate.gourmetgate.persistence.Keys;
 import org.gourmetgate.gourmetgate.persistence.Schema;
 import org.gourmetgate.gourmetgate.persistence.tables.records.OrderPositionOptionRecord;
+import org.jooq.Field;
+import org.jooq.ForeignKey;
+import org.jooq.Name;
 import org.jooq.Record;
+import org.jooq.Row5;
 import org.jooq.Table;
-import org.jooq.*;
+import org.jooq.TableField;
+import org.jooq.TableOptions;
+import org.jooq.UniqueKey;
 import org.jooq.impl.DSL;
 import org.jooq.impl.SQLDataType;
 import org.jooq.impl.TableImpl;
-
-import java.util.Arrays;
-import java.util.List;
 
 
 /**
@@ -59,6 +65,11 @@ public class OrderPositionOption extends TableImpl<OrderPositionOptionRecord> {
    * The column <code>Schema.ORDER_POSITION_OPTION.SELECTED</code>.
    */
   public final TableField<OrderPositionOptionRecord, Boolean> SELECTED = createField(DSL.name("SELECTED"), SQLDataType.BOOLEAN.nullable(false).defaultValue(DSL.field("FALSE", SQLDataType.BOOLEAN)), this, "");
+
+  /**
+   * The column <code>Schema.ORDER_POSITION_OPTION.DESCRIPTION</code>.
+   */
+  public final TableField<OrderPositionOptionRecord, String> DESCRIPTION = createField(DSL.name("DESCRIPTION"), SQLDataType.VARCHAR(80), this, "");
 
   private OrderPositionOption(Name alias, Table<OrderPositionOptionRecord> aliased) {
     this(alias, aliased, null);
@@ -107,11 +118,10 @@ public class OrderPositionOption extends TableImpl<OrderPositionOptionRecord> {
 
   @Override
   public List<ForeignKey<OrderPositionOptionRecord, ?>> getReferences() {
-    return Arrays.asList(Keys.ORDER_POSITION_OPTION_ORDER_POSITION_ORDER_POSITION_ID_FK, Keys.ORDER_POSITION_OPTION_ARTICLE_OPTION_ARTICLE_OPTION_ID_FK);
+    return Arrays.asList(Keys.ORDER_POSITION_OPTION_ORDER_POSITION_ORDER_POSITION_ID_FK);
   }
 
   private transient OrderPosition _orderPosition;
-  private transient ArticleOption _articleOption;
 
   /**
    * Get the implicit join path to the <code>Schema.ORDER_POSITION</code>
@@ -122,17 +132,6 @@ public class OrderPositionOption extends TableImpl<OrderPositionOptionRecord> {
       _orderPosition = new OrderPosition(this, Keys.ORDER_POSITION_OPTION_ORDER_POSITION_ORDER_POSITION_ID_FK);
 
     return _orderPosition;
-  }
-
-  /**
-   * Get the implicit join path to the <code>Schema.ARTICLE_OPTION</code>
-   * table.
-   */
-  public ArticleOption articleOption() {
-    if (_articleOption == null)
-      _articleOption = new ArticleOption(this, Keys.ORDER_POSITION_OPTION_ARTICLE_OPTION_ARTICLE_OPTION_ID_FK);
-
-    return _articleOption;
   }
 
   @Override
@@ -162,11 +161,11 @@ public class OrderPositionOption extends TableImpl<OrderPositionOptionRecord> {
   }
 
   // -------------------------------------------------------------------------
-  // Row4 type methods
+  // Row5 type methods
   // -------------------------------------------------------------------------
 
   @Override
-  public Row4<String, String, String, Boolean> fieldsRow() {
-    return (Row4) super.fieldsRow();
+  public Row5<String, String, String, Boolean, String> fieldsRow() {
+    return (Row5) super.fieldsRow();
   }
 }

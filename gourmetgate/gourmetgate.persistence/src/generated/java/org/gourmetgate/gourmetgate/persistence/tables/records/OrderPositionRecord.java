@@ -4,14 +4,14 @@
 package org.gourmetgate.gourmetgate.persistence.tables.records;
 
 
+import java.math.BigDecimal;
+
 import org.gourmetgate.gourmetgate.persistence.tables.OrderPosition;
 import org.jooq.Field;
 import org.jooq.Record1;
 import org.jooq.Record5;
 import org.jooq.Row5;
 import org.jooq.impl.UpdatableRecordImpl;
-
-import java.math.BigDecimal;
 
 
 /**

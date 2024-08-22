@@ -67,7 +67,7 @@ public class OrderResource implements IRestResource {
 
     // Get entities
     GenericReponse<OrderPositionOptionDo> response = m_restHelper.createGenericResponse(OrderPositionOptionDo.class);
-    response.withItems(BEANS.get(OrderPositionService.class).getOrCreateOrderPositonOptions(orderPositionId).toList());
+    response.withItems(BEANS.get(OrderPositionService.class).getOrCreateOrderPositionOptions(orderPositionId).toList());
     return m_restHelper.createJsonResponse(response);
   }
 

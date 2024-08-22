@@ -2,7 +2,9 @@ package org.gourmetgate.gourmetgate.core.orderposition;
 
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.service.IService;
+import org.gourmetgate.gourmetgate.core.article.ArticleOptionService;
 import org.gourmetgate.gourmetgate.data.article.ArticleDo;
+import org.gourmetgate.gourmetgate.data.article.ArticleOptionDo;
 import org.gourmetgate.gourmetgate.data.article.IArticleRepository;
 import org.gourmetgate.gourmetgate.data.cart.ArticleCartCountDo;
 import org.gourmetgate.gourmetgate.data.orderposition.IOrderPositionOptionRepository;
@@ -29,13 +31,28 @@ public class OrderPositionService implements IService {
     return BEANS.get(IOrderPositionRepository.class).create(orderPosition);
   }
 
-  public Stream<OrderPositionOptionDo> getOrCreateOrderPositonOptions(String orderPositionId) {
+  public Stream<OrderPositionOptionDo> getOrCreateOrderPositionOptions(String orderPositionId) {
     List<OrderPositionOptionDo> options = BEANS.get(IOrderPositionOptionRepository.class).getOrderPositionsOptions(orderPositionId).toList();
     if (options.isEmpty()) {
-      return BEANS.get(IOrderPositionOptionRepository.class).createOrderPositionsFromOptions(orderPositionId);
+      return createOrderPositionOptions(orderPositionId);
     } else {
       return options.stream();
     }
+  }
+
+  protected Stream<OrderPositionOptionDo> createOrderPositionOptions(String orderPositionId) {
+    String articleId = BEANS.get(IOrderPositionRepository.class).getById(orderPositionId).orElseThrow().getArticleId();
+    return BEANS.get(ArticleOptionService.class).getArticleOptionForArticle(articleId)
+      .map(option -> fromArticleOptionToOrderOption(option, orderPositionId))
+      .map(option -> BEANS.get(IOrderPositionOptionRepository.class).create(option));
+  }
+
+  protected OrderPositionOptionDo fromArticleOptionToOrderOption(ArticleOptionDo articleOption, String orderPositionId) {
+    return BEANS.get(OrderPositionOptionDo.class)
+      .withOrderPositionId(orderPositionId)
+      .withArticleOptionId(articleOption.getArticleOptionId())
+      .withSelected(false)
+      .withDescription(articleOption.getDescription());
   }
 
   public Stream<ArticleCartCountDo> getCartCounts(String orderId) {

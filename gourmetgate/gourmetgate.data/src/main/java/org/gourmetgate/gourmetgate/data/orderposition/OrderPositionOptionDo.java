@@ -20,9 +20,6 @@ public class OrderPositionOptionDo extends DoEntity {
     return doValue("articleOptionId");
   }
 
-  /**
-   * No actual column in the database but nescessary for transfering it to the UI
-   */
   public DoValue<String> description() {
     return doValue("description");
   }
