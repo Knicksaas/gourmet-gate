@@ -1,4 +1,5 @@
 import {
+  InitModelOf,
   MessageBox,
   MessageBoxes,
   ObjectOrModel,
@@ -10,12 +11,15 @@ import {
   TableRowsSelectedEvent
 } from "@eclipse-scout/core";
 import {
+  Article,
   ArticleForm,
+  ArticleGroup,
   ArticleGroupForm,
   ArticleGroupRepository,
   ArticleRepository,
   ArticleTable,
-  ArticleTablePageEntry
+  ArticleTablePageEntry,
+  DataChangeEvent
 } from "../index";
 import ArticleTablePageModel from "./ArticleTablePageModel";
 
@@ -24,6 +28,12 @@ export class ArticleTablePage extends PageWithTable {
 
   protected override _jsonModel(): Record<string, any> {
     return ArticleTablePageModel();
+  }
+
+  protected override _init(model: InitModelOf<this>) {
+    super._init(model);
+
+    this.session.desktop.on('dataChange', this._onDataChange.bind(this));
   }
 
   protected override _initDetailTable(table: Table) {
@@ -97,7 +107,7 @@ export class ArticleTablePage extends PageWithTable {
           if (this._isArticleGroup(row)) {
             ArticleGroupRepository.get().deleteArticleGroup(row.id);
           } else {
-            // TBD
+            ArticleRepository.get().deleteArticle(row.id);
           }
         }
       });
@@ -121,5 +131,12 @@ export class ArticleTablePage extends PageWithTable {
 
   protected _isArticleGroup(row: TableRow): boolean {
     return !row.parentRow;
+  }
+
+  protected _onDataChange(event: DataChangeEvent) {
+    if (event.dataType === Article.ENTITY_TYPE
+      || event.dataType === ArticleGroup.ENTITY_TYPE) {
+      this.reloadPage();
+    }
   }
 }

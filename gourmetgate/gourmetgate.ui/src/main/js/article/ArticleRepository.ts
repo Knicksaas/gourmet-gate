@@ -25,8 +25,7 @@ export class ArticleRepository extends Repository {
       vatId: '74564073-3eaf-40bf-b60c-59cc1ecd1e67',
       enabled: true
     });
-    return this.postJson(this.targetUrl, article)
-      .then(data => this._first(data));
+    return this._create(article);
   }
 
   getArticle(articleId: string) {
@@ -35,7 +34,12 @@ export class ArticleRepository extends Repository {
   }
 
   updateArticle(articleId: string, data: Article): JQuery.Promise<void> {
-    return this.putJson(this.targetUrl + articleId, data);
+    return this._store(data, this.targetUrl + articleId)
+      .then(() => undefined)
+  }
+
+  deleteArticle(articleId: string): JQuery.Promise<void> {
+    return this._remove(articleId);
   }
 
   static get(): ArticleRepository {

@@ -16,8 +16,7 @@ export class ArticleGroupRepository extends Repository {
       name: 'New article group',
       enabled: true
     });
-    return this.postJson(this.targetUrl, articleGroup)
-      .then(data => this._first(data));
+    return this._create(articleGroup);
   }
 
   getArticleGroup(articleGroupId: string): JQuery.Promise<ArticleGroup> {
@@ -26,11 +25,12 @@ export class ArticleGroupRepository extends Repository {
   }
 
   saveArticleGroup(data: ArticleGroup): JQuery.Promise<void> {
-    return this.putJson(this.targetUrl + data.articleGroupId, data);
+    return this._store(data, this.targetUrl + data.articleGroupId)
+      .then(() => undefined)
   }
 
   deleteArticleGroup(articleGroupId: string): JQuery.Promise<void> {
-    return this.removeJson(this.targetUrl + articleGroupId);
+    return this._remove(articleGroupId);
   }
 
   static get(): ArticleGroupRepository {

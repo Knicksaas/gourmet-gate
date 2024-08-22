@@ -57,7 +57,7 @@ public class OrderPositionRepository extends AbstractRepository<OrderPosition, O
         OrderPosition.ORDER_POSITION.ORDER_POSITION_ID,
         Article.ARTICLE.NAME,
         Article.ARTICLE.UNIT,
-        Article.ARTICLE.PRICE,
+        OrderPosition.ORDER_POSITION.PRICE,
         Article.ARTICLE.HAS_OPTIONS)
       .from(Order.ORDER)
       .join(OrderPosition.ORDER_POSITION).on(Order.ORDER.ORDER_ID.eq(OrderPosition.ORDER_POSITION.ORDER_ID))
