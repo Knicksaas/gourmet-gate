@@ -20,7 +20,10 @@ export class ParameterRepository extends Repository {
   }
 
   setParameterValue<T>(parameterClass: typeof Parameter<T>, value: T): JQuery.Promise<void> {
-    return this.putJson(this.targetUrl + parameterClass.PARAMETER_NAME, value);
+    // @ts-expect-error
+    let data = scout.create(parameterClass);
+    data.setValue(value);
+    return this.putJson(this.targetUrl + parameterClass.PARAMETER_NAME, data);
   }
 
   static get(): ParameterRepository {

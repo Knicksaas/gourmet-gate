@@ -16,4 +16,16 @@ export class TableLayoutForm extends Form {
       .then(() => ParameterRepository.get().getParameterValue(TablesPerRowParameter)
         .then(value => this.widget('TablesPerRowCountField').setValue(value)))
   }
+
+
+  protected override _save(data: any): JQuery.Promise<void> {
+    return this._storeParams()
+  }
+
+  protected _storeParams(): JQuery.Promise<any> {
+    let rowCount = this.widget('TableRowCountField').value;
+    let tableCount = this.widget('TablesPerRowCountField').value;
+    return ParameterRepository.get().setParameterValue(TableRowCountParameter, rowCount)
+      .then(() => ParameterRepository.get().setParameterValue(TablesPerRowParameter, tableCount));
+  }
 }
