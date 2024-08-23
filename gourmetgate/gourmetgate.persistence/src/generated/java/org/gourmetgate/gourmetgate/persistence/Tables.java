@@ -4,17 +4,7 @@
 package org.gourmetgate.gourmetgate.persistence;
 
 
-import org.gourmetgate.gourmetgate.persistence.tables.Article;
-import org.gourmetgate.gourmetgate.persistence.tables.ArticleGroup;
-import org.gourmetgate.gourmetgate.persistence.tables.ArticleOption;
-import org.gourmetgate.gourmetgate.persistence.tables.Order;
-import org.gourmetgate.gourmetgate.persistence.tables.OrderPosition;
-import org.gourmetgate.gourmetgate.persistence.tables.OrderPositionOption;
-import org.gourmetgate.gourmetgate.persistence.tables.Payment;
-import org.gourmetgate.gourmetgate.persistence.tables.Person;
-import org.gourmetgate.gourmetgate.persistence.tables.Table;
-import org.gourmetgate.gourmetgate.persistence.tables.User;
-import org.gourmetgate.gourmetgate.persistence.tables.Vat;
+import org.gourmetgate.gourmetgate.persistence.tables.*;
 
 
 /**
@@ -52,6 +42,11 @@ public class Tables {
    * The table <code>Schema.ORDER_POSITION_OPTION</code>.
    */
   public static final OrderPositionOption ORDER_POSITION_OPTION = OrderPositionOption.ORDER_POSITION_OPTION;
+
+  /**
+   * The table <code>Schema.PARAMETER</code>.
+   */
+  public static final Parameter PARAMETER = Parameter.PARAMETER;
 
   /**
    * The table <code>Schema.PAYMENT</code>.

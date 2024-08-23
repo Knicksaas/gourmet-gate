@@ -46,11 +46,16 @@ export * from './order/options/OrderPositionOption';
 export * from './order/options/OrderPositionOptionForm';
 export * from './order/options/OrderPositionOptionsListBox';
 export * from './order/options/OrderPositionOptionsLookupCall';
+export * from './parameter/Parameter';
+export * from './parameter/ParameterRepository';
 export * from './payment/PaymentRepository';
 export * from './payment/Redirect';
 export * from './table/HallForm';
 export * from './table/Table';
 export * from './table/TableTile';
+export * from './table/TableRowCountParameter';
+export * from './table/TablesPerRowParameter';
+export * from './table/TableLayoutForm';
 export * from './vat/Vat';
 export * from './vat/VatLookupCall';
 

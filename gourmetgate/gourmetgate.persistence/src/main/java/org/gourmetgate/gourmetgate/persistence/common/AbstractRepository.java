@@ -77,20 +77,20 @@ public abstract class AbstractRepository<TABLE extends Table<RECORD>, RECORD ext
       .fetchStream();
   }
 
-  public void update(String id, DO entity) {
-    store(id, fromDoToRecord(entity));
+  public int update(String id, DO entity) {
+    return store(id, fromDoToRecord(entity));
   }
 
   @Override
-  public void store(String id, RECORD record) {
+  public int store(String id, RECORD record) {
     if (exists(id)) {
-      jooq()
+      return jooq()
         .update(getTable())
         .set(record)
         .where(getIdColumn().eq(id))
         .execute();
     } else {
-      jooq()
+      return jooq()
         .insertInto(getTable())
         .set(record)
         .execute();

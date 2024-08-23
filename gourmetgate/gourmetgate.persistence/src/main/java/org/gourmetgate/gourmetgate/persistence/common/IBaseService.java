@@ -51,7 +51,7 @@ public interface IBaseService<TABLE extends Table<RECORD>, RECORD extends Record
    * Persists the provided record based on the id specified. If no record with this id exists, a new record is created.
    * Otherwise, the existing record is updated.
    */
-  void store(String id, RECORD record);
+  int store(String id, RECORD record);
 
   /**
    * Deletes the record with the specified id

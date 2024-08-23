@@ -15,7 +15,7 @@ public interface ICrudRepository<ENTITY extends DoEntity> {
 
   Stream<ENTITY> all();
 
-  void update(String id, ENTITY entity);
+  int update(String id, ENTITY entity);
 
   int delete(String id);
 }

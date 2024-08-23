@@ -1,4 +1,14 @@
-import {Button, FormModel, GroupBox, IntegerField, TileField, TileGrid} from '@eclipse-scout/core';
+import {
+  FormModel,
+  GroupBox,
+  HorizontalGrid,
+  icons,
+  Menu,
+  StringField,
+  TileField,
+  TileGrid,
+  Widget
+} from '@eclipse-scout/core';
 import {TableTile} from '../index';
 
 export default (): FormModel => ({
@@ -10,28 +20,6 @@ export default (): FormModel => ({
     gridColumnCount: 1,
     fields: [
       {
-        id: 'ConfigurationBox',
-        objectType: GroupBox,
-        label: '${textKey:Configuration}',
-        fields: [
-          {
-            id: 'TablePerRowCountField',
-            objectType: IntegerField,
-            label: '${textKey:TablePerRowCount}'
-          },
-          {
-            id: 'TableCountField',
-            objectType: IntegerField,
-            label: '${textKey:TableCount}'
-          },
-          {
-            id: 'DownloadQrCodesButton',
-            objectType: Button,
-            processButton: false,
-            label: '${textKey:DownloadQrCodes}',
-          }]
-      },
-      {
         id: 'HallTileField',
         objectType: TileField,
         labelVisible: false,
@@ -41,11 +29,13 @@ export default (): FormModel => ({
           id: 'HallTileGrid',
           objectType: TileGrid,
           selectable: true,
+          logicalGrid: HorizontalGrid,
+          withPlaceholders: true,
           layoutConfig: {
             rowHeight: 60,
-            columnWidth: 60,
+            columnWidth: 10,
             hgap: 10,
-            vgap: 10
+            vgap: 10,
           },
           tiles: [
             {
@@ -58,19 +48,19 @@ export default (): FormModel => ({
             },
             {
               objectType: TableTile,
-              bean: {name: 'test2'}
+              bean: {name: 'test3'}
             },
             {
               objectType: TableTile,
-              bean: {name: 'test2'}
+              bean: {name: 'test4'}
             },
             {
               objectType: TableTile,
-              bean: {name: 'test2'}
+              bean: {name: 'test5'}
             },
             {
               objectType: TableTile,
-              bean: {name: 'test2'}
+              bean: {name: 'test6'}
             },
 
           ]
@@ -79,8 +69,40 @@ export default (): FormModel => ({
           fillVertical: true,
           h: 8
         }
+      },
+      {
+        id: 'EventLogBox',
+        objectType: GroupBox,
+        expandable: true,
+        expanded: true,
+        label: '${textKey:EventLog}',
+        fields: [{
+          id: 'EventLogTextField',
+          objectType: StringField,
+          disabledStyle: Widget.DisabledStyle.READ_ONLY,
+          enabled: false,
+          multilineText: true,
+          labelVisible: false,
+          statusVisible: false,
+          gridDataHints: {
+            h: 5
+          }
+        }]
       }
-    ]
+    ],
+    menus: [
+      {
+        id: 'EditTableLayoutMenu',
+        objectType: Menu,
+        text: '${textKey:EditTableLayout}',
+        iconId: icons.PENCIL
+      },
+      {
+        id: 'DownloadTableQrCodesMenu',
+        objectType: Menu,
+        text: '${textKey:DownloadQrCodes}',
+        iconId: icons.LONG_ARROW_DOWN
+      }]
   }
 })
 
@@ -90,10 +112,10 @@ export default (): FormModel => ({
 
 export type HallFormWidgetMap = {
   'MainBox': GroupBox;
-  'ConfigurationBox': GroupBox;
-  'TablePerRowCountField': IntegerField;
-  'TableCountField': IntegerField;
-  'DownloadQrCodesButton': Button;
   'HallTileField': TileField;
   'HallTileGrid': TileGrid;
+  'EventLogBox': GroupBox;
+  'EventLogTextField': StringField;
+  'EditTableLayoutMenu': Menu;
+  'DownloadTableQrCodesMenu': Menu;
 };

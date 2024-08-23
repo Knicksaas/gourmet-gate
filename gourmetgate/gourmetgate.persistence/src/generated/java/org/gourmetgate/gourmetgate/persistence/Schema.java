@@ -4,22 +4,12 @@
 package org.gourmetgate.gourmetgate.persistence;
 
 
-import java.util.Arrays;
-import java.util.List;
-
-import org.gourmetgate.gourmetgate.persistence.tables.Article;
-import org.gourmetgate.gourmetgate.persistence.tables.ArticleGroup;
-import org.gourmetgate.gourmetgate.persistence.tables.ArticleOption;
-import org.gourmetgate.gourmetgate.persistence.tables.Order;
-import org.gourmetgate.gourmetgate.persistence.tables.OrderPosition;
-import org.gourmetgate.gourmetgate.persistence.tables.OrderPositionOption;
-import org.gourmetgate.gourmetgate.persistence.tables.Payment;
-import org.gourmetgate.gourmetgate.persistence.tables.Person;
-import org.gourmetgate.gourmetgate.persistence.tables.Table;
-import org.gourmetgate.gourmetgate.persistence.tables.User;
-import org.gourmetgate.gourmetgate.persistence.tables.Vat;
+import org.gourmetgate.gourmetgate.persistence.tables.*;
 import org.jooq.Catalog;
 import org.jooq.impl.SchemaImpl;
+
+import java.util.Arrays;
+import java.util.List;
 
 
 /**
@@ -66,6 +56,11 @@ public class Schema extends SchemaImpl {
   public final OrderPositionOption ORDER_POSITION_OPTION = OrderPositionOption.ORDER_POSITION_OPTION;
 
   /**
+   * The table <code>Schema.PARAMETER</code>.
+   */
+  public final Parameter PARAMETER = Parameter.PARAMETER;
+
+  /**
    * The table <code>Schema.PAYMENT</code>.
    */
   public final Payment PAYMENT = Payment.PAYMENT;
@@ -90,8 +85,8 @@ public class Schema extends SchemaImpl {
    */
   public final Vat VAT = Vat.VAT;
 
-    /**
-     * No further instances allowed
+  /**
+   * No further instances allowed
      */
     private Schema() {
         super("Schema", null);
@@ -112,6 +107,7 @@ public class Schema extends SchemaImpl {
           Order.ORDER,
           OrderPosition.ORDER_POSITION,
           OrderPositionOption.ORDER_POSITION_OPTION,
+          Parameter.PARAMETER,
           Payment.PAYMENT,
           Person.PERSON,
           Table.TABLE,

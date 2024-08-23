@@ -71,12 +71,12 @@ public class OrderPositionOptionRecord extends UpdatableRecordImpl<OrderPosition
       set(3, value);
     }
 
-  /**
-   * Getter for <code>Schema.ORDER_POSITION_OPTION.SELECTED</code>.
-   */
-  public Boolean getSelected() {
-    return (Boolean) get(3);
-  }
+    /**
+     * Getter for <code>Schema.ORDER_POSITION_OPTION.SELECTED</code>.
+     */
+    public Boolean getSelected() {
+      return (Boolean) get(3);
+    }
 
   /**
    * Setter for <code>Schema.ORDER_POSITION_OPTION.DESCRIPTION</code>.

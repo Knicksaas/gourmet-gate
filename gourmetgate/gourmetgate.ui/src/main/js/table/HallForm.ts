@@ -1,5 +1,6 @@
-import {Form, InitModelOf, PropertyChangeEvent, WidgetModel} from "@eclipse-scout/core";
+import {Form, InitModelOf, scout, WidgetModel} from "@eclipse-scout/core";
 import HallFormModel, {HallFormWidgetMap} from './HallFormModel';
+import {TableLayoutForm} from "../index";
 
 export class HallForm extends Form {
   declare widgetMap: HallFormWidgetMap;
@@ -13,11 +14,12 @@ export class HallForm extends Form {
   protected override _init(model: InitModelOf<this>) {
     super._init(model);
 
-    this.widget('TablePerRowCountField').on('propertyChange:value', this._onTablesPerRowChange.bind(this));
+    this.widget('EditTableLayoutMenu').on('action', this._openTableLayoutForm.bind(this));
   }
 
-  protected _onTablesPerRowChange(event: PropertyChangeEvent<number>) {
-    let tileGrid = this.widget('HallTileGrid')
-    tileGrid.setGridColumnCount(tileGrid.tiles.length / event.newValue);
+  protected _openTableLayoutForm() {
+    scout.create(TableLayoutForm, {
+      parent: this
+    }).open();
   }
 }

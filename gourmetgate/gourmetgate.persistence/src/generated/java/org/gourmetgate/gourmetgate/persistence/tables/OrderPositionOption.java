@@ -4,24 +4,18 @@
 package org.gourmetgate.gourmetgate.persistence.tables;
 
 
-import java.util.Arrays;
-import java.util.List;
-
 import org.gourmetgate.gourmetgate.persistence.Keys;
 import org.gourmetgate.gourmetgate.persistence.Schema;
 import org.gourmetgate.gourmetgate.persistence.tables.records.OrderPositionOptionRecord;
-import org.jooq.Field;
-import org.jooq.ForeignKey;
-import org.jooq.Name;
 import org.jooq.Record;
-import org.jooq.Row5;
 import org.jooq.Table;
-import org.jooq.TableField;
-import org.jooq.TableOptions;
-import org.jooq.UniqueKey;
+import org.jooq.*;
 import org.jooq.impl.DSL;
 import org.jooq.impl.SQLDataType;
 import org.jooq.impl.TableImpl;
+
+import java.util.Arrays;
+import java.util.List;
 
 
 /**
@@ -59,7 +53,7 @@ public class OrderPositionOption extends TableImpl<OrderPositionOptionRecord> {
   /**
    * The column <code>Schema.ORDER_POSITION_OPTION.ARTICLE_OPTION_ID</code>.
    */
-  public final TableField<OrderPositionOptionRecord, String> ARTICLE_OPTION_ID = createField(DSL.name("ARTICLE_OPTION_ID"), SQLDataType.VARCHAR(36).nullable(false), this, "");
+  public final TableField<OrderPositionOptionRecord, String> ARTICLE_OPTION_ID = createField(DSL.name("ARTICLE_OPTION_ID"), SQLDataType.VARCHAR(36), this, "");
 
   /**
    * The column <code>Schema.ORDER_POSITION_OPTION.SELECTED</code>.
@@ -118,10 +112,11 @@ public class OrderPositionOption extends TableImpl<OrderPositionOptionRecord> {
 
   @Override
   public List<ForeignKey<OrderPositionOptionRecord, ?>> getReferences() {
-    return Arrays.asList(Keys.ORDER_POSITION_OPTION_ORDER_POSITION_ORDER_POSITION_ID_FK);
+    return Arrays.asList(Keys.ORDER_POSITION_OPTION_ORDER_POSITION_ORDER_POSITION_ID_FK, Keys.ORDER_POSITION_OPTION_ARTICLE_OPTION_ARTICLE_OPTION_ID_FK);
   }
 
   private transient OrderPosition _orderPosition;
+  private transient ArticleOption _articleOption;
 
   /**
    * Get the implicit join path to the <code>Schema.ORDER_POSITION</code>
@@ -132,6 +127,17 @@ public class OrderPositionOption extends TableImpl<OrderPositionOptionRecord> {
       _orderPosition = new OrderPosition(this, Keys.ORDER_POSITION_OPTION_ORDER_POSITION_ORDER_POSITION_ID_FK);
 
     return _orderPosition;
+  }
+
+  /**
+   * Get the implicit join path to the <code>Schema.ARTICLE_OPTION</code>
+   * table.
+   */
+  public ArticleOption articleOption() {
+    if (_articleOption == null)
+      _articleOption = new ArticleOption(this, Keys.ORDER_POSITION_OPTION_ARTICLE_OPTION_ARTICLE_OPTION_ID_FK);
+
+    return _articleOption;
   }
 
   @Override
