@@ -1,12 +1,12 @@
 import {
   FormModel,
   GroupBox,
-  HorizontalGrid,
   icons,
   Menu,
   StringField,
   TileField,
   TileGrid,
+  VerticalSmartGrid,
   Widget
 } from '@eclipse-scout/core';
 
@@ -28,7 +28,7 @@ export default (): FormModel => ({
           id: 'HallTileGrid',
           objectType: TileGrid,
           selectable: true,
-          logicalGrid: HorizontalGrid,
+          logicalGrid: VerticalSmartGrid,
           withPlaceholders: true,
           layoutConfig: {
             rowHeight: 60,

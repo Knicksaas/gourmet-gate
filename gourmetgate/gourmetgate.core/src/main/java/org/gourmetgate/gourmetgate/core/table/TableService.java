@@ -39,7 +39,7 @@ public class TableService implements IService {
   }
 
   protected void renameTables(long amount) {
-    AtomicLong counter = new AtomicLong();
+    AtomicLong counter = new AtomicLong(1);
     BEANS.get(ITableRepository.class).all(amount)
       .map(dataObject -> dataObject.withName(String.format("#%s", counter.getAndIncrement())))
       .forEach(dataObject -> BEANS.get(ITableRepository.class).update(dataObject.getTableId(), dataObject));
