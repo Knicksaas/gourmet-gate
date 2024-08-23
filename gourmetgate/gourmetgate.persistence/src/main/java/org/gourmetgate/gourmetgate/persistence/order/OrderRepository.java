@@ -53,6 +53,16 @@ public class OrderRepository extends AbstractRepository<Order, OrderRecord, Orde
   }
 
   @Override
+  public int getOpenOrdersForTable(String tableId) {
+    return (int) jooq()
+      .selectFrom(getTable())
+      .where(
+        getTable().EVT_PAY.isNull(),
+        getTable().TABLE_ID.eq(tableId))
+      .stream().count();
+  }
+
+  @Override
   protected DoEntityBeanMappings<OrderDo, OrderRecord> mappings() {
     return new DoEntityBeanMappings<OrderDo, OrderRecord>()
       .with(OrderDo::orderId, OrderRecord::getOrderId, OrderRecord::setOrderId)

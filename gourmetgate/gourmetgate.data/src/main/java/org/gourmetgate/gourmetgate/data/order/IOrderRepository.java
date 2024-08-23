@@ -7,4 +7,6 @@ public interface IOrderRepository extends ICrudRepository<OrderDo> {
   String getCurrentOrderIdForSession(String sessionId);
 
   String getOrCreateOrderForSession(String sessionId, String tableId);
+
+  int getOpenOrdersForTable(String tableId);
 }

@@ -1,6 +1,6 @@
 import {Form, WidgetModel} from "@eclipse-scout/core";
 import TableLayoutFormModel, {TableLayoutFormWidgetMap} from './TableLayoutFormModel';
-import {ParameterRepository, TableRowCountParameter, TablesPerRowParameter} from "../index";
+import {ParameterRepository, TableRepository, TableRowCountParameter, TablesPerRowParameter} from "../index";
 
 export class TableLayoutForm extends Form {
   declare widgetMap: TableLayoutFormWidgetMap;
@@ -26,6 +26,7 @@ export class TableLayoutForm extends Form {
     let rowCount = this.widget('TableRowCountField').value;
     let tableCount = this.widget('TablesPerRowCountField').value;
     return ParameterRepository.get().setParameterValue(TableRowCountParameter, rowCount)
-      .then(() => ParameterRepository.get().setParameterValue(TablesPerRowParameter, tableCount));
+      .then(() => ParameterRepository.get().setParameterValue(TablesPerRowParameter, tableCount)
+        .then(() => TableRepository.get().regenerateTables()));
   }
 }

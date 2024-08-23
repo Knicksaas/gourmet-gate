@@ -8,6 +8,10 @@ import org.gourmetgate.gourmetgate.persistence.tables.Table;
 import org.gourmetgate.gourmetgate.persistence.tables.records.TableRecord;
 import org.jooq.Field;
 
+import java.util.stream.Stream;
+
+import static org.gourmetgate.gourmetgate.persistence.JooqSqlService.jooq;
+
 public class TableRepository extends AbstractRepository<Table, TableRecord, TableDo> implements ITableRepository {
 
   @Override
@@ -18,6 +22,20 @@ public class TableRepository extends AbstractRepository<Table, TableRecord, Tabl
   @Override
   public Field<String> getIdColumn() {
     return Table.TABLE.TABLE_ID;
+  }
+
+  @Override
+  public long getTableCount() {
+    return all().count();
+  }
+
+  @Override
+  public Stream<TableDo> all(long limit) {
+    return jooq()
+      .selectFrom(getTable())
+      .maxRows(((int) limit))
+      .stream()
+      .map(this::fromRecordToDo);
   }
 
   @Override

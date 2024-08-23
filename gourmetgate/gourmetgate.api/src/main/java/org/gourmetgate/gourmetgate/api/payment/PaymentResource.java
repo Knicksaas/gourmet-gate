@@ -8,7 +8,7 @@ import jakarta.ws.rs.core.Response;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.rest.IRestResource;
 import org.gourmetgate.gourmetgate.api.RestHelper;
-import org.gourmetgate.gourmetgate.core.order.OrderFormService;
+import org.gourmetgate.gourmetgate.core.order.OrderService;
 import org.gourmetgate.gourmetgate.core.payment.PaymentService;
 import org.gourmetgate.gourmetgate.data.common.GenericReponse;
 import org.gourmetgate.gourmetgate.data.payment.RedirectDo;
@@ -25,7 +25,7 @@ public class PaymentResource implements IRestResource {
   @POST
   @Path("/")
   public Response createPayment(@CookieParam("JSESSIONID") Cookie cookie) {
-    String orderId = BEANS.get(OrderFormService.class).getOrderIdForSession(cookie.getValue());
+    String orderId = BEANS.get(OrderService.class).getOrderIdForSession(cookie.getValue());
     if (orderId == null) {
       return m_restHelper.createBadRequestResponse("No order for current session");
     }

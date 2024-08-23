@@ -12,7 +12,7 @@ import org.gourmetgate.gourmetgate.data.order.OrderFormDataDo;
 
 import java.util.List;
 
-public class OrderFormService implements IService {
+public class OrderService implements IService {
 
   public OrderFormDataDo getOrderFormData(String orderId) {
     OrderFormDataDo formData = BEANS.get(OrderFormDataDo.class);
@@ -35,5 +35,9 @@ public class OrderFormService implements IService {
 
   public String getOrCreateOrderForSession(String sessionId, String tableId) {
     return BEANS.get(IOrderRepository.class).getOrCreateOrderForSession(sessionId, tableId);
+  }
+
+  public int getOpenOrderCountForTable(String tableId) {
+    return BEANS.get(IOrderRepository.class).getOpenOrdersForTable(tableId);
   }
 }

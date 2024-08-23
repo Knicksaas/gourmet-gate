@@ -9,7 +9,6 @@ import {
   TileGrid,
   Widget
 } from '@eclipse-scout/core';
-import {TableTile} from '../index';
 
 export default (): FormModel => ({
   id: 'HallForm',
@@ -37,33 +36,6 @@ export default (): FormModel => ({
             hgap: 10,
             vgap: 10,
           },
-          tiles: [
-            {
-              objectType: TableTile,
-              bean: {name: 'test'}
-            },
-            {
-              objectType: TableTile,
-              bean: {name: 'test2'}
-            },
-            {
-              objectType: TableTile,
-              bean: {name: 'test3'}
-            },
-            {
-              objectType: TableTile,
-              bean: {name: 'test4'}
-            },
-            {
-              objectType: TableTile,
-              bean: {name: 'test5'}
-            },
-            {
-              objectType: TableTile,
-              bean: {name: 'test6'}
-            },
-
-          ]
         },
         gridDataHints: {
           fillVertical: true,

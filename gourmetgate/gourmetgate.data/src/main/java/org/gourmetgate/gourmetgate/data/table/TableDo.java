@@ -4,6 +4,7 @@ import jakarta.annotation.Generated;
 import org.eclipse.scout.rt.dataobject.DoEntity;
 import org.eclipse.scout.rt.dataobject.DoValue;
 import org.gourmetgate.gourmetgate.data.common.EnumUtility;
+import org.gourmetgate.gourmetgate.data.common.NotPersisted;
 
 public class TableDo extends DoEntity {
 
@@ -18,6 +19,11 @@ public class TableDo extends DoEntity {
     public DoValue<String> status() {
         return doValue("status");
     }
+
+  @NotPersisted
+  public DoValue<Integer> openOrders() {
+    return doValue("openOrders");
+  }
 
   public TableDo withStatusEnum(TableStatus status) {
     return withStatus(status.name());
@@ -63,4 +69,17 @@ public class TableDo extends DoEntity {
     public String getStatus() {
         return status().get();
     }
+
+  @NotPersisted
+  @Generated("DoConvenienceMethodsGenerator")
+  public TableDo withOpenOrders(Integer openOrders) {
+    openOrders().set(openOrders);
+    return this;
+  }
+
+  @NotPersisted
+  @Generated("DoConvenienceMethodsGenerator")
+  public Integer getOpenOrders() {
+    return openOrders().get();
+  }
 }

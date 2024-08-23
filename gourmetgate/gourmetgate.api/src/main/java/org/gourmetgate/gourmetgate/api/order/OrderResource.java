@@ -7,7 +7,7 @@ import jakarta.ws.rs.core.Response;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.rest.IRestResource;
 import org.gourmetgate.gourmetgate.api.RestHelper;
-import org.gourmetgate.gourmetgate.core.order.OrderFormService;
+import org.gourmetgate.gourmetgate.core.order.OrderService;
 import org.gourmetgate.gourmetgate.core.orderposition.OrderPositionService;
 import org.gourmetgate.gourmetgate.data.common.GenericReponse;
 import org.gourmetgate.gourmetgate.data.orderposition.OrderPositionDo;
@@ -26,7 +26,7 @@ public class OrderResource implements IRestResource {
   @Path("position/{id}")
   @Produces(MediaType.APPLICATION_JSON)
   public Response createOrderPosition(@CookieParam("JSESSIONID") Cookie cookie, @PathParam("id") String articleId) {
-    String orderId = BEANS.get(OrderFormService.class).getOrderIdForSession(cookie.getValue());
+    String orderId = BEANS.get(OrderService.class).getOrderIdForSession(cookie.getValue());
     if (orderId == null) {
       return m_restHelper.createBadRequestResponse("No order for current session");
     }
@@ -41,7 +41,7 @@ public class OrderResource implements IRestResource {
   @Consumes(MediaType.APPLICATION_JSON)
   public Response deleteOrderPosition(@CookieParam("JSESSIONID") Cookie cookie, @PathParam("id") String orderPositionId) {
     // Check order
-    String orderId = BEANS.get(OrderFormService.class).getOrderIdForSession(cookie.getValue());
+    String orderId = BEANS.get(OrderService.class).getOrderIdForSession(cookie.getValue());
     if (orderId == null) {
       return m_restHelper.createBadRequestResponse("No order for current session");
     }
