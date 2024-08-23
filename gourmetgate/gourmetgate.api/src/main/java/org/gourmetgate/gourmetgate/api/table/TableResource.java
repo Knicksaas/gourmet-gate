@@ -34,7 +34,7 @@ public class TableResource implements IRestResource {
     }
 
     BEANS.get(TableService.class).regenerateTableLayout();
-    return m_restHelper.createOkResponse();
+    return m_restHelper.createGenericJsonResponse(BEANS.get(TableService.class).getHallFormData());
   }
 
   @GET

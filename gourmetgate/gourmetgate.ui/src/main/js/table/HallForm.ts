@@ -1,6 +1,6 @@
 import {Form, InitModelOf, scout, WidgetModel} from "@eclipse-scout/core";
 import HallFormModel, {HallFormWidgetMap} from './HallFormModel';
-import {HallFormData, Table, TableLayoutForm, TableRepository, TableTile} from "../index";
+import {DataChangeEvent, HallFormData, Table, TableLayoutForm, TableRepository, TableTile} from "../index";
 
 export class HallForm extends Form {
   declare widgetMap: HallFormWidgetMap;
@@ -15,6 +15,7 @@ export class HallForm extends Form {
   protected override _init(model: InitModelOf<this>) {
     super._init(model);
 
+    this.session.desktop.on('dataChange', this._onDataChange.bind(this));
     this.widget('EditTableLayoutMenu').on('action', this._openTableLayoutForm.bind(this));
   }
 
@@ -25,6 +26,7 @@ export class HallForm extends Form {
 
   override importData() {
     let tiles = this.data.tables.map(table => this._createTableTile(table));
+    this.widget('HallTileGrid').deleteAllTiles();
     this.widget('HallTileGrid').insertTiles(tiles);
     this.widget('HallTileGrid').setGridColumnCount(this.data.tableRowCount);
   }
@@ -40,5 +42,12 @@ export class HallForm extends Form {
     scout.create(TableLayoutForm, {
       parent: this
     }).open();
+  }
+
+  protected _onDataChange(event: DataChangeEvent) {
+    if (event.dataType === HallFormData.ENTITY_TYPE) {
+      this.data = event.data;
+      this.importData();
+    }
   }
 }

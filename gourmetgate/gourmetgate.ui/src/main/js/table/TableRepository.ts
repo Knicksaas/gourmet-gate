@@ -12,8 +12,10 @@ export class TableRepository extends Repository {
     this.targetUrl = `${App.get().apiUrl}table/`;
   }
 
-  regenerateTables(): JQuery.Promise<void> {
-    return this.postJson(this.targetUrl + 'regenerate');
+  regenerateTables(): JQuery.Promise<HallFormData> {
+    return this.postJson(this.targetUrl + 'regenerate')
+      .then(data => this._first(data) as HallFormData)
+      .then(data => this._triggerDataChange(data, HallFormData.ENTITY_TYPE));
   }
 
   getHallFormData(): JQuery.Promise<HallFormData> {
