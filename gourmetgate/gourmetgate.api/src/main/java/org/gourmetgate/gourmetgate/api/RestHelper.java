@@ -23,8 +23,12 @@ public class RestHelper {
     return Response.ok().build();
   }
 
+  public Response createOkResponse(Object entity) {
+    return Response.ok(entity).build();
+  }
+
   public Response createJsonResponse(DoEntity dataObject) {
-    return Response.ok(BEANS.get(IDataObjectMapper.class).writeValue(dataObject)).build();
+    return createOkResponse(BEANS.get(IDataObjectMapper.class).writeValue(dataObject));
   }
 
   public Response createNotFoundResponse() {
