@@ -1,6 +1,6 @@
 import {Article, Repository} from "../index";
 import {App} from "../App";
-import {scout} from "@eclipse-scout/core";
+import {access, scout} from "@eclipse-scout/core";
 import {OrderFormData} from "./OrderFormData";
 
 let repository: OrderFormRepository;
@@ -16,7 +16,13 @@ export class OrderFormRepository extends Repository {
 
   formData(): JQuery.Promise<OrderFormData> {
     return this.getJson(this.targetUrl + 'formData')
-      .then(data => this._first(data) as OrderFormData);
+      .then(data => {
+        if (data.redirectUrl && !access.quickCheck('EscapeShopViewPermission')) {
+          window.location = data.redirectUrl
+        }
+        return data;
+      }).then(data => this._first(data) as OrderFormData)
+
   }
 
   static get(): OrderFormRepository {

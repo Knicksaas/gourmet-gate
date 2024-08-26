@@ -1,5 +1,6 @@
 package org.gourmetgate.gourmetgate.api.order;
 
+import jakarta.annotation.PostConstruct;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.Cookie;
 import jakarta.ws.rs.core.MediaType;
@@ -9,6 +10,7 @@ import org.eclipse.scout.rt.rest.IRestResource;
 import org.gourmetgate.gourmetgate.api.RestHelper;
 import org.gourmetgate.gourmetgate.core.order.OrderService;
 import org.gourmetgate.gourmetgate.core.orderposition.OrderPositionService;
+import org.gourmetgate.gourmetgate.core.table.TableService;
 import org.gourmetgate.gourmetgate.data.common.GenericReponse;
 import org.gourmetgate.gourmetgate.data.orderposition.OrderPositionDo;
 import org.gourmetgate.gourmetgate.data.orderposition.OrderPositionOptionDo;
@@ -18,9 +20,22 @@ public class OrderResource implements IRestResource {
 
   RestHelper m_restHelper;
 
-  public OrderResource() {
+  @PostConstruct
+  public void init() {
     m_restHelper = BEANS.get(RestHelper.class);
   }
+
+  @GET
+  @Path("/")
+  public Response initiateOrderByLink(@QueryParam("tableId") String tableId, @CookieParam("JSESSIONID") Cookie cookie) {
+    if (!BEANS.get(TableService.class).tableExists(tableId)) {
+      return m_restHelper.createNotFoundResponse();
+    }
+
+    BEANS.get(OrderService.class).getOrCreateOrderForSession(cookie.getValue(), tableId);
+    return m_restHelper.createRedirectResponse("/");
+  }
+
 
   @POST
   @Path("position/{id}")

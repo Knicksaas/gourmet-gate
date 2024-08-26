@@ -1,13 +1,19 @@
 package org.gourmetgate.gourmetgate.core.table;
 
+import org.apache.pdfbox.pdmodel.PDDocument;
 import org.eclipse.scout.rt.platform.BEANS;
+import org.eclipse.scout.rt.platform.exception.DefaultRuntimeExceptionTranslator;
 import org.eclipse.scout.rt.platform.service.IService;
 import org.gourmetgate.gourmetgate.core.order.OrderService;
+import org.gourmetgate.gourmetgate.core.qrcode.PdfService;
+import org.gourmetgate.gourmetgate.core.qrcode.QrCodeService;
 import org.gourmetgate.gourmetgate.data.table.HallFormDataDo;
 import org.gourmetgate.gourmetgate.data.table.ITableRepository;
 import org.gourmetgate.gourmetgate.data.table.TableDo;
 import org.gourmetgate.gourmetgate.data.table.TableStatus;
 
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.LongStream;
 import java.util.stream.Stream;
@@ -56,5 +62,25 @@ public class TableService implements IService {
       .withTables(tableStream.toList())
       .withTableRowCount(BEANS.get(TableRowCountParameter.class).getValue())
       .withTablesPerRowCount(BEANS.get(TablesPerRowParameter.class).getValue());
+  }
+
+  public PDDocument getTableQrCodesAsPdf() {
+    BufferedImage[] tableQrCodes = BEANS.get(ITableRepository.class).all()
+      .map(tableDo -> BEANS.get(QrCodeService.class).generateQrCode(buildTableLink(tableDo.getTableId()), tableDo.getName()))
+      .toArray(BufferedImage[]::new);
+    try {
+      return BEANS.get(PdfService.class).createPdfWithImages(tableQrCodes);
+    } catch (IOException e) {
+      throw BEANS.get(DefaultRuntimeExceptionTranslator.class).translate(e);
+    }
+  }
+
+  protected String buildTableLink(String tableId) {
+    String baseUrl = "http://HACKBOOK:8084/";
+    return baseUrl + "api/order/?tableId=" + tableId;
+  }
+
+  public boolean tableExists(String tableId) {
+    return BEANS.get(ITableRepository.class).getById(tableId).isPresent();
   }
 }

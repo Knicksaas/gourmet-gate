@@ -17,6 +17,7 @@ export class HallForm extends Form {
 
     this.session.desktop.on('dataChange', this._onDataChange.bind(this));
     this.widget('EditTableLayoutMenu').on('action', this._openTableLayoutForm.bind(this));
+    this.widget('DownloadTableQrCodesMenu').on('action', this._onDownloadQrCodes.bind(this));
   }
 
 
@@ -42,6 +43,10 @@ export class HallForm extends Form {
     scout.create(TableLayoutForm, {
       parent: this
     }).open();
+  }
+
+  protected _onDownloadQrCodes() {
+    window.open('api/table/qrcodes/', '_blank').focus();
   }
 
   protected _onDataChange(event: DataChangeEvent) {

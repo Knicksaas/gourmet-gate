@@ -6,6 +6,7 @@ import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.exception.DefaultRuntimeExceptionTranslator;
 import org.eclipse.scout.rt.platform.service.IService;
@@ -21,6 +22,7 @@ public class QrCodeService implements IService {
     try {
       Map<EncodeHintType, Object> hints = new HashMap<>();
       hints.put(EncodeHintType.MARGIN, getConfiguredQrCodeMargin());
+      hints.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.H);
 
       BitMatrix matrix = new MultiFormatWriter()
         .encode(url, BarcodeFormat.QR_CODE, getConfiguredQrCodeSize(), getConfiguredQrCodeSize(), hints);
@@ -54,7 +56,7 @@ public class QrCodeService implements IService {
   }
 
   protected int getConfiguredQrCodeMargin() {
-    return 4;
+    return 9;
   }
 
 }

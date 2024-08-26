@@ -5,10 +5,13 @@ import org.eclipse.scout.rt.dataobject.DoEntity;
 import org.eclipse.scout.rt.dataobject.IDataObjectMapper;
 import org.eclipse.scout.rt.platform.ApplicationScoped;
 import org.eclipse.scout.rt.platform.BEANS;
+import org.eclipse.scout.rt.platform.exception.DefaultRuntimeExceptionTranslator;
 import org.eclipse.scout.rt.platform.util.CollectionUtility;
 import org.gourmetgate.gourmetgate.data.common.GenericReponse;
 import org.gourmetgate.gourmetgate.data.orderposition.IOrderPositionRepository;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
 
 @ApplicationScoped
@@ -60,5 +63,13 @@ public class RestHelper {
     GenericReponse<T> genericReponse = createGenericResponse(doClass);
     genericReponse.withItems(dataObjects);
     return createJsonResponse(genericReponse);
+  }
+
+  public Response createRedirectResponse(String url) {
+    try {
+      return Response.status(Response.Status.MOVED_PERMANENTLY).location(new URI(url)).build();
+    } catch (URISyntaxException e) {
+      throw BEANS.get(DefaultRuntimeExceptionTranslator.class).translate(e);
+    }
   }
 }
