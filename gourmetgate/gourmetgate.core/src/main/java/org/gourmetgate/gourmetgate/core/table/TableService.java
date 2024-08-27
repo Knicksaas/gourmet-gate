@@ -83,4 +83,10 @@ public class TableService implements IService {
   public boolean tableExists(String tableId) {
     return BEANS.get(ITableRepository.class).getById(tableId).isPresent();
   }
+
+  public String getTableName(String tableId) {
+    return BEANS.get(ITableRepository.class).getById(tableId)
+      .map(TableDo::getName)
+      .orElse(null);
+  }
 }

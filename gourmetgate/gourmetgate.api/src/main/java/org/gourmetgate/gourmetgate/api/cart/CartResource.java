@@ -1,28 +1,39 @@
 package org.gourmetgate.gourmetgate.api.cart;
 
+import jakarta.annotation.PostConstruct;
 import jakarta.ws.rs.CookieParam;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.Cookie;
 import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.rest.IRestResource;
 import org.gourmetgate.gourmetgate.api.RestHelper;
 import org.gourmetgate.gourmetgate.core.cart.CartFormService;
 import org.gourmetgate.gourmetgate.core.order.OrderService;
-import org.gourmetgate.gourmetgate.data.cart.CartFormDataDo;
-import org.gourmetgate.gourmetgate.data.common.GenericReponse;
+import org.gourmetgate.gourmetgate.data.payment.RedirectDo;
 
 @Path("cart")
 public class CartResource implements IRestResource {
 
+  private RestHelper m_restHelper;
+
+  @PostConstruct
+  public void init() {
+    m_restHelper = BEANS.get(RestHelper.class);
+  }
+
   @GET
   @Path("formData")
   @Produces(MediaType.APPLICATION_JSON)
-  public GenericReponse<CartFormDataDo> getFormData(@CookieParam("JSESSIONID") Cookie cookie) {
-    String orderId = BEANS.get(OrderService.class).getOrCreateOrderForSession(cookie.getValue(), "eaec9de9-3bc5-4981-bb0a-e02aa4c88b31");
-    return BEANS.get(RestHelper.class).createGenericResponse(CartFormDataDo.class)
-      .withItem(BEANS.get(CartFormService.class).getCartFormData(orderId));
+  public Response getFormData(@CookieParam("JSESSIONID") Cookie cookie) {
+    String orderId = BEANS.get(OrderService.class).getOrderIdForSession(cookie.getValue());
+    if (orderId == null) {
+      RedirectDo redirect = BEANS.get(RedirectDo.class).withRedirectUrl("user-guide.html");
+      return m_restHelper.createJsonResponse(redirect);
+    }
+    return m_restHelper.createGenericJsonResponse(BEANS.get(CartFormService.class).getCartFormData(orderId));
   }
 }

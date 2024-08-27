@@ -39,11 +39,7 @@ public class OrderRepository extends AbstractRepository<Order, OrderRecord, Orde
   }
 
   @Override
-  public String getOrCreateOrderForSession(String sessionId, String tableId) {
-    String currentOrder = getCurrentOrderIdForSession(sessionId);
-    if (currentOrder != null) {
-      return currentOrder;
-    }
+  public String createOrder(String sessionId, String tableId) {
     OrderDo orderDo = BEANS.get(OrderDo.class)
       .withTableId(tableId)
       .withSessionId(sessionId)

@@ -17,7 +17,7 @@ import org.gourmetgate.gourmetgate.data.payment.RedirectDo;
 @Path("orderForm")
 public class OrderFormResource implements IRestResource {
 
-  RestHelper m_restHelper;
+  private RestHelper m_restHelper;
 
   @PostConstruct
   public void init() {

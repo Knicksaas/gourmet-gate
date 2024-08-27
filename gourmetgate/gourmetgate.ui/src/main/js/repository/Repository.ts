@@ -1,4 +1,4 @@
-import {ajax, dates, ObjectWithType, scout} from '@eclipse-scout/core';
+import {access, ajax, dates, ObjectWithType, scout} from '@eclipse-scout/core';
 import $ from 'jquery';
 
 export abstract class Repository implements ObjectWithType {
@@ -86,6 +86,16 @@ export abstract class Repository implements ObjectWithType {
 
   protected _first<T>(items: T[]): T {
     return items[0];
+  }
+
+  protected _handlePotentialRedirect<T>(data: any): T[] {
+    if (!data.redirectUrl) {
+      return data;
+    }
+    if (access.quickCheck('EscapeShopViewPermission')) {
+      return [];
+    }
+    window.location = data.redirectUrl;
   }
 
   protected _triggerDataChange<TData>(data?: TData, entityType?: string): TData {

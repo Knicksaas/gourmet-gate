@@ -1,4 +1,4 @@
-package org.gourmetgate.gourmetgate.core.eventlog;
+package org.gourmetgate.gourmetgate.data.eventlog;
 
 import jakarta.annotation.PostConstruct;
 import org.eclipse.scout.rt.platform.BEANS;
@@ -11,17 +11,24 @@ import java.util.Optional;
 public class EventLogger {
 
   private EntityType m_entityType;
-  private EventLoggerService m_service;
+  private IEventLoggerService m_service;
 
   @PostConstruct
   public void init() {
-    m_service = BEANS.get(EventLoggerService.class);
+    m_service = BEANS.get(IEventLoggerService.class);
   }
 
-  void logCreatedEvent(String entityId, String displayText) {
+  public void logCreatedEvent(String entityId, String displayText) {
     m_service.createLogEntry(getEntityType(), entityId, EventLogType.CREATED, displayText);
   }
 
+  public void logUpdatedEvent(String entityId, String displayText) {
+    m_service.createLogEntry(getEntityType(), entityId, EventLogType.UPDATED, displayText);
+  }
+
+  public void logDeletedEvent(String entityId, String displayText) {
+    m_service.createLogEntry(getEntityType(), entityId, EventLogType.DELETED, displayText);
+  }
 
   public EventLogger withEntityType(EntityType type) {
     m_entityType = type;

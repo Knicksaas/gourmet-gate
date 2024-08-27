@@ -13,7 +13,8 @@ export class CartRepository extends Repository {
 
   getFormData(): JQuery.Promise<CartFormData> {
     return this.getJson(this.targetUrl + 'formData')
-      .then(data => this._first(data));
+      .then(data => this._handlePotentialRedirect(data))
+      .then(data => this._first(data) as CartFormData);
   }
 
   static get(): CartRepository {
