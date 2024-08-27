@@ -29,6 +29,11 @@ public class Tables {
   public static final ArticleOption ARTICLE_OPTION = ArticleOption.ARTICLE_OPTION;
 
   /**
+   * The table <code>Schema.EVENT_LOG</code>.
+   */
+  public static final EventLog EVENT_LOG = EventLog.EVENT_LOG;
+
+  /**
    * The table <code>Schema.order</code>.
    */
   public static final Order ORDER = Order.ORDER;

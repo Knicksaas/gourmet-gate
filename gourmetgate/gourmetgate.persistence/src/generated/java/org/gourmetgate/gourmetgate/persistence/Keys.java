@@ -27,6 +27,7 @@ public class Keys {
   public static final UniqueKey<ArticleRecord> ARTICLE_PK = Internal.createUniqueKey(Article.ARTICLE, DSL.name("ARTICLE_PK"), new TableField[]{Article.ARTICLE.ARTICLE_ID}, true);
   public static final UniqueKey<ArticleGroupRecord> ARTICLE_GROUP_PK = Internal.createUniqueKey(ArticleGroup.ARTICLE_GROUP, DSL.name("ARTICLE_GROUP_PK"), new TableField[]{ArticleGroup.ARTICLE_GROUP.ARTICLE_GROUP_ID}, true);
   public static final UniqueKey<ArticleOptionRecord> ARTICLE_OPTION_PK = Internal.createUniqueKey(ArticleOption.ARTICLE_OPTION, DSL.name("ARTICLE_OPTION_PK"), new TableField[]{ArticleOption.ARTICLE_OPTION.ARTICLE_OPTION_ID}, true);
+  public static final UniqueKey<EventLogRecord> EVENT_LOG_PK = Internal.createUniqueKey(EventLog.EVENT_LOG, DSL.name("EVENT_LOG_PK"), new TableField[]{EventLog.EVENT_LOG.EVENT_LOG_ID}, true);
   public static final UniqueKey<OrderRecord> ORDER_PK = Internal.createUniqueKey(Order.ORDER, DSL.name("ORDER_PK"), new TableField[]{Order.ORDER.ORDER_ID}, true);
   public static final UniqueKey<OrderPositionRecord> ORDER_POSITION_PK = Internal.createUniqueKey(OrderPosition.ORDER_POSITION, DSL.name("ORDER_POSITION_PK"), new TableField[]{OrderPosition.ORDER_POSITION.ORDER_POSITION_ID}, true);
   public static final UniqueKey<OrderPositionOptionRecord> ORDER_POSITION_OPTION_PK = Internal.createUniqueKey(OrderPositionOption.ORDER_POSITION_OPTION, DSL.name("ORDER_POSITION_OPTION_PK"), new TableField[]{OrderPositionOption.ORDER_POSITION_OPTION.ORDER_POSITION_OPTION_ID}, true);

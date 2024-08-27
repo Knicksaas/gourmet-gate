@@ -41,6 +41,11 @@ public class Schema extends SchemaImpl {
   public final ArticleOption ARTICLE_OPTION = ArticleOption.ARTICLE_OPTION;
 
   /**
+   * The table <code>Schema.EVENT_LOG</code>.
+   */
+  public final EventLog EVENT_LOG = EventLog.EVENT_LOG;
+
+  /**
    * The table <code>Schema.order</code>.
    */
   public final Order ORDER = Order.ORDER;
@@ -87,8 +92,8 @@ public class Schema extends SchemaImpl {
 
   /**
    * No further instances allowed
-     */
-    private Schema() {
+   */
+  private Schema() {
         super("Schema", null);
     }
 
@@ -104,6 +109,7 @@ public class Schema extends SchemaImpl {
             Article.ARTICLE,
           ArticleGroup.ARTICLE_GROUP,
           ArticleOption.ARTICLE_OPTION,
+          EventLog.EVENT_LOG,
           Order.ORDER,
           OrderPosition.ORDER_POSITION,
           OrderPositionOption.ORDER_POSITION_OPTION,

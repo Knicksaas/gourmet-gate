@@ -17,10 +17,13 @@ export class OrderFormRepository extends Repository {
   formData(): JQuery.Promise<OrderFormData> {
     return this.getJson(this.targetUrl + 'formData')
       .then(data => {
-        if (data.redirectUrl && !access.quickCheck('EscapeShopViewPermission')) {
-          window.location = data.redirectUrl
+        if (!data.redirectUrl) {
+          return data;
         }
-        return data;
+        if (access.quickCheck('EscapeShopViewPermission')) {
+          return [];
+        }
+        window.location = data.redirectUrl;
       }).then(data => this._first(data) as OrderFormData)
 
   }
