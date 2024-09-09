@@ -1,5 +1,5 @@
 import {Outline, OutlineModel} from '@eclipse-scout/core';
-import {CartForm, OrderForm} from '../index';
+import {CartForm, OrderForm, ParameterTablePage} from '../index';
 import {PageWithData} from './PageWithData';
 import {ArticleTablePage} from '../article/ArticleTablePage';
 import {HallForm} from "../table/HallForm";
@@ -44,6 +44,9 @@ export default (): OutlineModel => ({
         objectType: HallForm,
       },
       detailTableVisible: false
+    },
+    {
+      objectType: ParameterTablePage
     }
   ]
 });

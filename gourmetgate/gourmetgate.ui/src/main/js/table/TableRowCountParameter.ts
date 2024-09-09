@@ -1,14 +1,6 @@
-import {Parameter} from "../index";
+import {NumberParameter} from "../index";
 
-export class TableRowCountParameter extends Parameter<number> {
+export class TableRowCountParameter extends NumberParameter {
 
   static override PARAMETER_NAME = 'TableRowCountParameter';
-
-  protected override _parseValue(stringValue: string): number {
-    return Number.parseInt(stringValue);
-  }
-
-  protected override _prepareValue(value: number): string {
-    return value.toString();
-  }
 }

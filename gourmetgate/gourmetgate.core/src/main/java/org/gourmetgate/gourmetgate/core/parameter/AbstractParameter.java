@@ -60,4 +60,11 @@ public abstract class AbstractParameter<T> {
    * @return string representation of the value
    */
   public abstract String prepareValue(T value);
+
+  /**
+   * Determines, if the parameter can be edited in the parameter page
+   */
+  protected boolean getConfiguredEditableInApplication() {
+    return false;
+  }
 }

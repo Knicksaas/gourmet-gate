@@ -14,6 +14,8 @@ import org.gourmetgate.gourmetgate.core.parameter.ReadParameterPermission;
 import org.gourmetgate.gourmetgate.core.parameter.UpdateParameterPermission;
 import org.gourmetgate.gourmetgate.data.parameter.ParameterDo;
 
+import java.util.List;
+
 @Path("parameter")
 public class ParameterResource implements IRestResource {
 
@@ -55,5 +57,17 @@ public class ParameterResource implements IRestResource {
     }
     param.setRawValue(parameter.getValue());
     return m_restHelper.createOkResponse();
+  }
+
+  @GET
+  @Path("/")
+  @Produces(MediaType.APPLICATION_JSON)
+  public Response getParameterTablePageData() {
+    if (!ACCESS.check(new ReadParameterPermission())) {
+      return m_restHelper.createForbiddenResponse();
+    }
+
+    List<ParameterDo> parameters = BEANS.get(ParameterSerivce.class).getAllConfigurableParameters().toList();
+    return m_restHelper.createGenericJsonResponse(parameters);
   }
 }

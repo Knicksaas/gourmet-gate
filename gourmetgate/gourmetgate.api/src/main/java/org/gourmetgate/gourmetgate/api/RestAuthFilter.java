@@ -54,6 +54,7 @@ public class RestAuthFilter implements Filter {
 
   @Override
   public void destroy() {
+    m_trivialAccessController.destroy();
     m_formBasedAccessController.destroy();
     m_anonymousAccessController.destroy();
   }

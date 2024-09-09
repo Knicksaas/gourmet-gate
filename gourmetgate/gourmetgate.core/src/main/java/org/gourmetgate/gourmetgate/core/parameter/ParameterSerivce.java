@@ -6,8 +6,16 @@ import org.gourmetgate.gourmetgate.data.parameter.IParameterRepository;
 import org.gourmetgate.gourmetgate.data.parameter.ParameterDo;
 
 import java.util.Optional;
+import java.util.stream.Stream;
 
 public class ParameterSerivce implements IService {
+
+  public Stream<ParameterDo> getAllConfigurableParameters() {
+    return BEANS.all(AbstractParameter.class).stream()
+      .filter(AbstractParameter::getConfiguredEditableInApplication)
+      .map(this::mapToDo);
+
+  }
 
   public AbstractParameter<?> getParameterClassByName(String name) {
     return BEANS.all(AbstractParameter.class).stream()
@@ -34,5 +42,10 @@ public class ParameterSerivce implements IService {
     } else {
       createParameter(name, newValue);
     }
+  }
+
+  protected ParameterDo mapToDo(AbstractParameter<?> parameter) {
+    return BEANS.get(IParameterRepository.class).getById(parameter.getName())
+      .orElse(null);
   }
 }
