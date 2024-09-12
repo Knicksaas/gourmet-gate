@@ -1,5 +1,36 @@
 .info-tile {
-  display: flex;
-  flex-direction: row;
 
+  & > .icon-box {
+    width: 100%;
+    height: 30%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    & > .info-icon {
+      width: 100px;
+      height: 100px;
+      border-radius: 50px;
+      background-color: @palette-blue-3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      & > .icon-white::before {
+        color: @text-inverted-color;
+        font-size: 40px;
+      }
+    }
+  }
+
+  & > .text-box {
+    width: 100%;
+    height: 55%;
+  }
+
+  & > .button-box {
+    width: 100%;
+    height: 15px;
+  }
 }

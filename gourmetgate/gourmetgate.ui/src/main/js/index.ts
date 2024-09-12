@@ -14,6 +14,7 @@ export * from './widget/headerbar/HeaderBarFieldModel';
 export * from './widget/info/InfoForm';
 export * from './widget/info/InfoPage';
 export * from './widget/info/InfoTile';
+export * from './widget/info/InfoTileBean';
 export * from './desktop/Desktop';
 export * from './desktop/DesktopModel';
 export * from './desktop/ShopOutline';
