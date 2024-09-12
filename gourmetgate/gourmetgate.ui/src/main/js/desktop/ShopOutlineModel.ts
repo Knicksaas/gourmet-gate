@@ -3,6 +3,7 @@ import {CartForm, OrderForm, ParameterTablePage} from '../index';
 import {PageWithData} from './PageWithData';
 import {ArticleTablePage} from '../article/ArticleTablePage';
 import {HallForm} from "../table/HallForm";
+import {InfoPage} from '../widget/info/InfoPage';
 
 export default (): OutlineModel => ({
   id: 'gourmetgate.DataOutline',
@@ -47,6 +48,9 @@ export default (): OutlineModel => ({
     },
     {
       objectType: ParameterTablePage
+    },
+    {
+      objectType: InfoPage
     }
   ]
 });

@@ -1,6 +1,6 @@
 import {FormField} from "@eclipse-scout/core";
 import {HeaderBar} from "./HeaderBar";
-import {HeaderBarFieldModel, HeaderBarModel} from "../index";
+import {HeaderBarFieldModel, HeaderBarModel} from "../../index";
 
 export class HeaderBarField extends FormField implements HeaderBarFieldModel {
   declare model: HeaderBarModel;

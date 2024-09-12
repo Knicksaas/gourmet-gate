@@ -1,5 +1,5 @@
 import {Icon, InitModelOf, scout, Widget} from "@eclipse-scout/core";
-import {HeaderBarModel, IHeaderBarEventMap} from "../index";
+import {HeaderBarModel, IHeaderBarEventMap} from "../../index";
 
 export class HeaderBar extends Widget implements HeaderBarModel {
   declare model: HeaderBarModel;
