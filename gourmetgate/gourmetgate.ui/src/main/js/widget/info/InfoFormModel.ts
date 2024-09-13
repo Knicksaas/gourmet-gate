@@ -33,6 +33,13 @@ export default (): FormModel => ({
         tiles: [{
           id: 'TestTile',
           objectType: InfoTile,
+          bean: {
+            iconClass: 'gg-icon-qr-code',
+            title: 'QR Code scannen',
+            description: 'Scannen Sie den QR Code auf Ihrem Tisch, um mit der Bestellung zu starten.',
+            buttonLabel: 'Code scannen',
+            infoColorClass: 'info-color-orange'
+          }
         }]
       },
       gridDataHints: {

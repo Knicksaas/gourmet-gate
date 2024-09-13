@@ -1,6 +1,7 @@
 export class InfoTileBean {
-  iconId: string;
+  iconClass: string;
   title: string;
   description: string;
   buttonLabel: string;
+  infoColorClass: string;
 }

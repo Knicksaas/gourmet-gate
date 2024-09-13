@@ -1,5 +1,9 @@
 .info-tile {
 
+  &.dashboard {
+    #scout.double-drop-shadow(@blur1: 20px, @spread1: 3px, @color1: @dashboard-tile-border-color, @y2: 0px, @blur2: 0px);
+  }
+
   & > .icon-box {
     width: 100%;
     height: 30%;
@@ -12,7 +16,6 @@
       width: 100px;
       height: 100px;
       border-radius: 50px;
-      background-color: @palette-blue-3;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -27,10 +30,60 @@
   & > .text-box {
     width: 100%;
     height: 55%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    & > .title {
+      padding: 20px 0;
+      font-size: @font-size-extra-large;
+      font-family: @font-default-family;
+    }
+
+    & > .description {
+      padding: 20px;
+      font-size: @font-size-large;
+      font-family: @font-default-family;
+      text-align: center;
+    }
   }
 
   & > .button-box {
     width: 100%;
     height: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    & > .info-action-button {
+      width: 80%;
+      padding: 10px;
+      border-radius: @dashboard-tile-border-radius;
+      text-align: center;
+      font-family: @font-default-family;
+      font-size: @font-size-large;
+      color: @text-inverted-color;
+      cursor: pointer;
+    }
   }
+}
+
+.info-color-blue {
+  background-color: @palette-blue-3;
+}
+
+.info-color-light-blue {
+  background-color: @palette-blue-2;
+}
+
+.info-color-green {
+  background-color: @palette-green-5;
+}
+
+.info-color-red {
+  background-color: @palette-red-4;
+}
+
+.info-color-orange {
+  background-color: @palette-orange-4;
 }

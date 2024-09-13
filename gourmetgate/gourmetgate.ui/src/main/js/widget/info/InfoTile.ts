@@ -1,5 +1,5 @@
 import {BeanTile, InitModelOf} from "@eclipse-scout/core";
-import {InfoTileBean} from "./InfoTileBean";
+import {InfoTileBean} from "../../index";
 
 export class InfoTile extends BeanTile {
   declare bean: InfoTileBean;
@@ -25,10 +25,24 @@ export class InfoTile extends BeanTile {
     this.$buttonBox = this.$container.appendDiv('button-box');
 
     this.$icon = this.$iconBox.appendDiv('info-icon')
-    this.$icon.appendDiv('gg-icon icon-white gg-icon-check')
+      .addClass(this.bean.infoColorClass);
+    this.$icon.appendDiv('gg-icon icon-white').addClass(this.bean.iconClass);
 
-    this.$title = this.$textBox.appendDiv('title');
-    this.$description = this.$textBox.appendDiv('description');
+    this.$title = this.$textBox.appendDiv('title')
+      .text(this.bean.title);
+    this.$description = this.$textBox.appendDiv('description')
+      .text(this.bean.description);
+
+    if (this.bean.buttonLabel) {
+      this.$buttonBox.appendDiv('info-action-button')
+        .addClass(this.bean.infoColorClass)
+        .text(this.bean.buttonLabel)
+        .on('click', this._onButtonClick.bind(this));
+    }
+  }
+
+  protected _onButtonClick(event: JQuery.ClickEvent) {
+    // NOP
   }
 
   protected override _renderDisplayStyle() {
