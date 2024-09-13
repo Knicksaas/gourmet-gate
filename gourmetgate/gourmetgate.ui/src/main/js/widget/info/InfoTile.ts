@@ -16,6 +16,7 @@ export class InfoTile extends BeanTile {
   protected override _init(model: InitModelOf<this>) {
     super._init(model);
     this.setCssClass('info-tile');
+    this.bean = this._createBean();
   }
 
 
@@ -39,6 +40,10 @@ export class InfoTile extends BeanTile {
         .text(this.bean.buttonLabel)
         .on('click', this._onButtonClick.bind(this));
     }
+  }
+
+  protected _createBean(): InfoTileBean {
+    return null;
   }
 
   protected _onButtonClick(event: JQuery.ClickEvent) {
