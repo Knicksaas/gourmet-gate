@@ -1,6 +1,5 @@
 import {PageModel} from "@eclipse-scout/core";
-import {InfoForm} from './InfoForm';
-import {PageWithData} from "../../desktop/PageWithData";
+import {InfoForm, PageWithData} from '../../index';
 
 export default (): PageModel => ({
   id: 'InfoPage',
@@ -14,3 +13,11 @@ export default (): PageModel => ({
     objectType: InfoForm
   }
 });
+
+/* **************************************************************************
+* GENERATED WIDGET MAPS
+* **************************************************************************/
+
+export class InfoPageInfoForm extends InfoForm {
+
+}

@@ -59,7 +59,10 @@ public class RestHelper {
 
   @SuppressWarnings("unchecked")
   public <T extends DoEntity> Response createGenericJsonResponse(List<T> dataObjects) {
-    Class<T> doClass = (Class<T>) dataObjects.stream().findAny().map(Object::getClass).orElseThrow();
+    Class<T> doClass = (Class<T>) dataObjects.stream().findAny().map(Object::getClass).orElse(null);
+    if (doClass == null) {
+      doClass = (Class<T>) DoEntity.class;
+    }
     GenericReponse<T> genericReponse = createGenericResponse(doClass);
     genericReponse.withItems(dataObjects);
     return createJsonResponse(genericReponse);

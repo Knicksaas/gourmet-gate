@@ -1,9 +1,15 @@
 import {Outline, OutlineModel} from '@eclipse-scout/core';
-import {CartForm, OrderForm, ParameterTablePage} from '../index';
+import {
+  CartForm,
+  KitchenClosedInfoPage,
+  OrderForm,
+  ParameterTablePage,
+  PaymentStateInfoPage,
+  ScanQrCodeInfoPage
+} from '../index';
 import {PageWithData} from './PageWithData';
 import {ArticleTablePage} from '../article/ArticleTablePage';
 import {HallForm} from "../table/HallForm";
-import {InfoPage} from '../widget/info/InfoPage';
 
 export default (): OutlineModel => ({
   id: 'gourmetgate.DataOutline',
@@ -50,11 +56,16 @@ export default (): OutlineModel => ({
       objectType: ParameterTablePage
     },
     {
-      objectType: InfoPage
+      text: '${textKey:PaymentState}',
+      objectType: PaymentStateInfoPage
+    },
+    {
+      text: '${textKey:Pause}',
+      objectType: KitchenClosedInfoPage
+    },
+    {
+      text: '${textKey:UserGuide}',
+      objectType: ScanQrCodeInfoPage
     }
   ]
 });
-
-export type ShopOutlineWidgetMap = {
-  'gourmetgate.DataOutline': Outline;
-};

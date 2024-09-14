@@ -1,5 +1,5 @@
 import {Form, FormModel, GroupBox, TileField, TileGrid} from '@eclipse-scout/core';
-import {InfoTile} from "./InfoTile";
+import {InfoTile} from '../../index';
 
 export default (): FormModel => ({
   id: 'InfoFormModel',
@@ -30,16 +30,6 @@ export default (): FormModel => ({
           hgap: 200,
           vgap: 200
         },
-        tiles: [{
-          id: 'TestTile',
-          objectType: InfoTile,
-          bean: {
-            iconClass: 'gg-icon-qr-code',
-            title: 'QR-Code scannen',
-            description: 'Scannen Sie den QR-Code auf Ihrem Tisch, um mit der Bestellung zu starten.',
-            infoColorClass: 'info-color-blue'
-          }
-        }]
       },
       gridDataHints: {
         fillVertical: true,
@@ -48,3 +38,14 @@ export default (): FormModel => ({
     }]
   }
 });
+
+/* **************************************************************************
+* GENERATED WIDGET MAPS
+* **************************************************************************/
+
+export type InfoFormWidgetMap = {
+  'MainBox': GroupBox;
+  'InfoTileField': TileField;
+  'InfoTileGrid': TileGrid;
+  'TestTile': InfoTile;
+};
