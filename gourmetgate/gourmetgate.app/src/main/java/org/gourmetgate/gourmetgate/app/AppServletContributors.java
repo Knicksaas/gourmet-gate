@@ -17,6 +17,7 @@ import org.glassfish.jersey.server.ServerProperties;
 import org.glassfish.jersey.servlet.ServletContainer;
 import org.glassfish.jersey.servlet.ServletProperties;
 import org.gourmetgate.gourmetgate.api.RestAuthFilter;
+import org.gourmetgate.gourmetgate.api.SystemStatusFilter;
 
 import java.util.Arrays;
 import java.util.List;
@@ -45,8 +46,6 @@ public final class AppServletContributors {
         "/favicon/*",
         "/fonts/*",
         "/logo.png",
-        "sucess.html",
-        "failed.html",
         "/*login*.js",
         "/*logout*.js",
         "/*frwdeluxe-theme*.css"));
@@ -75,6 +74,16 @@ public final class AppServletContributors {
     public void contribute(ServletContextHandler handler) {
       handler.addFilter(HttpServerRunContextFilter.class, "/api/*", null);
     }
+  }
+
+  @Order(6000)
+  public static class SystemStatusFilterContributor implements IServletFilterContributor {
+
+    @Override
+    public void contribute(ServletContextHandler handler) {
+      handler.addFilter(SystemStatusFilter.class, "/api/*", null);
+    }
+
   }
 
   /**
