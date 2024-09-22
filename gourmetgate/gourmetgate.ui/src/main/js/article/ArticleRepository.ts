@@ -12,7 +12,8 @@ export class ArticleRepository extends Repository {
   }
 
   getArticleTablePageData(): JQuery.Promise<ArticleTablePageEntry[]> {
-    return this.getJson(this.targetUrl + 'tablePageData');
+    return this.getJson(this.targetUrl + 'tablePageData')
+      .catch(error => this._handleError(error));
   }
 
   createArticle(articleGroupId: string): JQuery.Promise<Article> {
@@ -30,7 +31,8 @@ export class ArticleRepository extends Repository {
 
   getArticle(articleId: string) {
     return this.getJson(this.targetUrl + articleId)
-      .then(data => this._first(data));
+      .then(data => this._first(data))
+      .catch(error => this._handleError(error));
   }
 
   updateArticle(articleId: string, data: Article): JQuery.Promise<void> {

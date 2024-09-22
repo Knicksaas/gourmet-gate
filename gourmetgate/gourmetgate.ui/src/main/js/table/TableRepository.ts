@@ -15,12 +15,14 @@ export class TableRepository extends Repository {
   regenerateTables(): JQuery.Promise<HallFormData> {
     return this.postJson(this.targetUrl + 'regenerate')
       .then(data => this._first(data) as HallFormData)
-      .then(data => this._triggerDataChange(data, HallFormData.ENTITY_TYPE));
+      .then(data => this._triggerDataChange(data, HallFormData.ENTITY_TYPE))
+      .catch(error => this._handleError(error));
   }
 
   getHallFormData(): JQuery.Promise<HallFormData> {
     return this.getJson(this.targetUrl + 'hallFormData')
-      .then(data => this._first(data));
+      .then(data => this._first(data))
+      .catch(error => this._handleError(error));
   }
 
   static get(): TableRepository {

@@ -1,7 +1,9 @@
 package org.gourmetgate.gourmetgate.api.order;
 
 import jakarta.annotation.PostConstruct;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.Cookie;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
@@ -15,6 +17,8 @@ import org.gourmetgate.gourmetgate.data.common.GenericReponse;
 import org.gourmetgate.gourmetgate.data.orderposition.OrderPositionDo;
 import org.gourmetgate.gourmetgate.data.orderposition.OrderPositionOptionDo;
 
+import java.util.Arrays;
+
 @Path("order")
 public class OrderResource implements IRestResource {
 
@@ -27,13 +31,18 @@ public class OrderResource implements IRestResource {
 
   @GET
   @Path("/")
-  public Response initiateOrderByLink(@QueryParam("tableId") String tableId, @CookieParam("JSESSIONID") Cookie cookie) {
+  public Response initiateOrderByLink(@QueryParam("tableId") String tableId, @Context HttpServletRequest request) {
     if (!BEANS.get(TableService.class).tableExists(tableId)) {
       return m_restHelper.createNotFoundResponse();
     }
 
+    jakarta.servlet.http.Cookie cookie = Arrays.stream(request.getCookies())
+      .filter(c -> "JSESSIONID".equalsIgnoreCase(c.getName()))
+      .findAny()
+      .orElseThrow();
+
     BEANS.get(OrderService.class).getOrCreateOrderForSession(cookie.getValue(), tableId);
-    return m_restHelper.createRedirectResponse("/");
+    return m_restHelper.createTemoraryServerRedirectResponse("/");
   }
 
 

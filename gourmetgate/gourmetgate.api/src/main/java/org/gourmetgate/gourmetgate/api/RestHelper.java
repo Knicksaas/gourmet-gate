@@ -68,9 +68,17 @@ public class RestHelper {
     return createJsonResponse(genericReponse);
   }
 
-  public Response createRedirectResponse(String url) {
+  public Response createTemoraryJsRedirectResponse(String url) {
     try {
-      return Response.status(Response.Status.MOVED_PERMANENTLY).location(new URI(url)).build();
+      return Response.status(Response.Status.NOT_ACCEPTABLE).location(new URI(url)).build();
+    } catch (URISyntaxException e) {
+      throw BEANS.get(DefaultRuntimeExceptionTranslator.class).translate(e);
+    }
+  }
+
+  public Response createTemoraryServerRedirectResponse(String url) {
+    try {
+      return Response.status(Response.Status.FOUND).location(new URI(url)).build();
     } catch (URISyntaxException e) {
       throw BEANS.get(DefaultRuntimeExceptionTranslator.class).translate(e);
     }

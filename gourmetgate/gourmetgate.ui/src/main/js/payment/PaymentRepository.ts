@@ -14,7 +14,8 @@ export class PaymentRepository extends Repository {
 
   createPayment(): JQuery.Promise<Redirect> {
     return this.postJson(this.targetUrl)
-      .then(data => this._first(data));
+      .then(data => this._first(data))
+      .catch(error => this._handleError(error));
   }
 
   static get(): PaymentRepository {

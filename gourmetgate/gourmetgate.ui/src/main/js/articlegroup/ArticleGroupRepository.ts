@@ -21,12 +21,13 @@ export class ArticleGroupRepository extends Repository {
 
   getArticleGroup(articleGroupId: string): JQuery.Promise<ArticleGroup> {
     return this.getJson(this.targetUrl + articleGroupId)
-      .then(data => this._first(data));
+      .then(data => this._first(data))
+      .catch(error => this._handleError(error));
   }
 
   saveArticleGroup(data: ArticleGroup): JQuery.Promise<void> {
     return this._store(data, this.targetUrl + data.articleGroupId)
-      .then(() => undefined)
+      .then(() => undefined);
   }
 
   deleteArticleGroup(articleGroupId: string): JQuery.Promise<void> {

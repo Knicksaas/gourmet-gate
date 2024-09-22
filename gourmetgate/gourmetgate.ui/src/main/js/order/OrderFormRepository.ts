@@ -16,9 +16,8 @@ export class OrderFormRepository extends Repository {
 
   formData(): JQuery.Promise<OrderFormData> {
     return this.getJson(this.targetUrl + 'formData')
-      .then(data => this._handlePotentialRedirect(data))
       .then(data => this._first(data) as OrderFormData)
-
+      .catch(error => this._handleError(error));
   }
 
   static get(): OrderFormRepository {

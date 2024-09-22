@@ -12,7 +12,6 @@ import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.rest.IRestResource;
 import org.gourmetgate.gourmetgate.api.RestHelper;
 import org.gourmetgate.gourmetgate.core.order.OrderService;
-import org.gourmetgate.gourmetgate.data.payment.RedirectDo;
 
 @Path("orderForm")
 public class OrderFormResource implements IRestResource {
@@ -31,8 +30,7 @@ public class OrderFormResource implements IRestResource {
     OrderService service = BEANS.get(OrderService.class);
     String orderId = service.getOrderIdForSession(cookie.getValue());
     if (orderId == null) {
-      RedirectDo redirect = BEANS.get(RedirectDo.class).withRedirectUrl("user-guide.html");
-      return m_restHelper.createJsonResponse(redirect);
+      return m_restHelper.createTemoraryJsRedirectResponse("../#userGuide");
     }
     return m_restHelper.createGenericJsonResponse(service.getOrderFormData(orderId));
   }

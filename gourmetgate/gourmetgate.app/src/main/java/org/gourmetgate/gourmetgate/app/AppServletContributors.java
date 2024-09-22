@@ -73,8 +73,7 @@ public final class AppServletContributors {
 
     @Override
     public void contribute(ServletContextHandler handler) {
-      FilterHolder filter = handler.addFilter(HttpServerRunContextFilter.class, "/api/*", null);
-      filter.setInitParameter("session", "false");
+      handler.addFilter(HttpServerRunContextFilter.class, "/api/*", null);
     }
   }
 

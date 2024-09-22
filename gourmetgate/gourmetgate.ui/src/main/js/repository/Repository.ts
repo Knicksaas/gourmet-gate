@@ -1,4 +1,4 @@
-import {access, ajax, dates, ObjectWithType, scout} from '@eclipse-scout/core';
+import {ajax, dates, ObjectWithType, scout} from '@eclipse-scout/core';
 import $ from 'jquery';
 
 export abstract class Repository implements ObjectWithType {
@@ -62,40 +62,43 @@ export abstract class Repository implements ObjectWithType {
 
   protected _load<TData>(url: string): JQuery.Promise<TData> {
     return this.getJson(url)
-      .then(data => this._first(data) as TData);
+      .then(data => this._first(data) as TData)
+      .catch(error => this._handleError(error));
   }
 
   protected _store<TData>(data: TData, url: string): JQuery.Promise<TData> {
     return this.putJson(url, this.jsonStringify(data))
       .then(data => this._first(data) as TData)
-      .then(data => this._triggerDataChange(data));
+      .then(data => this._triggerDataChange(data))
+      .catch(error => this._handleError(error));
   }
 
   protected _create<TData>(data: TData): JQuery.Promise<TData> {
     return this.postJson(this.targetUrl, this.jsonStringify(data))
       .then(data => this._first(data) as TData)
-      .then(data => this._triggerDataChange(data));
+      .then(data => this._triggerDataChange(data))
+      .catch(error => this._handleError(error));
   }
 
   protected _remove(id: string): JQuery.Promise<void> {
     return this.removeJson(this.targetUrl + id)
-      .then(() => {
-        this._triggerDataChange();
-      });
+      .then(() => this._triggerDataChange())
+      .catch(error => this._handleError(error));
   }
 
   protected _first<T>(items: T[]): T {
     return items[0];
   }
 
-  protected _handlePotentialRedirect<T>(data: any): T[] {
-    if (!data.redirectUrl) {
-      return data;
+  protected _handleError(error: any): null {
+    // Not acceptable, redirect to location
+    if (error.jqXHR?.status === 406) {
+      let location = error.jqXHR.getResponseHeader('location');
+      if (location) {
+        window.location = location;
+      }
     }
-    if (access.quickCheck('EscapeShopViewPermission')) {
-      return [];
-    }
-    window.location = data.redirectUrl;
+    return null;
   }
 
   protected _triggerDataChange<TData>(data?: TData, entityType?: string): TData {

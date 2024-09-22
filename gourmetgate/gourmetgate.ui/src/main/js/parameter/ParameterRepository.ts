@@ -15,7 +15,8 @@ export class ParameterRepository extends Repository {
     return this.getJson(this.targetUrl + parameterClassName)
       .then(data => {
         return scout.create(this._parseClassName(parameterClassName), data).getValue();
-      });
+      })
+      .catch(error => this._handleError(error));
   }
 
   getParameterValue<T>(parameterClass: typeof Parameter<T>): JQuery.Promise<T> {
@@ -25,18 +26,21 @@ export class ParameterRepository extends Repository {
   setParameterValueByName(parameterClassName: string, value: string): JQuery.Promise<void> {
     let data = scout.create(this._parseClassName(parameterClassName));
     data.setValue(value);
-    return this.putJson(this.targetUrl + parameterClassName, data);
+    return this.putJson(this.targetUrl + parameterClassName, data)
+      .catch(error => this._handleError(error));
   }
 
   setParameterValue<T>(parameterClass: typeof Parameter<T>, value: T): JQuery.Promise<void> {
     // @ts-expect-error
     let data = scout.create(parameterClass);
     data.setValue(value);
-    return this.putJson(this.targetUrl + parameterClass.PARAMETER_NAME, data);
+    return this.putJson(this.targetUrl + parameterClass.PARAMETER_NAME, data)
+      .catch(error => this._handleError(error));
   }
 
   getParameterTablePageData(): JQuery.Promise<Parameter[]> {
     return this.getJson(this.targetUrl)
+      .catch(error => this._handleError(error));
   }
 
   protected _parseClassName(name: string) {

@@ -63,6 +63,11 @@ export class OrderForm extends Form {
     this._allGroups = [];
     this._allTiles = [];
 
+    if (!this.data) {
+      // Noting to import
+      return;
+    }
+
     let accordion = this.widget('OrderAcordion');
     this._allGroups = this.data.articleGroups
       .map(group => this._createArticleGroup(group, accordion));
