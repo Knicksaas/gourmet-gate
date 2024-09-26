@@ -4,7 +4,6 @@ import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.Context;
-import jakarta.ws.rs.core.Cookie;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.eclipse.scout.rt.platform.BEANS;
@@ -16,8 +15,6 @@ import org.gourmetgate.gourmetgate.core.table.TableService;
 import org.gourmetgate.gourmetgate.data.common.GenericReponse;
 import org.gourmetgate.gourmetgate.data.orderposition.OrderPositionDo;
 import org.gourmetgate.gourmetgate.data.orderposition.OrderPositionOptionDo;
-
-import java.util.Arrays;
 
 @Path("order")
 public class OrderResource implements IRestResource {
@@ -36,12 +33,7 @@ public class OrderResource implements IRestResource {
       return m_restHelper.createNotFoundResponse();
     }
 
-    jakarta.servlet.http.Cookie cookie = Arrays.stream(request.getCookies())
-      .filter(c -> "JSESSIONID".equalsIgnoreCase(c.getName()))
-      .findAny()
-      .orElseThrow();
-
-    BEANS.get(OrderService.class).getOrCreateOrderForSession(cookie.getValue(), tableId);
+    BEANS.get(OrderService.class).getOrCreateOrderForSession(request.getSession().getId(), tableId);
     return m_restHelper.createTemoraryServerRedirectResponse("/");
   }
 
@@ -49,8 +41,8 @@ public class OrderResource implements IRestResource {
   @POST
   @Path("position/{id}")
   @Produces(MediaType.APPLICATION_JSON)
-  public Response createOrderPosition(@CookieParam("JSESSIONID") Cookie cookie, @PathParam("id") String articleId) {
-    String orderId = BEANS.get(OrderService.class).getOrderIdForSession(cookie.getValue());
+  public Response createOrderPosition(@PathParam("id") String articleId, @Context HttpServletRequest request) {
+    String orderId = BEANS.get(OrderService.class).getOrderIdForSession(request.getSession().getId());
     if (orderId == null) {
       return m_restHelper.createBadRequestResponse("No order for current session");
     }
@@ -63,15 +55,15 @@ public class OrderResource implements IRestResource {
   @DELETE
   @Path("position/{id}")
   @Consumes(MediaType.APPLICATION_JSON)
-  public Response deleteOrderPosition(@CookieParam("JSESSIONID") Cookie cookie, @PathParam("id") String orderPositionId) {
+  public Response deleteOrderPosition(@PathParam("id") String orderPositionId, @Context HttpServletRequest request) {
     // Check order
-    String orderId = BEANS.get(OrderService.class).getOrderIdForSession(cookie.getValue());
+    String orderId = BEANS.get(OrderService.class).getOrderIdForSession(request.getSession().getId());
     if (orderId == null) {
       return m_restHelper.createBadRequestResponse("No order for current session");
     }
 
     // Check access
-    if (!m_restHelper.checkAccessToOrderPosition(cookie.getValue(), orderPositionId)) {
+    if (!m_restHelper.checkAccessToOrderPosition(request.getSession().getId(), orderPositionId)) {
       return m_restHelper.createForbiddenResponse();
     }
 
@@ -83,9 +75,9 @@ public class OrderResource implements IRestResource {
   @GET
   @Path("position/{id}/options")
   @Produces(MediaType.APPLICATION_JSON)
-  public Response getOrderPositionOptions(@CookieParam("JSESSIONID") Cookie cookie, @PathParam("id") String orderPositionId) {
+  public Response getOrderPositionOptions(@Context HttpServletRequest request, @PathParam("id") String orderPositionId) {
     // Check access
-    if (!m_restHelper.checkAccessToOrderPosition(cookie.getValue(), orderPositionId)) {
+    if (!m_restHelper.checkAccessToOrderPosition(request.getSession().getId(), orderPositionId)) {
       return m_restHelper.createForbiddenResponse();
     }
 
@@ -99,9 +91,9 @@ public class OrderResource implements IRestResource {
   @Path("position/{id}/options")
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
-  public Response updateOrderPositionOptions(@CookieParam("JSESSIONID") Cookie cookie, @PathParam("id") String orderPositionId, GenericReponse<OrderPositionOptionDo> orderPositionOptions) {
+  public Response updateOrderPositionOptions(@PathParam("id") String orderPositionId, @Context HttpServletRequest request, GenericReponse<OrderPositionOptionDo> orderPositionOptions) {
     // Check access
-    if (!m_restHelper.checkAccessToOrderPosition(cookie.getValue(), orderPositionId)) {
+    if (!m_restHelper.checkAccessToOrderPosition(request.getSession().getId(), orderPositionId)) {
       return m_restHelper.createForbiddenResponse();
     }
 

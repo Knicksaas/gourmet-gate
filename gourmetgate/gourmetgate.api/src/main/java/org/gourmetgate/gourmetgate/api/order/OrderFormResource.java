@@ -1,11 +1,11 @@
 package org.gourmetgate.gourmetgate.api.order;
 
 import jakarta.annotation.PostConstruct;
-import jakarta.ws.rs.CookieParam;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
-import jakarta.ws.rs.core.Cookie;
+import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.eclipse.scout.rt.platform.BEANS;
@@ -26,9 +26,9 @@ public class OrderFormResource implements IRestResource {
   @GET
   @Path("formData")
   @Produces(MediaType.APPLICATION_JSON)
-  public Response getFormData(@CookieParam("JSESSIONID") Cookie cookie) {
+  public Response getFormData(@Context HttpServletRequest request) {
     OrderService service = BEANS.get(OrderService.class);
-    String orderId = service.getOrderIdForSession(cookie.getValue());
+    String orderId = service.getOrderIdForSession(request.getSession().getId());
     if (orderId == null) {
       return m_restHelper.createTemoraryJsRedirectResponse("../#userGuide");
     }
