@@ -1,11 +1,9 @@
-import {InfoPage, InfoTileBean} from "../index";
+import {InfoForm, InfoTileBean} from "../index";
 import {EnumObject} from "@eclipse-scout/core";
 
-export type PaymentStatus = EnumObject<typeof PaymentStateInfoPage.PaymentStatus>;
+export type PaymentStatus = EnumObject<typeof PaymentStateInfoForm.PaymentStatus>;
 
-export class PaymentStateInfoPage extends InfoPage {
-  routeRef = 'paymentState'
-  state: PaymentStatus;
+export class PaymentStateInfoForm extends InfoForm {
 
   static PaymentStatus = {
     PENDING: 0,
@@ -13,24 +11,19 @@ export class PaymentStateInfoPage extends InfoPage {
     FAILED: 100
   } as const;
 
-  setPaymentState(state: PaymentStatus) {
-    this.state = state;
-    this.infoTile.setBean(this._createBeanForState(state));
+  protected override _load(): JQuery.Promise<InfoTileBean> {
+    return $.resolvedPromise(this._createBeanForState(PaymentStateInfoForm.PaymentStatus.PENDING));
   }
 
   protected _createBeanForState(state: PaymentStatus) {
     switch (state) {
-      case PaymentStateInfoPage.PaymentStatus.SUCCESS:
+      case PaymentStateInfoForm.PaymentStatus.SUCCESS:
         return this._createSuccessBean();
-      case PaymentStateInfoPage.PaymentStatus.FAILED:
+      case PaymentStateInfoForm.PaymentStatus.FAILED:
         return this._createFailedBean();
       default:
         return this._createPendingBean();
     }
-  }
-
-  protected override _createInfoTileBean(): InfoTileBean {
-    return this._createBeanForState(PaymentStateInfoPage.PaymentStatus.PENDING);
   }
 
   protected _createPendingBean(): InfoTileBean {

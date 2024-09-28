@@ -1,14 +1,13 @@
-import {InfoPage, InfoTileBean} from "../index";
+import {InfoForm, InfoTileBean} from "../index";
 
-export class ScanQrCodeInfoPage extends InfoPage {
-  routeRef = 'userGuide'
+export class ScanQrCodeInfoForm extends InfoForm {
 
-  protected override _createInfoTileBean(): InfoTileBean {
-    return {
+  protected override _load(): JQuery.Promise<InfoTileBean> {
+    return $.resolvedPromise({
       iconClass: 'gg-icon-qr-code',
       title: 'QR-Code scannen',
       description: 'Scannen Sie den QR-Code auf Ihrem Tisch, um mit einer neue Bestellung zu starten.',
       infoColorClass: 'info-color-blue'
-    }
-  }
+    })
+  };
 }

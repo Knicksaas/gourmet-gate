@@ -8,10 +8,6 @@ export default (): PageModel => ({
   leaf: true,
   navigateButtonsVisible: false,
   detailTableVisible: false,
-  detailForm: {
-    id: 'InfoForm',
-    objectType: InfoForm
-  }
 });
 
 /* **************************************************************************

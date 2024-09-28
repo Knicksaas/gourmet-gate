@@ -1,11 +1,12 @@
 import {Outline, OutlineModel} from '@eclipse-scout/core';
 import {
   CartForm,
-  KitchenClosedInfoPage,
+  InfoPage,
+  KitchenClosedInfoForm,
   OrderForm,
   ParameterTablePage,
-  PaymentStateInfoPage,
-  ScanQrCodeInfoPage
+  PaymentStateInfoForm,
+  ScanQrCodeInfoForm
 } from '../index';
 import {PageWithData} from './PageWithData';
 import {ArticleTablePage} from '../article/ArticleTablePage';
@@ -57,15 +58,27 @@ export default (): OutlineModel => ({
     },
     {
       text: '${textKey:PaymentState}',
-      objectType: PaymentStateInfoPage
+      objectType: InfoPage,
+      routeRef: 'paymentState',
+      detailForm: {
+        objectType: PaymentStateInfoForm
+      }
     },
     {
       text: '${textKey:Pause}',
-      objectType: KitchenClosedInfoPage
+      objectType: InfoPage,
+      routeRef: 'pause',
+      detailForm: {
+        objectType: KitchenClosedInfoForm
+      }
     },
     {
       text: '${textKey:UserGuide}',
-      objectType: ScanQrCodeInfoPage
+      objectType: InfoPage,
+      routeRef: 'userGuide',
+      detailForm: {
+        objectType: ScanQrCodeInfoForm
+      }
     }
   ]
 });
