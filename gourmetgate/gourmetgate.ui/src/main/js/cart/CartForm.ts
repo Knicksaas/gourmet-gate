@@ -48,7 +48,7 @@ export class CartForm extends Form {
     this.widget('PayButton').setLoading(true);
     PaymentRepository.get().createPayment()
       .then(redirect => {
-        window.location.href = redirect.redirectUrl;
+        window.location.assign(redirect.redirectUrl);
       })
   }
 

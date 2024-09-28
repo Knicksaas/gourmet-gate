@@ -1,6 +1,7 @@
 package org.gourmetgate.gourmetgate.api.payment;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.core.Context;
@@ -11,6 +12,7 @@ import org.gourmetgate.gourmetgate.api.RestHelper;
 import org.gourmetgate.gourmetgate.core.order.OrderService;
 import org.gourmetgate.gourmetgate.core.payment.PaymentService;
 import org.gourmetgate.gourmetgate.data.common.GenericReponse;
+import org.gourmetgate.gourmetgate.data.infopage.InfoTileBeanDo;
 import org.gourmetgate.gourmetgate.data.payment.RedirectDo;
 
 @Path("payment")
@@ -37,5 +39,17 @@ public class PaymentResource implements IRestResource {
       .withItem(redirectDo);
 
     return m_restHelper.createJsonResponse(response);
+  }
+
+  @GET
+  @Path("/status")
+  public Response getPaymentStatus(@Context HttpServletRequest request) {
+    String orderId = BEANS.get(OrderService.class).getOrderIdForSession(request.getSession().getId());
+    if (orderId == null) {
+      return m_restHelper.createBadRequestResponse("No order for current session");
+    }
+
+    InfoTileBeanDo responseDo = BEANS.get(PaymentService.class).getPaymentStatusDo(orderId);
+    return m_restHelper.createGenericJsonResponse(responseDo);
   }
 }

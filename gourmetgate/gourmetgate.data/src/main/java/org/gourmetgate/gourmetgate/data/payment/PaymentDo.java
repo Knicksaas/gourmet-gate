@@ -4,6 +4,7 @@ import jakarta.annotation.Generated;
 import org.eclipse.scout.rt.dataobject.DoEntity;
 import org.eclipse.scout.rt.dataobject.DoValue;
 import org.eclipse.scout.rt.dataobject.TypeName;
+import org.gourmetgate.gourmetgate.data.common.EnumUtility;
 
 @TypeName("gourmetgate.Payment")
 public class PaymentDo extends DoEntity {
@@ -26,6 +27,10 @@ public class PaymentDo extends DoEntity {
 
   public PaymentDo withStatus(PaymentStatus status) {
     return withStatus(status.toString());
+  }
+
+  public PaymentStatus getPaymentStatus() {
+    return EnumUtility.getEnumFromString(PaymentStatus.class, getStatus());
   }
 
   /* **************************************************************************

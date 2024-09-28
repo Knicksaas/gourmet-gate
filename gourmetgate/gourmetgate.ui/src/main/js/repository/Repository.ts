@@ -95,7 +95,7 @@ export abstract class Repository implements ObjectWithType {
     if (error.jqXHR?.status === 406) {
       let location = error.jqXHR.getResponseHeader('location');
       if (location) {
-        window.location = location;
+        window.location.assign(location);
       }
     }
     return null;

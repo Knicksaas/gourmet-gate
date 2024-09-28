@@ -7,4 +7,6 @@ import java.util.Optional;
 public interface IPaymenetRepository extends ICrudRepository<PaymentDo> {
 
   Optional<PaymentDo> getByExtId(String extId);
+
+  Optional<PaymentDo> getByOrderId(String orderId);
 }

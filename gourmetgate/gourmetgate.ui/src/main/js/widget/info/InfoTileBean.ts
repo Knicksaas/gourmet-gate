@@ -1,7 +1,17 @@
+import {PaymentStatus} from "../../index";
+import $ from "jquery";
+
 export class InfoTileBean {
-  iconClass: string;
   title: string;
   description: string;
-  buttonLabel?: string;
   infoColorClass?: string;
+  iconClass: string;
+  buttonLabel?: string;
+  paymentStatus?: PaymentStatus
+
+  static ENTITY_TYPE = 'infoTileBean';
+
+  init(model: any) {
+    $.extend(this, model);
+  }
 }

@@ -1,4 +1,4 @@
-import {App, Article, Redirect, Repository} from "../index";
+import {App, Article, InfoTileBean, Redirect, Repository} from "../index";
 import {scout} from "@eclipse-scout/core";
 
 let repository: PaymentRepository;
@@ -14,6 +14,12 @@ export class PaymentRepository extends Repository {
 
   createPayment(): JQuery.Promise<Redirect> {
     return this.postJson(this.targetUrl)
+      .then(data => this._first(data))
+      .catch(error => this._handleError(error));
+  }
+
+  getPaymentStatus(): JQuery.Promise<InfoTileBean> {
+    return this.getJson(this.targetUrl + 'status')
       .then(data => this._first(data))
       .catch(error => this._handleError(error));
   }

@@ -35,6 +35,16 @@ public class PaymentRepository extends AbstractRepository<Payment, PaymentRecord
   }
 
   @Override
+  public Optional<PaymentDo> getByOrderId(String orderId) {
+    return Optional.ofNullable(
+        jooq()
+          .selectFrom(getTable())
+          .where(getTable().ORDER_ID.eq(orderId))
+          .fetchOne())
+      .map(this::fromRecordToDo);
+  }
+
+  @Override
   protected DoEntityBeanMappings<PaymentDo, PaymentRecord> mappings() {
     return new DoEntityBeanMappings<PaymentDo, PaymentRecord>()
       .with(PaymentDo::paymentId, PaymentRecord::getPaymentId, PaymentRecord::setPaymentId)
