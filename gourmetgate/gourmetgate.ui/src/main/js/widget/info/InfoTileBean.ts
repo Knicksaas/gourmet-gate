@@ -3,7 +3,7 @@ import $ from "jquery";
 
 export class InfoTileBean {
   title: string;
-  description: string;
+  description?: string;
   infoColorClass?: string;
   iconClass: string;
   buttonLabel?: string;

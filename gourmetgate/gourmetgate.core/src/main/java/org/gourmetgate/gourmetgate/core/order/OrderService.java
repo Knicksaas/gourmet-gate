@@ -38,6 +38,10 @@ public class OrderService implements IService {
     return BEANS.get(IOrderRepository.class).getCurrentOrderIdForSession(sessionId);
   }
 
+  public String getOrderIdForSessionWithoutFilter(String sessionId) {
+    return BEANS.get(IOrderRepository.class).getOrderIdForSessionWithoutFilter(sessionId);
+  }
+
   public void getOrCreateOrderForSession(String sessionId, String tableId) {
     if (getOrderIdForSession(sessionId) != null) {
       return;

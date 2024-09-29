@@ -39,6 +39,18 @@ public class OrderRepository extends AbstractRepository<Order, OrderRecord, Orde
   }
 
   @Override
+  public String getOrderIdForSessionWithoutFilter(String sessionId) {
+    Optional<Record1<String>> orderId = Optional.ofNullable(
+      jooq().select(Order.ORDER.ORDER_ID)
+        .from(Order.ORDER)
+        .where(Order.ORDER.SESSION_ID.eq(sessionId))
+        .orderBy(Order.ORDER.EVT_CREATE.desc())
+        .limit(1) // Possibly to have multiple results when multiple orders are created within the same session
+        .fetchOne());
+    return orderId.map(Record1::component1).orElse(null);
+  }
+
+  @Override
   public String createOrder(String sessionId, String tableId) {
     OrderDo orderDo = BEANS.get(OrderDo.class)
       .withTableId(tableId)

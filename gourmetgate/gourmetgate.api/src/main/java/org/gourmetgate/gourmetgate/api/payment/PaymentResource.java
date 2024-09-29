@@ -44,7 +44,7 @@ public class PaymentResource implements IRestResource {
   @GET
   @Path("/status")
   public Response getPaymentStatus(@Context HttpServletRequest request) {
-    String orderId = BEANS.get(OrderService.class).getOrderIdForSession(request.getSession().getId());
+    String orderId = BEANS.get(OrderService.class).getOrderIdForSessionWithoutFilter(request.getSession().getId());
     if (orderId == null) {
       return m_restHelper.createBadRequestResponse("No order for current session");
     }

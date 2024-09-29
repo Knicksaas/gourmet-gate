@@ -1,5 +1,5 @@
-import {App as ScoutApp, Desktop, router, Widget} from '@eclipse-scout/core';
-import {AppRoute, Desktop as AppDesktop} from "./index";
+import {access, App as ScoutApp, Desktop, router, Widget} from '@eclipse-scout/core';
+import {AppRoute, Desktop as GouGaDesktop} from "./index";
 
 export class App extends ScoutApp {
   apiUrl: string;
@@ -12,9 +12,16 @@ export class App extends ScoutApp {
 
   protected override _createDesktop(parent: Widget): Desktop {
     let desktop = super._createDesktop(parent);
-    router.register(new AppRoute(desktop as AppDesktop));
+    router.register(new AppRoute(desktop as GouGaDesktop));
+    this._setDefaultLocation();
     router.activate();
     return desktop;
+  }
+
+  protected _setDefaultLocation() {
+    if (!access.quickCheck('EscapeShopViewPermission')) {
+      router.setDefaultLocation('order');
+    }
   }
 
 // @ts-expect-error

@@ -22,6 +22,15 @@ export class InfoForm extends Form {
   }
 
   protected _createInfoTile(bean: InfoTileBean) {
+    if (!bean) {
+      bean = scout.create(InfoTileBean, {
+        title: this.session.text('NothingHere'),
+        infoColorClass: 'info-color-orange',
+        iconClass: 'gg-icon-help',
+        buttonLabel: this.session.text('NavigationBackward')
+      });
+    }
+
     let tile = scout.create(InfoTile, {
       parent: this.widget('InfoTileGrid'),
       bean: bean

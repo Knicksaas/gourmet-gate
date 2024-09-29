@@ -57,8 +57,8 @@ public class WalleePaymentProvider implements IPaymentProvider {
     transactionPayload.autoConfirmationEnabled(true)
       .currency("CHF")
       .language("de-CH")
-      .successUrl("http://localhost:8084/success.html")
-      .failedUrl("http://localhost:8084/failed.html");
+      .successUrl("http://localhost:8084/#paymentState")
+      .failedUrl("http://localhost:8084/#paymentState");
 
     paymentDo.getCartItems().stream()
       .map(this::createLineItem)
