@@ -45,7 +45,8 @@ export class ArticleRepository extends Repository {
   }
 
   syncArticlesFromLoyverse(): JQuery.Promise<void> {
-    return this.postJson(this.targetUrl + 'sync/loyverse');
+    return this.postJson(this.targetUrl + 'sync/loyverse')
+      .then(() => this._triggerDataChange());
   }
 
   static get(): ArticleRepository {

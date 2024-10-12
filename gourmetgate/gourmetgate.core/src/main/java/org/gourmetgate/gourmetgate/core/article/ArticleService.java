@@ -2,14 +2,13 @@ package org.gourmetgate.gourmetgate.core.article;
 
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.service.IService;
-import org.gourmetgate.gourmetgate.data.article.ArticleDo;
-import org.gourmetgate.gourmetgate.data.article.ArticleOptionDo;
-import org.gourmetgate.gourmetgate.data.article.ArticleTablePageEntryDo;
-import org.gourmetgate.gourmetgate.data.article.IArticleRepository;
+import org.gourmetgate.gourmetgate.data.article.*;
 import org.gourmetgate.gourmetgate.data.articlegroup.ArticleGroupDo;
+import org.gourmetgate.gourmetgate.data.articlegroup.IArticleGroupRepository;
 import org.gourmetgate.gourmetgate.data.dataprovider.IArticleGroupProvider;
 import org.gourmetgate.gourmetgate.data.dataprovider.IArticleProvider;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -83,5 +82,19 @@ public class ArticleService implements IService {
   public void syncArticlesFromLoyverse() {
     List<ArticleGroupDo> newGroups = BEANS.get(IArticleGroupProvider.class).getArticleGroups();
     List<ArticleDo> newArticles = BEANS.get(IArticleProvider.class).getArticles();
+    List<ArticleOptionDo> newArticleOptions = newArticles.stream()
+      .filter(ArticleDo::isOptions)
+      .map(ArticleDo::getArticleOptions)
+      .flatMap(Collection::stream)
+      .toList();
+
+    IArticleGroupRepository groupRepository = BEANS.get(IArticleGroupRepository.class);
+    IArticleRepository articleRepository = BEANS.get(IArticleRepository.class);
+    IArticleOptionRepository optionRepository = BEANS.get(IArticleOptionRepository.class);
+
+    // Insert or update new groups and articles
+    newGroups.forEach(group -> groupRepository.update(group.getArticleGroupId(), group));
+    newArticles.forEach(article -> articleRepository.update(article.getArticleId(), article));
+    newArticleOptions.forEach(option -> optionRepository.update(option.getArticleOptionId(), option));
   }
 }

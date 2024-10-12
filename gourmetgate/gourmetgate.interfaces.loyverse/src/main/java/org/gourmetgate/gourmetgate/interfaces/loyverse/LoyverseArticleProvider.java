@@ -1,11 +1,13 @@
 package org.gourmetgate.gourmetgate.interfaces.loyverse;
 
 import org.eclipse.scout.rt.platform.BEANS;
+import org.eclipse.scout.rt.platform.html.HtmlHelper;
 import org.gourmetgate.gourmetgate.data.article.ArticleDo;
 import org.gourmetgate.gourmetgate.data.article.ArticleOptionDo;
 import org.gourmetgate.gourmetgate.data.dataprovider.IArticleProvider;
 import org.gourmetgate.gourmetgate.interfaces.loyverse.data.item.LoyverseItemDo;
 import org.gourmetgate.gourmetgate.interfaces.loyverse.data.item.LoyverseItemVariantDo;
+import org.gourmetgate.gourmetgate.interfaces.loyverse.data.item.LoyverseItemVariantStoreDo;
 import org.gourmetgate.gourmetgate.interfaces.loyverse.rest.LoyverseResourceClient;
 
 import java.util.List;
@@ -22,15 +24,17 @@ public class LoyverseArticleProvider implements IArticleProvider {
 
   protected ArticleDo mapItemToArticle(LoyverseItemDo item) {
     LoyverseItemVariantDo firstVariant = item.getVariants().stream().findFirst().orElseThrow();
+    LoyverseItemVariantStoreDo firstStore = firstVariant.getStores().stream().findFirst().orElseThrow();
 
     ArticleDo article = BEANS.get(ArticleDo.class)
       .withArticleId(item.getId())
       .withArticleGroupId(item.getCategoryId())
       .withName(item.getItemName())
-      .withUnit(item.getDescription())
+      .withUnit(BEANS.get(HtmlHelper.class).toPlainText(item.getDescription()))
       .withOptions(item.getVariants().size() > 1)
-      .withPrice(firstVariant.getDefaultPrice())
-      .withEnabled(true);
+      .withPrice(firstStore.getPrice())
+      .withVatId("74564073-3eaf-40bf-b60c-59cc1ecd1e67")
+      .withEnabled(firstStore.getAvailableForSale());
 
     if (article.isOptions()) {
       item.getVariants().forEach(variant -> addArticleOption(article, variant));

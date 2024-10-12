@@ -50,7 +50,9 @@ public abstract class AbstractRepository<TABLE extends Table<RECORD>, RECORD ext
   }
 
   protected void setPrimaryKey(RECORD record, String key) {
-    record.set(getIdColumn(), key);
+    if (record.get(getIdColumn()) == null) {
+      record.set(getIdColumn(), key);
+    }
   }
 
   public Optional<DO> getById(String id) {
