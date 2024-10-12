@@ -6,10 +6,7 @@ import org.eclipse.scout.rt.security.DefaultPermissionCollection;
 import org.eclipse.scout.rt.security.IPermissionCollection;
 import org.eclipse.scout.rt.security.PermissionLevel;
 import org.eclipse.scout.rt.shared.session.Sessions;
-import org.gourmetgate.gourmetgate.core.article.ArticleTablePagePermission;
-import org.gourmetgate.gourmetgate.core.article.DeleteArticlePermission;
-import org.gourmetgate.gourmetgate.core.article.ReadArticlePermission;
-import org.gourmetgate.gourmetgate.core.article.UpdateArticlePermission;
+import org.gourmetgate.gourmetgate.core.article.*;
 import org.gourmetgate.gourmetgate.core.desktop.EscapeShopViewPermission;
 import org.gourmetgate.gourmetgate.core.parameter.ReadParameterPermission;
 import org.gourmetgate.gourmetgate.core.parameter.UpdateParameterPermission;
@@ -52,5 +49,6 @@ public class AccessControlService extends AbstractAccessControlService<String> {
     permissions.add(new ReadHallFormDataPermission(), PermissionLevel.ALL);
     permissions.add(new RegenerateTablesPermission(), PermissionLevel.ALL);
     permissions.add(new GenerateQrCodePermission(), PermissionLevel.ALL);
+    permissions.add(new SyncLoyversePermission(), PermissionLevel.ALL);
   }
 }

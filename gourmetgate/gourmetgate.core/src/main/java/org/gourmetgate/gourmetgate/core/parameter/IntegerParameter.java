@@ -1,6 +1,6 @@
 package org.gourmetgate.gourmetgate.core.parameter;
 
-public class IntegerParameter extends AbstractParameter<Integer> {
+public abstract class IntegerParameter extends AbstractParameter<Integer> {
 
   public IntegerParameter(String name) {
     super(name);

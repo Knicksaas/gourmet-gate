@@ -23,6 +23,10 @@
     </dependency>
     <dependency>
       <groupId>org.gourmetgate</groupId>
+      <artifactId>gourmetgate.interfaces.loyverse</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.gourmetgate</groupId>
       <artifactId>gourmetgate.persistence</artifactId>
       <exclusions>
         <!-- Remove the activation-api, Scout includes the implementation anyway, and it includes the api classes as well. -->

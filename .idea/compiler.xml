@@ -18,6 +18,7 @@
       <module name="gourmetgate.core" options="-proc:none -warn:-unusedImport" />
       <module name="gourmetgate.data" options="-proc:none -warn:-unusedImport" />
       <module name="gourmetgate.db" options="-proc:none -warn:-unusedImport" />
+      <module name="gourmetgate.interfaces.loyverse" options="-proc:none -warn:-unusedImport" />
       <module name="gourmetgate.payment" options="-proc:none -warn:-unusedImport" />
       <module name="gourmetgate.persistence" options="-proc:none -warn:-unusedImport" />
       <module name="gourmetgate.ui" options="-proc:none -warn:-unusedImport" />

@@ -44,6 +44,10 @@ export class ArticleRepository extends Repository {
     return this._remove(articleId);
   }
 
+  syncArticlesFromLoyverse(): JQuery.Promise<void> {
+    return this.postJson(this.targetUrl + 'sync/loyverse');
+  }
+
   static get(): ArticleRepository {
     if (!repository) {
       repository = scout.create(ArticleRepository);

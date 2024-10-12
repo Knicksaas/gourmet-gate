@@ -41,6 +41,7 @@ export class ArticleTablePage extends PageWithTable {
 
     this.detailTable.widget('CreateArticleGroupMenu').on('action', this._createArticleGroup.bind(this));
     this.detailTable.widget('CreateArticleMenu').on('action', this._createArticle.bind(this))
+    this.detailTable.widget('SyncFromLoyverseMenu').on('action', this._syncFromLoyverseMenu.bind(this))
     this.detailTable.widget('EditEntryMenu').on('action', this._modifyEntryMenuAction.bind(this));
     this.detailTable.widget('DeleteEntryMenu').on('action', this._deleteTableEntry.bind(this));
     this.detailTable.on('rowsSelected', this._onTableRowClicked.bind(this));
@@ -88,6 +89,13 @@ export class ArticleTablePage extends PageWithTable {
       .then(article => {
         this._createArticleForm(article.articleId).open();
       });
+  }
+
+  protected _syncFromLoyverseMenu() {
+    let menu = this.detailTable.widget('SyncFromLoyverseMenu');
+    menu.setLoading(true);
+    ArticleRepository.get().syncArticlesFromLoyverse()
+      .always(() => menu.setLoading(false));
   }
 
   protected _modifyEntryMenuAction() {

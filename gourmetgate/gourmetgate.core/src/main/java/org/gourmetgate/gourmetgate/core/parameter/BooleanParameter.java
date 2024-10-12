@@ -1,6 +1,6 @@
 package org.gourmetgate.gourmetgate.core.parameter;
 
-public class BooleanParameter extends AbstractParameter<Boolean> {
+public abstract class BooleanParameter extends AbstractParameter<Boolean> {
 
   public BooleanParameter(String name) {
     super(name);

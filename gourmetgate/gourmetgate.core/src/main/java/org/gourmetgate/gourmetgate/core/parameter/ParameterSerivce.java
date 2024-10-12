@@ -28,11 +28,11 @@ public class ParameterSerivce implements IService {
     return BEANS.get(IParameterRepository.class).getById(name).map(ParameterDo::getValue);
   }
 
-  public String createParameter(String name, String defaultValue) {
+  public ParameterDo createParameter(String name, String defaultValue) {
     ParameterDo newParameter = BEANS.get(ParameterDo.class)
       .withName(name)
       .withValue(defaultValue);
-    return BEANS.get(IParameterRepository.class).create(newParameter).getValue();
+    return BEANS.get(IParameterRepository.class).create(newParameter);
   }
 
   public void updateParameterValue(String name, String newValue) {
@@ -44,8 +44,8 @@ public class ParameterSerivce implements IService {
     }
   }
 
-  protected ParameterDo mapToDo(AbstractParameter<?> parameter) {
+  protected <T> ParameterDo mapToDo(AbstractParameter<T> parameter) {
     return BEANS.get(IParameterRepository.class).getById(parameter.getName())
-      .orElse(null);
+      .orElseGet(() -> createParameter(parameter.getName(), parameter.prepareValue(parameter.getDefaultValue())));
   }
 }

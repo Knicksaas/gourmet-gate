@@ -70,6 +70,13 @@ export default (): PageWithTableModel => ({
         menuTypes: [Table.MenuType.EmptySpace]
       },
       {
+        id: 'SyncFromLoyverseMenu',
+        objectType: Menu,
+        text: '${textKey:SyncFromLoyverse}',
+        iconId: icons.DIAGRAM_AREA,
+        menuTypes: [Table.MenuType.EmptySpace]
+      },
+      {
         id: 'EditEntryMenu',
         objectType: Menu,
         defaultMenu: true,
@@ -107,6 +114,7 @@ export class ArticleTable extends Table {
 export type ArticleTableWidgetMap = {
   'CreateArticleGroupMenu': Menu;
   'CreateArticleMenu': Menu;
+  'SyncFromLoyverseMenu': Menu;
   'EditEntryMenu': Menu;
   'ChangeStatusMenu': Menu;
   'DeleteEntryMenu': Menu;

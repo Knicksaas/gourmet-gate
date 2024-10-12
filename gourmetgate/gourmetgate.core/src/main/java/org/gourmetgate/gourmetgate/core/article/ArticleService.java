@@ -7,6 +7,8 @@ import org.gourmetgate.gourmetgate.data.article.ArticleOptionDo;
 import org.gourmetgate.gourmetgate.data.article.ArticleTablePageEntryDo;
 import org.gourmetgate.gourmetgate.data.article.IArticleRepository;
 import org.gourmetgate.gourmetgate.data.articlegroup.ArticleGroupDo;
+import org.gourmetgate.gourmetgate.data.dataprovider.IArticleGroupProvider;
+import org.gourmetgate.gourmetgate.data.dataprovider.IArticleProvider;
 
 import java.util.List;
 import java.util.stream.Stream;
@@ -76,5 +78,10 @@ public class ArticleService implements IService {
   public int deleteArticle(String articleId) {
     BEANS.get(ArticleOptionService.class).deleteArticleOptionsForArticle(articleId);
     return BEANS.get(IArticleRepository.class).delete(articleId);
+  }
+
+  public void syncArticlesFromLoyverse() {
+    List<ArticleGroupDo> newGroups = BEANS.get(IArticleGroupProvider.class).getArticleGroups();
+    List<ArticleDo> newArticles = BEANS.get(IArticleProvider.class).getArticles();
   }
 }

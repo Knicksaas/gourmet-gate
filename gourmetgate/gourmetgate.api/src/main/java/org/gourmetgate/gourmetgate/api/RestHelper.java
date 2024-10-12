@@ -83,4 +83,8 @@ public class RestHelper {
       throw BEANS.get(DefaultRuntimeExceptionTranslator.class).translate(e);
     }
   }
+
+  public Response createInternalServerErrorResponse() {
+    return Response.serverError().build();
+  }
 }

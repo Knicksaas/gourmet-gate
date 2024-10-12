@@ -54,6 +54,9 @@
 
     <!-- DB modules -->
     <module>../gourmetgate.db</module>
+
+    <!-- Interface modules -->
+    <module>../gourmetgate.interfaces.loyverse</module>
   </modules>
 
   <profiles>
@@ -202,6 +205,11 @@
       <dependency>
         <groupId>org.gourmetgate</groupId>
         <artifactId>gourmetgate.db</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.gourmetgate</groupId>
+        <artifactId>gourmetgate.interfaces.loyverse</artifactId>
         <version>${project.version}</version>
       </dependency>
     </dependencies>

@@ -25,7 +25,7 @@ public abstract class AbstractParameter<T> {
 
   public String getRawValue() {
     return BEANS.get(ParameterSerivce.class).getParameterValue(getName())
-      .orElseGet(() -> BEANS.get(ParameterSerivce.class).createParameter(getName(), prepareValue(getDefaultValue())));
+      .orElseGet(() -> BEANS.get(ParameterSerivce.class).createParameter(getName(), prepareValue(getDefaultValue())).getValue());
   }
 
   public void setValue(T value) {

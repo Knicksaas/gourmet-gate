@@ -5,6 +5,7 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.eclipse.scout.rt.platform.BEANS;
+import org.eclipse.scout.rt.platform.exception.ProcessingException;
 import org.eclipse.scout.rt.rest.IRestResource;
 import org.eclipse.scout.rt.security.ACCESS;
 import org.gourmetgate.gourmetgate.api.RestHelper;
@@ -92,5 +93,20 @@ public class ArticleResource implements IRestResource {
       return m_restHelper.createNotFoundResponse();
     }
     return m_restHelper.createOkResponse();
+  }
+
+  @POST
+  @Path("/sync/loyverse")
+  public Response syncArticlesFromLoyverse() {
+    if (!ACCESS.check(new SyncLoyversePermission())) {
+      return m_restHelper.createForbiddenResponse();
+    }
+
+    try {
+      BEANS.get(ArticleService.class).syncArticlesFromLoyverse();
+      return m_restHelper.createOkResponse();
+    } catch (ProcessingException e) {
+      return m_restHelper.createInternalServerErrorResponse();
+    }
   }
 }

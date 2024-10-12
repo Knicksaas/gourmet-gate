@@ -1,16 +1,17 @@
 import {Outline, OutlineModel} from '@eclipse-scout/core';
 import {
+  ArticleTablePage,
   CartForm,
+  HallForm,
   InfoPage,
   KitchenClosedInfoForm,
   OrderForm,
+  PageWithData,
   ParameterTablePage,
   PaymentStateInfoForm,
   ScanQrCodeInfoForm
 } from '../index';
-import {PageWithData} from './PageWithData';
-import {ArticleTablePage} from '../article/ArticleTablePage';
-import {HallForm} from "../table/HallForm";
+
 
 export default (): OutlineModel => ({
   id: 'gourmetgate.DataOutline',
