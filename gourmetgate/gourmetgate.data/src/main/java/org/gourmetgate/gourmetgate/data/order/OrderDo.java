@@ -37,6 +37,10 @@ public class OrderDo extends DoEntity {
     return doValue("evtPay");
   }
 
+  public DoValue<Boolean> printed() {
+    return doValue("printed");
+  }
+
   /* **************************************************************************
    * GENERATED CONVENIENCE METHODS
    * *************************************************************************/
@@ -116,5 +120,21 @@ public class OrderDo extends DoEntity {
   @Generated("DoConvenienceMethodsGenerator")
   public Date getEvtPay() {
     return evtPay().get();
+  }
+
+  @Generated("DoConvenienceMethodsGenerator")
+  public OrderDo withPrinted(Boolean printed) {
+    printed().set(printed);
+    return this;
+  }
+
+  @Generated("DoConvenienceMethodsGenerator")
+  public Boolean getPrinted() {
+    return printed().get();
+  }
+
+  @Generated("DoConvenienceMethodsGenerator")
+  public boolean isPrinted() {
+    return nvl(getPrinted());
   }
 }

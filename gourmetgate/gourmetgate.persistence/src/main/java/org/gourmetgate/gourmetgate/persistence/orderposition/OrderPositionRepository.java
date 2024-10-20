@@ -6,6 +6,7 @@ import org.eclipse.scout.rt.platform.util.Pair;
 import org.gourmetgate.gourmetgate.data.cart.CartItemDo;
 import org.gourmetgate.gourmetgate.data.orderposition.IOrderPositionRepository;
 import org.gourmetgate.gourmetgate.data.orderposition.OrderPositionDo;
+import org.gourmetgate.gourmetgate.data.printable.PrintableOrderPositionDo;
 import org.gourmetgate.gourmetgate.persistence.common.AbstractRepository;
 import org.gourmetgate.gourmetgate.persistence.common.DoEntityBeanMappings;
 import org.gourmetgate.gourmetgate.persistence.tables.Article;
@@ -71,6 +72,28 @@ public class OrderPositionRepository extends AbstractRepository<OrderPosition, O
         .withUnit(rec.component3())
         .withPrice(rec.component4())
         .withHasOptions(rec.component5()));
+  }
+
+  @Override
+  public Stream<PrintableOrderPositionDo> getPrintableOrderPositionsByOrderId(String orderId) {
+    return jooq()
+      .select(
+        OrderPosition.ORDER_POSITION.ORDER_POSITION_ID,
+        OrderPosition.ORDER_POSITION.ORDER_ID,
+        Article.ARTICLE.ARTICLE_GROUP_ID,
+        Article.ARTICLE.NAME
+          .concat(" (")
+          .concat(Article.ARTICLE.UNIT)
+          .concat(")"))
+      .from(getTable())
+      .join(Article.ARTICLE).on(OrderPosition.ORDER_POSITION.ARTICLE_ID.eq(Article.ARTICLE.ARTICLE_ID))
+      .where(OrderPosition.ORDER_POSITION.ORDER_ID.eq(orderId))
+      .stream()
+      .map(rec -> BEANS.get(PrintableOrderPositionDo.class)
+        .withPrintableOrderPositionId(rec.component1())
+        .withPrintableOrderId(rec.component2())
+        .withArticleGroupId(rec.component3())
+        .withName(rec.component4()));
   }
 
   @Override

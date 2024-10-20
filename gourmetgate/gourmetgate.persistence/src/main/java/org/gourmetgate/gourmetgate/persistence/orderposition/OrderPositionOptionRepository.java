@@ -4,9 +4,11 @@ import org.gourmetgate.gourmetgate.data.orderposition.IOrderPositionOptionReposi
 import org.gourmetgate.gourmetgate.data.orderposition.OrderPositionOptionDo;
 import org.gourmetgate.gourmetgate.persistence.common.AbstractRepository;
 import org.gourmetgate.gourmetgate.persistence.common.DoEntityBeanMappings;
+import org.gourmetgate.gourmetgate.persistence.tables.ArticleOption;
 import org.gourmetgate.gourmetgate.persistence.tables.OrderPositionOption;
 import org.gourmetgate.gourmetgate.persistence.tables.records.OrderPositionOptionRecord;
 import org.jooq.Field;
+import org.jooq.Record1;
 
 import java.util.stream.Stream;
 
@@ -33,6 +35,18 @@ public class OrderPositionOptionRepository extends AbstractRepository<OrderPosit
       .map(this::fromRecordToDo);
   }
 
+  @Override
+  public Stream<String> getSelectedOrderPositionOptionNames(String orderPositionId) {
+    return jooq()
+      .select(
+        ArticleOption.ARTICLE_OPTION.DESCRIPTION)
+      .from(getTable())
+      .join(ArticleOption.ARTICLE_OPTION).on(OrderPositionOption.ORDER_POSITION_OPTION.ARTICLE_OPTION_ID.eq(ArticleOption.ARTICLE_OPTION.ARTICLE_OPTION_ID))
+      .where(OrderPositionOption.ORDER_POSITION_OPTION.SELECTED)
+      .and(OrderPositionOption.ORDER_POSITION_OPTION.ORDER_POSITION_ID.eq(orderPositionId))
+      .stream()
+      .map(Record1::component1);
+  }
 
   @Override
   protected DoEntityBeanMappings<OrderPositionOptionDo, OrderPositionOptionRecord> mappings() {

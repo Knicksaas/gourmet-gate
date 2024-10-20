@@ -4,8 +4,32 @@
 package org.gourmetgate.gourmetgate.persistence;
 
 
-import org.gourmetgate.gourmetgate.persistence.tables.*;
-import org.gourmetgate.gourmetgate.persistence.tables.records.*;
+import org.gourmetgate.gourmetgate.persistence.tables.Article;
+import org.gourmetgate.gourmetgate.persistence.tables.ArticleGroup;
+import org.gourmetgate.gourmetgate.persistence.tables.ArticleOption;
+import org.gourmetgate.gourmetgate.persistence.tables.EventLog;
+import org.gourmetgate.gourmetgate.persistence.tables.Order;
+import org.gourmetgate.gourmetgate.persistence.tables.OrderPosition;
+import org.gourmetgate.gourmetgate.persistence.tables.OrderPositionOption;
+import org.gourmetgate.gourmetgate.persistence.tables.Parameter;
+import org.gourmetgate.gourmetgate.persistence.tables.Payment;
+import org.gourmetgate.gourmetgate.persistence.tables.Person;
+import org.gourmetgate.gourmetgate.persistence.tables.Table;
+import org.gourmetgate.gourmetgate.persistence.tables.User;
+import org.gourmetgate.gourmetgate.persistence.tables.Vat;
+import org.gourmetgate.gourmetgate.persistence.tables.records.ArticleGroupRecord;
+import org.gourmetgate.gourmetgate.persistence.tables.records.ArticleOptionRecord;
+import org.gourmetgate.gourmetgate.persistence.tables.records.ArticleRecord;
+import org.gourmetgate.gourmetgate.persistence.tables.records.EventLogRecord;
+import org.gourmetgate.gourmetgate.persistence.tables.records.OrderPositionOptionRecord;
+import org.gourmetgate.gourmetgate.persistence.tables.records.OrderPositionRecord;
+import org.gourmetgate.gourmetgate.persistence.tables.records.OrderRecord;
+import org.gourmetgate.gourmetgate.persistence.tables.records.ParameterRecord;
+import org.gourmetgate.gourmetgate.persistence.tables.records.PaymentRecord;
+import org.gourmetgate.gourmetgate.persistence.tables.records.PersonRecord;
+import org.gourmetgate.gourmetgate.persistence.tables.records.TableRecord;
+import org.gourmetgate.gourmetgate.persistence.tables.records.UserRecord;
+import org.gourmetgate.gourmetgate.persistence.tables.records.VatRecord;
 import org.jooq.ForeignKey;
 import org.jooq.TableField;
 import org.jooq.UniqueKey;

@@ -94,7 +94,7 @@ public class Schema extends SchemaImpl {
    * No further instances allowed
    */
   private Schema() {
-        super("Schema", null);
+    super("Schema", null);
     }
 
 

@@ -59,7 +59,7 @@ public class Article extends TableImpl<ArticleRecord> {
   /**
    * The column <code>Schema.ARTICLE.UNIT</code>.
    */
-  public final TableField<ArticleRecord, String> UNIT = createField(DSL.name("UNIT"), SQLDataType.LONGVARCHAR.nullable(false).defaultValue(DSL.field("'5 dl'", SQLDataType.LONGVARCHAR)), this, "");
+  public final TableField<ArticleRecord, String> UNIT = createField(DSL.name("UNIT"), SQLDataType.LONGVARCHAR.defaultValue(DSL.field("'5 dl'", SQLDataType.LONGVARCHAR)), this, "");
 
   /**
    * The column <code>Schema.ARTICLE.HAS_OPTIONS</code>.
